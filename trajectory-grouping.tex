@@ -1,0 +1,36 @@
+%!TEX TS-program = pdflatex
+%!TEX TS-options = -shell-escape
+\input{preamble.tex}
+
+\begin{document}
+\pagenumbering{Roman}
+
+\input{title.tex}
+
+\tableofcontents
+
+
+\section*{Notation}
+\addcontentsline{toc}{section}{Notation}
+Im Verlauf dieser Arbeit gelten die folgenden Konventionen
+\begin{itemize}
+	\item 
+\end{itemize}
+Das Vorgehen richtet sich in erster Linie nach \textcite{buchin2015}.
+\cleardoubleoddemptypage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\setcounter{footnote}{0}
+
+
+
+\cleardoubleoddemptypage
+\pagenumbering{Alph}
+\setcounter{page}{1}
+\appendix
+\printbibliography
+\printindex
+\todototoc
+\listoftodos[To-do's und andere Baustellen]
+\end{document}
