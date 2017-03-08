@@ -94,6 +94,9 @@
                or test {\ifcurrentname{author}}
                or ( test {\ifnameundef{author}} and test {\ifcurrentname{editor}} ) }}
 \addbibresource{quellen.bib}
+\DefineBibliographyStrings{ngerman}{%
+  andothers = {et\addabbrvspace al\adddot}
+}
 
 % -- Konfiguration von Hyperref
 \usepackage[hidelinks, pdfpagelabels, bookmarksopen=true, bookmarksnumbered=true, linkcolor=black, urlcolor=SkyBlue2, plainpages=false,pagebackref, citecolor=black, hypertexnames=true, pdfauthor={Jannes Bantje}, pdfborderstyle={/S/U}, linkbordercolor=SkyBlue2, colorlinks=false,backref=false]{hyperref}
