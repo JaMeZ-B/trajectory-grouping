@@ -53,7 +53,8 @@
 
 % -- Einstellungen bezüglich Schriftart etc.
 \usepackage{ccfonts}
-\usepackage[semibold]{sourcesanspro}
+% \usepackage[semibold]{sourcesanspro}
+\usepackage[semibold,scale=.915]{montserrat}
 \usepackage[semibold,scale=.95]{sourcecodepro}
 \usepackage{eulervm}
 
@@ -111,7 +112,9 @@
 
 % -- Aufzählungen, Anführungszeichen etc.
 \usepackage[shortlabels,inline]{enumitem}
+\setlist{itemsep=1pt}
 \setlist[itemize,1]{label=\textcolor{black}{\raisebox{.45ex}{\rule{.6ex}{.6ex}}}}
+\setlist[enumerate]{font=\sffamily\fontseries{mb}\selectfont}
 \usepackage[autostyle,german=quotes]{csquotes}
 
 
