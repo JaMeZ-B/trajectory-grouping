@@ -1,0 +1,179 @@
+%!TEX TS-program = pdflatex
+%!BIB program = biber
+\documentclass[
+wide,
+% handout,
+10pt,
+xcolor={x11names,svgnames},
+hyperref={pdfauthor={Jannes Bantje},colorlinks,urlcolor=maincolor,hidelinks=false,linkcolor=maincolor},
+pantone312, 	% WWU-Design in hellblau
+%pantone396, 	% WWU-Design in grellem hellgrün 
+%pantone315, 	% WWU-Design in dunkelblau
+%pantone3282, 	% WWU-Design in "blau"
+%pantone390, 	% WWU-Design in 
+%pantone369,	% WWU-Design in gras-grün
+%pantoneblack7, % WWU-Design in dunklem gras-grün
+%handout% aktivieren um \pause für Druck zu ignorieren (keine neue Seite für einen neuen Punkt)
+]{beamer}
+\usepackage{etex}
+% \usepackage{xxcolor}
+% \definecolor{pantone312}{RGB}{0,157,209}
+% \definecolor{maincolor}{named}{pantone312}
+\usefonttheme[onlymath]{serif}
+\usepackage{newpxtext}
+% \usepackage{palatino}
+\usepackage[bigdelims,varbb,varg]{newpxmath}
+\usepackage{wwustyle2}
+
+\usepackage[ngerman]{babel}
+\usepackage{multirow}
+\usepackage{xspace}
+
+% -- Aufzählungen, Anführungszeichen etc.
+% \usepackage[shortlabels,inline]{enumitem}
+% % \setlist[itemize,1]{label=\faCaretRight}
+% \setlist[enumerate]{font=\bfseries}
+% \setlist{itemsep=0pt}
+\usepackage[autostyle,german=quotes]{csquotes}
+
+% \usepackage{array}
+
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+
+%-- um Inkompatibilitaeten von quotes und polyglossia bzw. babel zu vermeiden
+\usepackage{tikz}
+\usetikzlibrary{calc,fadings,decorations.pathreplacing}
+
+\tikzset{
+  every picture/.append style={
+    execute at begin picture={\shorthandoff{"}},
+    execute at end picture={\shorthandon{"}}
+  }
+}
+\usetikzlibrary{quotes}
+
+
+\usepackage{mathtools} % beinhaltet amsmath
+\usepackage{amssymb} % zusätzliche Symbole
+% \usepackage{stmaryrd} % für Blitz
+\usepackage{nicefrac} % schräge Brüche
+\usepackage{faktor}
+\newcommand{\Faktor}[1]{\faktor[\textstyle]{#1}}
+\usepackage{xfrac}
+\usepackage{cancel}
+\usepackage{mathdots} % Verbesserung von Punkten wie zB \ldots
+\usepackage[bb=px]{mathalfa}
+\usepackage{centernot}
+
+
+\usepackage{cleveref}
+
+\newcommand{\Index}[1]{\bet{#1}}
+
+
+
+\hypersetup{pdfstartview={Fit}}
+
+\makeatletter
+\renewcommand{\LaTeX}{L\kern -.22em{\sbox \z@ T\vbox to\ht \z@ {\hbox {\check@mathfonts \fontsize \sf@size \z@ \math@fontsfalse \selectfont A}\vss }}\kern -.10em\TeX}
+\makeatother
+
+\usepackage{multicol}
+
+
+\newcommand{\bet}[1]{\textbf{\color{maincolor}#1}}
+\newcommand{\keyword}[1]{{\color{pantone369}#1}}
+\newcommand{\keyWWU}{\keyword{WWU Münster}\xspace}
+
+\input{math.tex}
+
+% -- theorem packages
+\usepackage{amsthm}
+% \theoremstyle{definition}
+% \setbeamertemplate{theorems}[normal font]
+\setbeamertemplate{theorems}[numbered]
+\setbeamertemplate{definitions}[numbered]
+% \renewtheorem{definition}{Definition}
+\newtheorem{satz}{Satz}
+\newtheorem{proposition}{Proposition}
+\theoremstyle{definition}
+\newtheorem{definitionP}{Definition \& Proposition}
+% \theoremstyle{remark}
+% \newtheorem{beweis}{Beweis}
+\newenvironment{beweis}{\textsc{Beweis:}}{\qed}
+\newenvironment{beweisX}{\textsc{Beweis:}}{}
+\newenvironment{beweisCont}{\textsc{Beweis}(fortgesetzt):}{\qed}
+
+% -- BibLaTeX 
+\usepackage[%
+	backend=biber,
+	sortlocale=auto,
+	natbib,
+	hyperref,
+	backref,
+	style=alphabetic,
+	]%
+{biblatex}
+\renewcommand*{\mkbibnamefamily}[1]{%
+  \ifmknamesc{\textsc{#1}}{#1}}
+
+\renewcommand*{\mkbibnameprefix}[1]{%
+  \ifboolexpr{ test {\ifmknamesc} and test {\ifuseprefix} }
+    {\textsc{#1}}
+    {#1}}
+
+\def\ifmknamesc{%
+  \ifboolexpr{ test {\ifcurrentname{labelname}}
+               or test {\ifcurrentname{author}}
+               or ( test {\ifnameundef{author}} and test {\ifcurrentname{editor}} ) }}
+\addbibresource{quellen.bib}
+\setbeamertemplate{bibliography item}[text]
+
+
+%-- Farben
+
+\definecolor{blue3}{RGB}{27,53,62}
+\definecolor{blue2}{RGB}{49,81,95}
+\definecolor{blue1}{RGB}{84,113,121}
+\definecolor{blueS}{RGB}{27,53,62}
+\definecolor{teal3}{RGB}{34,107,96}
+\definecolor{teal2}{RGB}{49,142,133}
+\definecolor{teal1}{RGB}{77,165,154}
+\definecolor{tealS}{RGB}{179,198,189}
+\definecolor{red3}{RGB}{126,27,48}
+\definecolor{red2}{RGB}{158,48,68}
+\definecolor{red1}{RGB}{173,73,95}
+\definecolor{redS}{RGB}{219,179,180}
+
+
+\begin{document}
+\makeatletter
+\author{Jannes Bantje} \let\Author\@author
+\title{Gruppierung von Trajektorien}
+\subtitle{Seminar zur algorithmischen Geometrie}
+\makeatother
+
+
+\begin{frame}[plain]
+  \maketitle
+\end{frame}
+
+
+
+\section*{Quellen}
+\begin{frame}[allowframebreaks]{\secname}
+	\printbibliography
+\end{frame}
+
+
+\end{document}
