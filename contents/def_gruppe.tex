@@ -1,3 +1,38 @@
 %!TEX root = ../trajectory-grouping.tex
 
 Wir bezeichnen mit $\mathcal{X}$ die Menge der Entitäten, zu denen uns der Ort innerhalb eines gewissen Zeitraums bekannt ist.
+Wie in \cref{cha:einleitung} angedeutet wird unsere Definition einer Gruppe von den folgenden drei Parametern abhängen, die Charakteristika der zu betrachtenden Gruppen bestimmen:
+\begin{itemize}
+	\item Räumlicher Parameter $\varepsilon > 0$
+	\item zeitlicher Parameter $\delta > 0$
+	\item Mindestgröße $m \in \mathbb{N}\setminus \set*{0}$
+\end{itemize}
+Wir beginnen mit einigen Definitionen zum räumlichen Zusammenhang zu einem festen Zeitpunkt $t$.\todo{Scheibe offen oder geschlossen?}
+\begin{definition}
+	Die $\varepsilon$-Scheibe $B_\varepsilon^t(x)$ einer Entität $x$ zum Zeitpunkt $t$ ist eine Scheibe mit Radius $\varepsilon$ um $x$ zu Zeitpunkt $t$, also $B_\varepsilon^t(x) = \set*{y \in \mathbb{R}^d \given \norm*{x^t-y} \le \varepsilon}$.\marginnote{wir betrachten meist $d=2$}
+	
+	Zwei Entitäten $x$ und $y$ sind zum Zeitpunkt $t$ \Index{direkt zusammenhängend}, falls sich die $\varepsilon$-Scheiben überlappen, das heißt der Schnitt der beiden offenen Scheiben nicht leer ist.
+	
+	Die Entitäten $x$ und $y$ heißen \bet{$\varepsilon$-zusammenhängend}\index{epsilon-zusammenhängend@$\varepsilon$-zusammenhängend} zum Zeitpunkt $t$, falls eine Folge von Entitäten $x=x_0, \ldots, x_k = y$ existiert, sodass $x_i$ und $x_{i+1}$ direkt zusammenhängend sind.
+\end{definition}
+
+Eine Teilmenge $\mathcal{S} \subseteq \mathcal{X}$ heißt dementsprechend \bet{$\varepsilon$-zusammenhängend}, falls alle Entitäten in $\mathcal{S}$ paarweise $\varepsilon$-zusammenhängend sind.
+Dies ist äquivalent dazu, dass das Innere der Vereinigung aller $\varepsilon$-Scheiben der Entitäten von $\mathcal{S}$ zusammenhängend ist.
+Wir nennen $\mathcal{S}$ eine \Index{Komponente} zum Zeitpunkt $t$, falls $\mathcal{S}$ eine maximale $\varepsilon$-zusammenhängende Teilmenge ist.
+Die Menge der Komponenten zum Zeitpunkt $t$ bezeichnen wir mit $\mathcal{C}(t)$; sie bildet eine Partition von $\mathcal{X}$ zum Zeitpunkt $t$.
+
+\todo[inline]{das ganze mit einer Zeichnung erklären}
+
+\begin{definition}[{name=[Gruppe während eines Zeitraums]}]
+	Eine Menge $G$ von $k$ Entitäten bildet eine \Index{Gruppe} im Zeitintervall $I$, falls folgendes gilt:
+	\begin{enumerate}[(i)]
+		\item $G$ enthält mindestens $m$ Entitäten, also $k \ge m$
+		\item die Länge von $I$ ist mindestens $\delta$
+		\item zu jeder Zeit $t \in I$ existiert eine Komponente $C \in \mathcal{C}(t)$ mit $G \subseteq C$.
+	\end{enumerate}
+	Das Intervall $I=[t_s,t_e]$ der Gruppe $G$ bezeichnen wir auch mit $I_G$.
+	Eine Gruppe $H$ \bet{überlagert}\index{Gruppe!überlagernde} $G$, falls $G \subseteq H$ und $I_G \subseteq I_H$ gilt.
+	Falls kein solches $H$ existiert, so heißt $G$ \bet{maximal}\index{Gruppe!maximale}. 
+\end{definition}
+
+Da wir ja eigentlich die Trajektorien einzelner Entitäten gruppieren wollen, mag es auf den ersten Blick etwas kontraintuitiv erscheinen, dass eine Entität $x$ in mehreren maximalen Gruppen enthalten sein kann, da zum Überlagern auch die Inklusion der Zeitintervalle gegeben sein muss.
