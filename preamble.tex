@@ -1,48 +1,92 @@
 %!TEX root = trajectory-grouping.tex
+%!TEX TS-options = -shell-escape
+%!BIB programm = biber
 % -- Author: Jannes Bantje, j.bantje@wwu.de
-\documentclass[a4paper,index=totoc,toc=bibliography,fontsize=11pt,DIV=13,headinclude,BCOR=5mm,cleardoublepage=empty,ngerman,draft]{scrreprt}
-\usepackage{scrpage2} % wie fancyhdr, nur optimiert auf KOMA-Skript, leicht andere Syntax
-\usepackage{etoolbox,letltxmacro} % zum Programmieren
-\usepackage[final]{graphicx}
-\robustify\rotatebox
+\documentclass[%
+	paper=a4,
+	fontsize=10,
+	DIV=13,
+	BCOR=9mm,
+	cleardoublepage=empty,
+	headinclude,
+	footinclude,
+	headheight=20.7pt,
+	footheight=18pt,
+	headings=optiontohead,
+	toc=bibliography,toc=listof,
+	index=totoc,
+	ngerman,
+	draft=true
+]{scrreprt}
+% \usepackage{scrpage2} % wie fancyhdr, nur optimiert auf KOMA-Skript, leicht andere Syntax
 
-% -- Farben
+
+%-- Zum "Programmieren"
+% ======================================================================================
+\usepackage{etoolbox,letltxmacro} % zum Programmieren
+% ======================================================================================
+
+
+%-- Für Farben und Grafiken allgemein
+% ======================================================================================
 \usepackage[x11names]{xcolor}
 \definecolor{dark_gray}{gray}{0.45}
 \definecolor{light_gray}{gray}{0.6}
 \definecolor{fb10_blue}{cmyk}{0.8,0.4,0.13,0.07}
+\usepackage[final]{graphicx}
+\robustify\rotatebox
+% ======================================================================================
 
+
+
+%-- typografische Verbesserungen, Codierungskram, Schriftwahl und erste Mathepakete
+% ======================================================================================
 \usepackage[utf8]{inputenc}
+\usepackage{ccfonts}
+% \usepackage[semibold]{sourcesanspro}
+\usepackage[semibold,scale=.915]{montserrat}
+\usepackage[semibold,scale=.95]{sourcecodepro}
+\usepackage{fontawesome}
 \usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[newcommands]{ragged2e} % besserer Flattersatz
+
 \usepackage{mathtools} % beinhaltet amsmath
+\usepackage{eulervm}
+\usepackage{babel}
+\usepackage[babel=true,final,tracking=smallcaps]{microtype}
+\SetTracking{ encoding = *, shape = sc}{ 45 } % aktiviert ein nicht übertriebenes Tracking von SmallCaps
+\DisableLigatures{encoding = T1, family = tt* } % deaktiviere alle Ligaturen für Mono-Spacing-Fonts
+% ======================================================================================
+
+
+%-- Mathepakete 
+% ======================================================================================
 \mathtoolsset{centercolon,showmanualtags}
 \newtagform{brackets}{[}{]}
 \usetagform{brackets}
-\usepackage{fix-cm}
-\usepackage[bbgreekl]{mathbbol}
 \usepackage{amssymb} % zusätzliche Symbole
-\usepackage{nicefrac} % schräge Brüche
-\usepackage{faktor}
-\newcommand{\Faktor}[1]{\faktor[\textstyle]{#1}}
 \usepackage{xfrac}
-\usepackage{cancel}
 \usepackage{mathdots} % Verbesserung von Punkten wie zB \ldots
 \usepackage[bb=px]{mathalfa}
-\usepackage{centernot}
+% ======================================================================================
 
+
+%-- Hässliche Hacks, um FontWarnings loszuwerden
+% ======================================================================================
 \usepackage{silence}
 \WarningFilter{latexfont}{Size substitutions with differences}
 \WarningFilter{latexfont}{Font shape `U/bbold/m/n' in size}
+% ======================================================================================
 
 \input{math.tex} % Liste mit Mathebefehlen laden
 
 % -- TikZ-Kram
+% ======================================================================================
 \usepackage{tikz-cd}
 \usetikzlibrary{quotes,babel,arrows.meta}
 \tikzset{>=Straight Barb[]}
 \tikzcdset{arrow style=math font}
-
-% -- tikz/externalize
 \usetikzlibrary{external}
 \tikzexternalize[prefix=Bilder/tikz/, up to date check=diff]
 \tikzset{external/system call={xelatex \tikzexternalcheckshellescape %-- verwende LuaLaTeX, wegen dynamischer Speicherallokation
@@ -50,29 +94,35 @@
 \AtBeginEnvironment{tikzcd}{\tikzexternaldisable}
 \AtEndEnvironment{tikzcd}{\tikzexternalenable}
 \pgfkeys{/pgf/images/include external/.code=\includegraphics{#1}}
+% ======================================================================================
 
-% -- Einstellungen bezüglich Schriftart etc.
-\usepackage{ccfonts}
-% \usepackage[semibold]{sourcesanspro}
-\usepackage[semibold,scale=.915]{montserrat}
-\usepackage[semibold,scale=.95]{sourcecodepro}
-\usepackage{eulervm}
 
-% \addtokomafont{disposition}{\sffamily}
+%-- Kopf- und Fußzeilen und allgemeine KOMO-Skript Formatierung
+% ======================================================================================
+\addtokomafont{chapter}{\Huge}
+\addtokomafont{captionlabel}{\sffamily\fontseries{mb}\selectfont}
+\usepackage[%
+	headsepline=1pt,
+	automark,
+	draft=false,
+	]%
+{scrlayer-scrpage}
+\pagestyle{scrheadings}
+\clearscrheadfoot % Standardkonfiguration löschen
+\ohead{\includegraphics[height=0.6 cm,keepaspectratio]{Bilder/wwulogo.pdf}}
+\ihead{\rule{0cm}{0.6cm}\headmark}
+\ofoot*{\Large\sffamily\thepage}
+\ifoot{\color{light_gray}Gruppierung von Trajektorien -- Seminarvortrag von Jannes Bantje}
+% ======================================================================================
 
-\usepackage{fontawesome}
-\usepackage[final]{microtype}
+%-- Satzspiegel neu berechnen
+% ======================================================================================
 \flushbottom
 \KOMAoptions{DIV=last}
-
-
-% -- Einstellungen bezüglich der Sprache, Silbentrennung etc.
-\usepackage{babel}
-% \usepackage{polyglossia}
-% \setmainlanguage[spelling=new,babelshorthands=true]{german}
-% \setotherlanguage[variant=british]{english}
+% ======================================================================================
 
 % -- BibLaTeX 
+% ======================================================================================
 \usepackage[%
 	backend=biber,
 	sortlocale=auto,
@@ -98,48 +148,90 @@
 \DefineBibliographyStrings{ngerman}{%
   andothers = {et\addabbrvspace al\adddot}
 }
+% ======================================================================================
 
-% -- Konfiguration von Hyperref
+
+% -- Konfiguration von Hyperref und Cleveref
+% ======================================================================================
 \usepackage[hidelinks, pdfpagelabels, bookmarksopen=true, bookmarksnumbered=true, linkcolor=black, urlcolor=SkyBlue2, plainpages=false,pagebackref, citecolor=black, hypertexnames=true, pdfauthor={Jannes Bantje}, pdfborderstyle={/S/U}, linkbordercolor=SkyBlue2, colorlinks=false,backref=false]{hyperref}
 \hypersetup{final}
-
 \usepackage[nameinlink,noabbrev]{cleveref}
-
-% -- \url aufhübschen
 \newcommand{\appendLink}[1]{#1\,\faExternalLink}
 \newcommand{\hrefsym}[2]{\href{#1}{\texttt{\appendLink{#2}}}}
 \renewcommand{\url}[1]{\hrefsym{#1}{\nolinkurl{#1}}}
+% ======================================================================================
 
-% -- Aufzählungen, Anführungszeichen etc.
+%-- Schöne Emailadressen setzen (nach http://tex.stackexchange.com/a/663/67086)
+% ======================================================================================
+\catcode`\_=11\relax
+\newcommand\email[1]{\_email #1\q_nil}
+\def\_email#1@#2\q_nil{%
+  \href{mailto:#1@#2}{{\emailfont #1\emailampersat #2}}
+}
+\newcommand\emailfont{\ttfamily}
+\newcommand\emailampersat{{\sffamily@}}
+\catcode`\_=8\relax
+% ======================================================================================
+
+% -- marginnotes/todonotes 
+% ======================================================================================
+\usepackage[fulladjust]{marginnote}
+\renewcommand*{\marginfont}{\itshape\footnotesize}
+\renewcommand*{\raggedleftmarginnote}{\RaggedLeft}
+\renewcommand*{\raggedrightmarginnote}{\RaggedRight}
+\usepackage[textsize=small,obeyDraft]{todonotes}
+\LetLtxMacro{\oldtodo}{\todo}
+\renewcommand{\todo}[2][]{\tikzexternaldisable\oldtodo[#1]{#2}\tikzexternalenable}
+\LetLtxMacro{\oldmissingfigure}{\missingfigure}
+\renewcommand{\missingfigure}[2][]{\tikzexternaldisable\oldmissingfigure[{#1}]{#2}\tikzexternalenable}
+\deffootnote[1.5em]{1.5em}{1.5em}{\textsuperscript{\thefootnotemark}\ }
+% ======================================================================================
+
+
+%-- Für Auflistungen und Tabellen
+% ======================================================================================
+\usepackage{multicol}
 \usepackage[shortlabels,inline]{enumitem}
-\setlist{itemsep=1pt}
+\setlist{itemsep=1pt,parsep=2pt,topsep=2pt}
 \setlist[itemize,1]{label=\textcolor{black}{\raisebox{.45ex}{\rule{.6ex}{.6ex}}}}
 \setlist[enumerate]{font=\sffamily\fontseries{mb}\selectfont}
-\usepackage[autostyle,german=quotes]{csquotes}
+\usepackage{booktabs}
+% ======================================================================================
+
+
+%-- Für Abbildungen
+% ======================================================================================
+\usepackage[caption=false]{subfig}
+\captionsetup[subfigure]{subrefformat=simple,labelformat=simple,listofformat=subsimple}
+\renewcommand\thesubfigure{(\alph{subfigure})}
+\usepackage{wrapfig}
+% ======================================================================================
+
+
+%-- Inhaltsverzeichnis konfigurieren
+% ======================================================================================
+\usepackage[tocindentauto]{tocstyle}
+\usetocstyle{KOMAlike}
+% ======================================================================================
+
+
 
 
 % -- Indexverarbeitung
+% ======================================================================================
 \usepackage{makeidx}
 \newcommand{\bet}[1]{\emph{#1}}
 \newcommand{\Index}[1]{\bet{#1}\index{#1}}
 \makeindex
-% \setindexpreamble{{\noindent \itshape Die Seitenzahlen sind mit Hyperlinks zu den entsprechenden Seiten versehen, also anklickbar}\par \bigskip}
 \renewcommand{\indexpagestyle}{scrheadings}
+% ======================================================================================
 
-% -- Alles zum Thema Gliederung
-% \usepackage{chngcntr}
-% \counterwithin*{equation}{section}
-\numberwithin{equation}{section}
-% \setcounter{tocdepth}{3}
 
 % -- theorem packages
-\let\openbox\relax
+% ======================================================================================
 \usepackage{amsthm}
 \usepackage{thmtools,thm-restate}
 \usepackage{mdframed}
-\renewcommand{\listtheoremname}{Übersicht aller Aussagen}
-
-% -- Theoreme als PDF-Lesezeichen
 \usepackage{bookmark}
 \bookmarksetup{open,numbered}
 \makeatletter
@@ -157,7 +249,6 @@
   }%
 }   
 \makeatother
-
 % -- Definition der einzelnen Umgebungen
 \declaretheoremstyle[%
 	headfont=\sffamily\bfseries,
@@ -168,17 +259,6 @@
 	postheadspace=1em,
 	spaceabove=15pt,spacebelow=10pt,
 	shaded={bgcolor=gray!20},
-	% mdframed={%
-	% 	backgroundcolor=gray!20,
-	% 	innertopmargin=0pt,
-	% 	innerleftmargin=0pt,
-	% 	% roundcorner=5pt,
-	% 	innerbottommargin=0pt,
-	% 	splittopskip = 0pt,
-	% 	% skipbelow=6pt,
-	% 	% skipbelow=6pt,
-	% 	topline=false,bottomline=false,leftline=false,rightline=false
-	% },
 	postheadhook=\theorembookmark]%
 {mainstyle}
 \declaretheoremstyle[%
@@ -206,17 +286,6 @@
 	headfont=\sffamily\bfseries,
 	notefont=\normalfont\sffamily,
 	bodyfont=\normalfont,
-	headformat=\NUMBER\NAME\NOTE,
-	headpunct=.,
-	postheadspace=1em,
-	spaceabove=15pt,spacebelow=10pt,
-	% shaded={bgcolor=gray!20},
-	postheadhook=\theorembookmark]%
-{mainstyle_unnumbered}
-\declaretheoremstyle[%
-	headfont=\sffamily\bfseries,
-	notefont=\normalfont\sffamily,
-	bodyfont=\normalfont,
 	headformat=swapnumber,
 	headpunct=.,
 	postheadspace=1em,
@@ -232,56 +301,15 @@
 \declaretheorem[name=Satz,refname=Satz,sharenumber=definition,style=mainstyle]{satz}
 \declaretheorem[name=Korollar,sharenumber=definition,style=mainstyle]{korollar}
 \declaretheorem[name=Bemerkung,sharenumber=definition,style=mainstyle_unshaded]{bemerkung}
-
 % -- Beweise
 \declaretheoremstyle[headfont=\bfseries\scshape,bodyfont=\normalfont,headpunct=:,postheadspace=1em,spacebelow=12pt,spaceabove=2pt,qed=\qedsymbol]{beweise}
 \declaretheoremstyle[headfont=\bfseries\scshape,bodyfont=\normalfont,headpunct=:,postheadspace=1em,spacebelow=12pt,spaceabove=2pt]{beweisskizze}
 \declaretheorem[name=Beweis,numbered=no,style=beweise]{beweis}
+% ======================================================================================
 
-
-% -- marginnotes package
-\usepackage[fulladjust]{marginnote}
-\renewcommand*{\marginfont}{\itshape \footnotesize}
-\usepackage{ragged2e}
-\renewcommand*{\raggedleftmarginnote}{\RaggedLeft}
-\renewcommand*{\raggedrightmarginnote}{\RaggedRight}
-
-% -- todonotes package
-\usepackage[textsize=small,obeyDraft]{todonotes}
-\LetLtxMacro{\oldtodo}{\todo}
-\renewcommand{\todo}[2][]{\tikzexternaldisable\oldtodo[#1]{#2}\tikzexternalenable}
-\LetLtxMacro{\oldmissingfigure}{\missingfigure}
-\renewcommand{\missingfigure}[2][]{\tikzexternaldisable\oldmissingfigure[{#1}]{#2}\tikzexternalenable}
-
-% -- Fußnoten anpassen
-\deffootnote[1.5em]{1.5em}{1.5em}{\textsuperscript{\thefootnotemark}\ }
-
-% -- Figures und Captions
-\usepackage{wrapfig}
-
-%--Römische Zahlen
-\newcommand{\RM}[1]{\MakeUppercase{\expandafter{\romannumeral #1.\relax}}}
-\robustify\RM
-
-
-% -- Metadaten für die Titelei
-\author{Jannes Bantje}
-
-
-% -- Kopf- und Fußzeilen
-\setheadsepline{1pt}[\color{light_gray}]
-\pagestyle{scrheadings}
-\clearscrheadfoot
-\automark{section}
-\lehead{\includegraphics[height=0.6 cm,keepaspectratio]{Bilder/Logo_WWU_Muenster_light_gray.pdf}}
-\lohead{\color{dark_gray}\normalfont\footnotesize\sffamily\itshape Gruppierung von Trajektorien -- Seminarvortrag von Jannes Bantje}
-\rohead{\includegraphics[height=0.6 cm,keepaspectratio]{Bilder/fb10logo_gray.pdf}}
-
-\ofoot[{\color{dark_gray}\sffamily\LARGE \thepage}]{{\color{dark_gray}\sffamily\LARGE \thepage}} %hier wir auch der plain Stil bearbeitet!
-\ifoot{ \color{dark_gray} \sffamily\small \leftmark}
 
 % -- Inhaltsverzeichnis und weitere Pakte, die zuletzt geladen werden sollten
-\usepackage[tocindentauto]{tocstyle}
-\usetocstyle{KOMAlike}
+% ======================================================================================
+\usepackage[autostyle,german=quotes]{csquotes}
 \usepackage{ellipsis}
-
+% ======================================================================================
