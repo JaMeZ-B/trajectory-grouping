@@ -46,13 +46,12 @@
 % \usepackage[semibold]{sourcesanspro}
 \usepackage[semibold,scale=.915]{montserrat}
 \usepackage[semibold,scale=.95]{sourcecodepro}
-\usepackage{fontawesome}
 \usepackage[T1]{fontenc}
 \usepackage{textcomp}
 \usepackage[newcommands]{ragged2e} % besserer Flattersatz
-
+\usepackage[euler-digits]{eulervm}
 \usepackage{mathtools} % beinhaltet amsmath
-\usepackage{eulervm}
+
 \usepackage{babel}
 \usepackage[babel=true,final,tracking=smallcaps]{microtype}
 \SetTracking{ encoding = *, shape = sc}{ 45 } % aktiviert ein nicht übertriebenes Tracking von SmallCaps
@@ -89,7 +88,7 @@
 \tikzcdset{arrow style=math font}
 \usetikzlibrary{external}
 \tikzexternalize[prefix=Bilder/tikz/, up to date check=diff]
-\tikzset{external/system call={xelatex \tikzexternalcheckshellescape %-- verwende LuaLaTeX, wegen dynamischer Speicherallokation
+\tikzset{external/system call={pdflatex \tikzexternalcheckshellescape %-- verwende LuaLaTeX, wegen dynamischer Speicherallokation
     -halt-on-error -interaction=batchmode -jobname "\image" "\texsource"}}
 \AtBeginEnvironment{tikzcd}{\tikzexternaldisable}
 \AtEndEnvironment{tikzcd}{\tikzexternalenable}
@@ -215,8 +214,6 @@
 % ======================================================================================
 
 
-
-
 % -- Indexverarbeitung
 % ======================================================================================
 \usepackage{makeidx}
@@ -305,6 +302,12 @@
 \declaretheoremstyle[headfont=\bfseries\scshape,bodyfont=\normalfont,headpunct=:,postheadspace=1em,spacebelow=12pt,spaceabove=2pt,qed=\qedsymbol]{beweise}
 \declaretheoremstyle[headfont=\bfseries\scshape,bodyfont=\normalfont,headpunct=:,postheadspace=1em,spacebelow=12pt,spaceabove=2pt]{beweisskizze}
 \declaretheorem[name=Beweis,numbered=no,style=beweise]{beweis}
+% ======================================================================================
+
+%-- siunitx für Einheiten
+% ======================================================================================
+\usepackage[detect-none]{siunitx}
+\sisetup{text-rm=\normalfont, unit-math-rm=\text}
 % ======================================================================================
 
 
