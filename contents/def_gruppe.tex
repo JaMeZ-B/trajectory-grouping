@@ -83,24 +83,21 @@ Die Menge der Komponenten zum Zeitpunkt $t$ bezeichnen wir mit $\mathcal{C}(t)$;
 	\caption{Komponenten einer 14-elementigen Punktmenge zu verschiedenen $\varepsilon$-Werten}\label{fig:components}
 \end{figure}
 
-\begin{definition}[{name=[Gruppe während eines Zeitraums]}]
+\begin{definition}[{name=[Gruppe während eines Zeitraums]},label=def:gruppe]
 	Eine Menge $G$ von $k$ Entitäten bildet eine \Index{Gruppe} im Zeitintervall $I$, falls folgendes gilt:
 	\begin{enumerate}[(i)]
 		\item $G$ enthält mindestens $m$ Entitäten, also $k \ge m$
 		\item die Länge von $I$ ist mindestens $\delta$
-		\item zu jeder Zeit $t \in I$ existiert eine Komponente $C \in \mathcal{C}(t)$ mit $G \subseteq C$.
+		\item \label{enum:3:def:gruppe}zu jeder Zeit $t \in I$ existiert eine Komponente $C \in \mathcal{C}(t)$ mit $G \subseteq C$.
 	\end{enumerate}
 	Das Intervall $I=[t_s,t_e]$ der Gruppe $G$ bezeichnen wir auch mit $I_G$.
 	Eine Gruppe $H$ \bet{überlagert}\index{Gruppe!überlagernde} $G$, falls $G \subseteq H$ und $I_G \subseteq I_H$ gilt.
 	Falls kein solches $H$ existiert, so heißt $G$ \bet{maximal}\index{Gruppe!maximale}. 
 \end{definition}
 
-Da wir ja eigentlich die Trajektorien einzelner Entitäten gruppieren wollen, mag es auf den ersten Blick etwas kontraintuitiv erscheinen, dass eine Entität $x$ in mehreren maximalen Gruppen enthalten sein kann, da zum Überlagern auch die Inklusion der Zeitintervalle gegeben sein muss.
-In \cref{fig:max-groups} ist eine Menge von Trajektorien gezeichnet, bei der keine Entität eindeutig einer maximalen Gruppe zuzuordnen ist.
-
 \begin{figure}[thbp]
 	\Centering
-	\begin{tikzpicture}[scale=1.4]
+	\begin{tikzpicture}[scale=1.3]
 		% Zeitpunkte definieren
 		\coordinate (t_0) at (0,0);
 		\coordinate (t_1) at (2,0);
@@ -150,10 +147,40 @@ In \cref{fig:max-groups} ist eine Menge von Trajektorien gezeichnet, bei der kei
 		% epsilon-discs
 		\foreach \x in {x_1,x_2,x_3,x_4}{
 			\foreach \n in {0,1,...,5}{
-				\draw[darkgray,fill=gray,fill opacity=.3] (\n\x) circle[radius=.107];
+				\draw[darkgray,fill=gray,fill opacity=.2] (\n\x) circle[radius=.107];
 			}
 		}
 	\end{tikzpicture}
 	\caption[Trajektorien mit eingezeichneten $\varepsilon$-Scheiben]{Trajektorien zu vier Entitäten $x_1, \ldots ,x_4$ mit eingezeichneten $\varepsilon$-Scheiben.
-	Die maximalen Gruppen sind $\set*{x_1,x_2}$ während $[t_0,t_3]$, $\set*{x_1,x_2,x_3}$ während $[t_2,t_3]$, $\set*{x_2,x_3}$ während $[t_2,t_5]$, $\set*{x_3,x_4}$ während $[t_0,t_1]$ und $\set*{x_2,x_3,x_4}$ während $[t_4,t_5]$. Hier wurde $m=2$ und $\delta < \abs*{t_5 -t_4}$ gewählt.}\label{fig:max-groups}
+	Die maximalen Gruppen sind $\set*{x_1,x_2}$ während $[t_0,t_3]$, $\set*{x_1,x_2,x_3}$ während $[t_2,t_3]$, $\set*{x_2,x_3}$ während $[t_2,t_5]$, $\set*{x_3,x_4}$ während $[t_0,t_1]$ und $\set*{x_2,x_3,x_4}$ während $[t_4,t_5]$. Hier wurde $m=2$ und $\delta < \abs*{t_5 -t_4}$ gewählt. Wählt man stattdessen $\abs*{t_1-t_2}\ge \delta > \abs*{t_5 -t_4}$, so fällt die Gruppe $\set*{x_2,x_3,x_4}$ weg.}\label{fig:max-groups}
 \end{figure}
+
+In \cref{fig:max-groups} ist eine Menge von Trajektorien gezeichnet, bei der keine Entität eindeutig einer maximalen Gruppe zuzuordnen ist.
+Da wir ja eigentlich die Trajektorien einzelner Entitäten gruppieren wollen, mag dies auf den ersten Blick etwas kontraintuitiv erscheinen.
+Tatsächlich benötigen wir aber alle diese Informationen, um später die Entwicklung der Gruppen über die Zeit und insbesondere Start-, End-, Split- und Merge-Ereignisse von Gruppen analysieren zu können.\todo{siehe Kap. 1?}
+
+Wie \cref{fig:components} bereits zeigt, hat die Wahl des Parameters $\varepsilon$ einen großen Einfluss auf die Komponenten und es stellt sich die Frage, wie sich die (maximalen) Gruppen bei Variation dieses Parameters sowie der anderen beiden $\delta$ und $m$ verändern.
+
+Wenn $G$ eine Gruppe auf dem Intervall $I$ ist, so bleibt sie es offensichtlich bei Verminderung der Mindestgröße $m$ und der minimalen Dauer $\delta$; des Weiteren bleibt eine maximale Gruppe maximal. 
+Eine ähnliche Monotonie-Eigenschaft erhalten wir auch für den räumlichen Parameter $\varepsilon$:
+Vergrößert man $\varepsilon$, so entstehen potentiell zu jedem Zeitpunk weniger, aber dafür größere Komponenten, sodass \cref{enum:3:def:gruppe} aus \cref{def:gruppe} eher erfüllt ist.
+Folglich gibt es zu einer Gruppe $G$ bezüglich des ursprünglichen Parameters $\varepsilon$ eine Gruppe $G'$ mit $G \subseteq G'$.
+
+Diese Monotonie-Eigenschaften haben zur Folge, dass bei einer detaillierten Betrachtung durch Verringerung der Parameter $\delta$ und $m$ die maximalen Gruppen erhalten bleiben.
+\todo{was dazu in dem Paper bzgl der Größe und Dauer steht, halte ich für falsch}
+
+Wir werden im weiteren Verlauf die \Index{\GrpStruktur} bestehend aus der Menge der maximalen Gruppen und einem sogenannten \Index{Reeb-Graphen} betrachten.
+Neben dem Partitionieren in der Trajektorien wird es uns diese \GrpStruktur erlauben, diverse Fragen an die gegeben Daten, wie zum Beispiel die folgenden zu beantworten:
+\begin{itemize}
+	\item Was ist die größte/am längsten andauernde maximale Gruppe zum Zeitpunkt $t$?
+	\item Wie viele Entitäten sind momentan (nicht) in einer maximalen Gruppe?
+	\item Welche maximale Gruppe endet oder startet zuerst nach dem Zeitpunkt $t$?
+	\item Wie lange war eine Entität insgesamt Teil einer maximalen Gruppe?
+	\item Welche Entität war mit den meisten anderen Entitäten zusammen in einer maximalen Gruppe?
+\end{itemize}
+
+Bevor wir nun im nächsten Kapitel den Reeb-Graphen definieren und damit dann die Repräsentation der \GrpStruktur inklusive ihrer Komplexität besprechen, sollte an dieser Stelle noch eine kleine Unzulänglichkeit unserer Definition von Gruppen zur Sprache kommen.
+Dazu stelle man sich die folgende Situation vor: Eine Entität $x$ reist über einen langen Zeitraum zusammen mit einer Gruppe $G$, verlässt diese zwischendurch aber für einen sehr kurzen Zeitraum.
+Im Widerspruch zur obigen \cref{def:gruppe} mag es nun sinnvoller sein, $G \cup \set*{x}$ als Gruppe zu betrachten.
+Man möchte die Gruppen also \Index{robust} gegenüber kleinen Störungen machen, die insbesondere bei Daten aus der Praxis durchgängig auftreten.
+Wie sich dies unter Einbeziehung der maximalen Störungsdauer als weiteren Parameter realisieren lässt, werden in \cref{cha:robust} gegen Ende dieses Arbeit behandeln.
