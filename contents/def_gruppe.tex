@@ -8,7 +8,7 @@ Wie in \cref{cha:einleitung} angedeutet wird unsere Definition einer Gruppe von 
 	\item Mindestgröße $m \in \mathbb{N}\setminus \set*{0}$
 \end{itemize}
 Wir beginnen mit einigen Definitionen zum räumlichen Zusammenhang zu einem festen Zeitpunkt $t$.\todo{Scheibe offen oder geschlossen?}
-\begin{definition}
+\begin{definition}[{name=[Epsilon-Zusammenhang]}]
 	Die $\varepsilon$-Scheibe $B_\varepsilon^t(x)$ einer Entität $x$ zum Zeitpunkt $t$ ist eine Scheibe mit Radius $\varepsilon$ um $x$ zu Zeitpunkt $t$, also $B_\varepsilon^t(x) = \set*{y \in \mathbb{R}^d \given \norm*{x^t-y} \le \varepsilon}$.\marginnote{wir betrachten meist $d=2$}
 	
 	Zwei Entitäten $x$ und $y$ sind zum Zeitpunkt $t$ \Index{direkt zusammenhängend}, falls sich die $\varepsilon$-Scheiben überlappen, das heißt der Schnitt der beiden offenen Scheiben nicht leer ist.
@@ -96,3 +96,64 @@ Die Menge der Komponenten zum Zeitpunkt $t$ bezeichnen wir mit $\mathcal{C}(t)$;
 \end{definition}
 
 Da wir ja eigentlich die Trajektorien einzelner Entitäten gruppieren wollen, mag es auf den ersten Blick etwas kontraintuitiv erscheinen, dass eine Entität $x$ in mehreren maximalen Gruppen enthalten sein kann, da zum Überlagern auch die Inklusion der Zeitintervalle gegeben sein muss.
+In \cref{fig:max-groups} ist eine Menge von Trajektorien gezeichnet, bei der keine Entität eindeutig einer maximalen Gruppe zuzuordnen ist.
+
+\begin{figure}[thbp]
+	\Centering
+	\begin{tikzpicture}[scale=1.4]
+		% Zeitpunkte definieren
+		\coordinate (t_0) at (0,0);
+		\coordinate (t_1) at (2,0);
+		\coordinate (t_2) at (3.2,0);
+		\coordinate (t_3) at (4.5,0);
+		\coordinate (t_4) at (5.7,0);
+		\coordinate (t_5) at (6.2,0);
+		
+		\draw[gray,very thick] ($(t_0) - (.2,0)$) -- ($(t_5) + (.2,0)$);
+		\foreach \x in {t_0,t_1,t_2,t_3,t_4,t_5}{
+			\draw[gray, thick] ($(\x) + (0,.1)$) -- ($(\x)- (0,.1)$) node[below]{$\x$};
+		}
+		
+		% Trajektorien
+		\coordinate (0x_1) at ($(t_0) + (0,3)$);
+		\coordinate (1x_1) at ($(t_1) + (0,2.7)$);
+		\coordinate (2x_1) at ($(t_2) + (0,2.9)$);
+		\coordinate (3x_1) at ($(t_3) + (0,2.85)$);
+		\coordinate (4x_1) at ($(t_4) + (0,3.7)$);
+		\coordinate (5x_1) at ($(t_5) + (0,3.4)$);
+		               
+		\coordinate (0x_2) at ($(t_0) + (0,2.8)$);
+		\coordinate (1x_2) at ($(t_1) + (0,2.6)$);
+		\coordinate (2x_2) at ($(t_2) + (0,2.8)$);
+		\coordinate (3x_2) at ($(t_3) + (0,2.77)$);
+		\coordinate (4x_2) at ($(t_4) + (0,2.35)$);
+		\coordinate (5x_2) at ($(t_5) + (0,2.4)$);
+		               
+		\coordinate (0x_3) at ($(t_0) + (0,.8)$);
+		\coordinate (1x_3) at ($(t_1) + (0,1)$);
+		\coordinate (2x_3) at ($(t_2) + (0,2.7)$);
+		\coordinate (3x_3) at ($(t_3) + (0,2.68)$);
+		\coordinate (4x_3) at ($(t_4) + (0,2.2)$);
+		\coordinate (5x_3) at ($(t_5) + (0,2.35)$);
+		               
+		\coordinate (0x_4) at ($(t_0) + (0,.65)$);
+		\coordinate (1x_4) at ($(t_1) + (0,.9)$);
+		\coordinate (2x_4) at ($(t_2) + (0,1.3)$);
+		\coordinate (3x_4) at ($(t_3) + (0,.4)$);
+		\coordinate (4x_4) at ($(t_4) + (0,2.05)$);
+		\coordinate (5x_4) at ($(t_5) + (0,2.28)$);
+		
+		\foreach \x/\y in {x_1/DodgerBlue3,x_2/Firebrick2,x_3/SeaGreen3,x_4/Sienna2}{
+			\draw[very thick,\y] (0\x) node[left=1.4ex]{$\x$} -- (1\x) -- (2\x) -- (3\x) -- (4\x) -- (5\x);
+		}
+		
+		% epsilon-discs
+		\foreach \x in {x_1,x_2,x_3,x_4}{
+			\foreach \n in {0,1,...,5}{
+				\draw[darkgray,fill=gray,fill opacity=.3] (\n\x) circle[radius=.107];
+			}
+		}
+	\end{tikzpicture}
+	\caption[Trajektorien mit eingezeichneten $\varepsilon$-Scheiben]{Trajektorien zu vier Entitäten $x_1, \ldots ,x_4$ mit eingezeichneten $\varepsilon$-Scheiben.
+	Die maximalen Gruppen sind $\set*{x_1,x_2}$ während $[t_0,t_3]$, $\set*{x_1,x_2,x_3}$ während $[t_2,t_3]$, $\set*{x_2,x_3}$ während $[t_2,t_5]$, $\set*{x_3,x_4}$ während $[t_0,t_1]$ und $\set*{x_2,x_3,x_4}$ während $[t_4,t_5]$. Hier wurde $m=2$ und $\delta < \abs*{t_5 -t_4}$ gewählt.}\label{fig:max-groups}
+\end{figure}
