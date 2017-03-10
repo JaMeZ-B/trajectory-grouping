@@ -4,6 +4,19 @@ In diesem Beitrag soll eine solche Gruppierung mit Methoden der Topologie erläu
 
 Intuitiv soll eine Menge ausreichend vieler sich bewegender Entitäten, die sich für eine gewisse Zeit lang \enquote{zusammen bewegen}, eine Gruppe bilden.
 Unsere erste Aufgabe wird es sein, diese Intuition in eine mathematische Definition zu überführen.
+Diese intuitive Definition suggeriert bereits, dass dabei drei Parameter in eine Definition mit eingehen sollten:
+\begin{description}
+	\item[Mindestgröße] Auch wenn man prinzipiell den Fall einer einelementigen Gruppe betrachten kann, sollte eine Gruppe im Allgemeinen eine gewisse Mindestgröße haben, die sich gegebenenfalls aus dem Anwendungsfall ergibt, oftmals aber auch während der Analyse variiert wird.
+	So gelangt man zu einer detaillierten Sicht auf Gruppierungen, wenn man die Mindestgröße verringert, da so mehr Gruppen entstehen.
+	\item[Dauer/zeitlicher Parameter] Entitäten, die sich nur kurz \enquote{begegnen}, aber nicht zusammen bewegen, sollten nicht unbedingt zu einer Gruppe zusammengefasst werden, was durch die Forderung einer minimalen Dauer der gemeinsamen Bewegung gewährleistet wird.
+	Auch hier erhält man eine detailliertere Sicht auf Gruppierungen, wenn man die minimale Dauer geringer ansetzt, da dann tendenziell mehr Gruppen entstehen.
+	\item[Räumlicher Parameter] Um von einer gemeinsamen Bewegung sprechen zu können, dürfen die Entitäten offensichtlich nicht zu weit voneinander entfernt sein und wir benötigen einen Parameter für den Abstand zwischen den Entitäten.
+	Hier erhalten wir eine detailliertere Sicht mit mehr Gruppen durch Vergrößerung dieses Parameters.
+\end{description}
+Diese drei Parameter ermöglichen es uns, Gruppierungen in verschiedenen Größenordnungen zu analysieren und unser Augenmerk auf bestimmte Gruppen zu lenken: Bei einer hohen Mindestgröße interessieren wir uns nur für große Gruppen, wählen wir einen großen zeitlichen Parameter, so betrachten wir lediglich lange bestehende Gruppen und ein kleiner räumlicher Parameter filtert lose zusammenhängende Gruppen heraus.
 
+Das hier vorgestellte Modell leistet aber noch deutlich mehr als die Identifikation der Gruppen, den es beinhaltet auch die Veränderungen der \GrpStruktur über den betrachteten Zeitraum.
+Insbesondere werden neben \emph{Start}- und \emph{End}-Ereignissen auch \emph{Merge}- und \emph{Split}-Ereignisse beachtet, das heißt es lässt sich eine detaillierte Historie der \GrpStruktur erstellen.
 
+Bevor wir im folgenden \cref{cha:def_gruppe} Gruppen mathematisch präzise definieren, soll hier noch das Zusammenspiel der Parameter an möglichen Anwendungsgebieten demonstriert werden.
 \todo[inline]{mögliche Anwendungsgebiete}
