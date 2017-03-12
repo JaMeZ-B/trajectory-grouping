@@ -166,8 +166,8 @@ Eine ähnliche Monotonie-Eigenschaft erhalten wir auch für den räumlichen Para
 Vergrößert man $\varepsilon$, so entstehen potentiell zu jedem Zeitpunk weniger, aber dafür größere Komponenten, sodass \cref{enum:3:def:gruppe} aus \cref{def:gruppe} eher erfüllt ist.
 Folglich gibt es zu einer Gruppe $G$ bezüglich des ursprünglichen Parameters $\varepsilon$ eine Gruppe $G'$ mit $G \subseteq G'$.
 
-Diese Monotonie-Eigenschaften haben zur Folge, dass bei einer detaillierten Betrachtung durch Verringerung der Parameter $\delta$ und $m$ die maximalen Gruppen erhalten bleiben.
-\todo{was dazu in dem Paper bzgl der Größe und Dauer steht, halte ich für falsch}
+Diese Monotonie-Eigenschaften haben zur Folge, dass bei einer detaillierten Sicht -- im Sinne von \cref{cha:einleitung} -- durch Verringerung der Parameter $\delta$ und $m$ sowie Vergrößerung von $\varepsilon$ die maximalen Gruppen erhalten bleiben.
+Dabei können sich Größe und Dauer einer maximalen Gruppe durch ein größeres $\varepsilon$ allerdings ausdehnen.
 
 Wir werden im weiteren Verlauf die \Index{\GrpStruktur} bestehend aus der Menge der maximalen Gruppen und einem sogenannten \Index{Reeb-Graphen} betrachten.
 Neben dem Partitionieren in der Trajektorien wird es uns diese \GrpStruktur erlauben, diverse Fragen an die gegeben Daten, wie zum Beispiel die folgenden zu beantworten:
@@ -182,5 +182,5 @@ Neben dem Partitionieren in der Trajektorien wird es uns diese \GrpStruktur erla
 Bevor wir nun im nächsten Kapitel den Reeb-Graphen definieren und damit dann die Repräsentation der \GrpStruktur inklusive ihrer Komplexität besprechen, sollte an dieser Stelle noch eine kleine Unzulänglichkeit unserer Definition von Gruppen zur Sprache kommen.
 Dazu stelle man sich die folgende Situation vor: Eine Entität $x$ reist über einen langen Zeitraum zusammen mit einer Gruppe $G$, verlässt diese zwischendurch aber für einen sehr kurzen Zeitraum.
 Im Widerspruch zur obigen \cref{def:gruppe} mag es nun sinnvoller sein, $G \cup \set*{x}$ als Gruppe zu betrachten.
-Man möchte die Gruppen also \Index{robust} gegenüber kleinen Störungen machen, die insbesondere bei Daten aus der Praxis durchgängig auftreten.
+Man möchte die Gruppen also \Index{robust} gegenüber kleinen Störungen machen, die insbesondere bei Daten aus der Praxis oftmals auftreten.
 Wie sich dies unter Einbeziehung der maximalen Störungsdauer als weiteren Parameter realisieren lässt, werden in \cref{cha:robust} gegen Ende dieses Arbeit behandeln.
