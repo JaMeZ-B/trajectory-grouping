@@ -43,6 +43,7 @@
 %-- typografische Verbesserungen, Codierungskram, Schriftwahl und erste Mathepakete
 % ======================================================================================
 \usepackage[utf8]{inputenc}
+\usepackage{fix-cm}
 \usepackage{ccfonts}
 % \usepackage[semibold]{sourcesanspro}
 \usepackage[semibold,scale=.915]{montserrat}
@@ -86,7 +87,7 @@
 \usepackage{tikz-cd}
 \usetikzlibrary{quotes,babel,arrows.meta,calc}
 \tikzset{>=Straight Barb[]}
-\tikzcdset{arrow style=math font}
+% \tikzcdset{arrow style=math font}
 \usetikzlibrary{external}
 \tikzexternalize[prefix=Bilder/tikz/, up to date check=diff]
 \tikzset{external/system call={pdflatex \tikzexternalcheckshellescape %-- verwende LuaLaTeX, wegen dynamischer Speicherallokation
@@ -156,9 +157,9 @@
 \usepackage[hidelinks, pdfpagelabels, bookmarksopen=true, bookmarksnumbered=true, linkcolor=black, urlcolor=SkyBlue2, plainpages=false,pagebackref, citecolor=black, hypertexnames=true, pdfauthor={Jannes Bantje}, pdfborderstyle={/S/U}, linkbordercolor=SkyBlue2, colorlinks=false,backref=false]{hyperref}
 \hypersetup{final}
 \usepackage[nameinlink,noabbrev]{cleveref}
-\newcommand{\appendLink}[1]{#1\,\faExternalLink}
-\newcommand{\hrefsym}[2]{\href{#1}{\texttt{\appendLink{#2}}}}
-\renewcommand{\url}[1]{\hrefsym{#1}{\nolinkurl{#1}}}
+% \newcommand{\appendLink}[1]{#1\,\faExternalLink}
+% \newcommand{\hrefsym}[2]{\href{#1}{\texttt{\appendLink{#2}}}}
+% \renewcommand{\url}[1]{\hrefsym{#1}{\nolinkurl{#1}}}
 % ======================================================================================
 
 %-- Schöne Emailadressen setzen (nach http://tex.stackexchange.com/a/663/67086)
