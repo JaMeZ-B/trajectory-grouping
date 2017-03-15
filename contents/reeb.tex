@@ -1,2 +1,33 @@
 %!TEX root = ../trajectory-grouping.tex
+Sei $X$ ein topologischer Raum und $f \colon X \to \mathbb{R}$ eine stetige Funktion.
+Dann bezeichnet man für einen Wert $a \in \mathbb{R}$ das Urbild unter $f$ als \Index{Niveaumenge} (engl. \emph{level set}) von $a$.
+Die Niveaumengen bilden offensichtlich eine Partition von $X$.
+
+Anschaulich stellt man sich $f$ meist als \Index{Höhenfunktion} vor. 
+So könnte $X$ beispielsweise das Gebiet einer Karte in einem handelsüblichen Atlas sein (=eine Teilmenge der zweidimensionalen Ebene) und $f$ gibt die Höhe über NN an.
+Dann sind die Niveaumengen $f^{-1}(\set{a})$ genau die Niveaulinien, die man in detaillierten topografischen Karten findet (ein Beispiel einer solchen Karte findet sich in \cref{sec:karte_niveau}).
+
+Um den \Index{Reeb-Graph} von $f$ zu erhalten, benutzen wir nun die Zusammenhangskomponenten von $f^{-1}(\set{a})$ wie folgt (Definition nach \textcite[\RM{6}.4]{compTopo})
+
+\begin{definition}[{name=[Reeb-Graph]}]
+	Der \Index{Reeb-Graph} zu $f \colon X \to \mathbb{R}$ ist der Quotientenraum $\mathcal{R}(f) \coloneqq X/{\sim}$ bezüglich der folgenden Äquivalenzrelation
+	\[
+		x \sim y :\iff \exists a \in \mathbb{R} : x,y \text{ liegen in der gleichen Zusammenhangskomponente von } f^{-1}(\set{a}) 
+	\]
+	Die Elemente von $\mathcal{R}(f)$ bezeichnen wir als \Index{Konturen} von $f$.
+\end{definition}
+Wir erhalten eine eindeutig bestimme Abbildung $h \colon \mathcal{R}(f) \to \mathbb{R}$, sodass das folgende Diagramm kommutiert.
+Alle Abbildungen sind aufgrund der universellen Eigenschaft der Quotiententopologie stetig.
+\[
+	\begin{tikzcd}[sep=large]
+		X \rar["f"] \dar["q",two heads] & \mathbb{R} \\
+		\mathcal{R}(f) \urar["h"']
+	\end{tikzcd}
+\]
+Die Quotientenabbildung $q$ bildet einen Punkt aus $X$ auf die zugehörige Kontur in $\mathcal{R}(f)$ ab.
+
+$\mathcal{R}(f)$ ist tatsächlich ein Graph, da jede Niveaumenge unter $q$ auf eine diskrete Menge abgebildet wird.\todo{genauer bzw. expliziter}
+
+\vspace{3cm}
+
 Sei $\mathcal{X}$ wieder eine Menge von Entitäten, die sich entlang bekannter Trajektorien bewegen, die jeweils aus $\tau$ Kanten bestehen.
