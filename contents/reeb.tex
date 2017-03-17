@@ -26,6 +26,7 @@ Alle Abbildungen sind aufgrund der universellen Eigenschaft der Quotiententopolo
 \]
 Die Quotientenabbildung $q$ bildet einen Punkt aus $X$ auf die zugehörige Kontur in $\mathcal{R}(f)$ ab.
 $\mathcal{R}(f)$ ist tatsächlich ein Graph, da jede Niveaumenge unter $q$ auf eine diskrete Menge abgebildet wird.\todo{genauer bzw. expliziter}
+Betrachtet man die positive Richtung in $\mathbb{R}$, so wird $\mathcal{R}(f)$ auf kanonische Weise zu einem gerichteten Graphen.
 
 \section{Differentialtopologische Hintergründe zum Reeb-Graphen} % (fold)
 \label{sec:background_reeb}
@@ -105,7 +106,6 @@ Für den aufrechten Torus $T$ aus \cref{fig:torus_reeb} ist $T^a$ zum Beispiel z
 In Bezug auf den Reeb-Graphen bedeutet dies, dass sich auch die Zusammenhangskomponenten der Niveaumengen nun an den kritischen Werten ändern können.
 Ein Punkt $r \in \mathcal{R}(f)$ ist also ein Knoten, wenn $q^{-1}(u)$ einen kritischen Punkt enthält.
 \Cref{enum:def:morse:2} stellt dann sicher, dass es eine Bijektion zwischen den Knoten im Reeb-Graphen und den kritischen Punkten gibt, die in \cref{fig:torus_reeb} klar ersichtlich ist.
-
 % section background_reeb (end)
 
 
@@ -113,15 +113,89 @@ Ein Punkt $r \in \mathcal{R}(f)$ ist also ein Knoten, wenn $q^{-1}(u)$ einen kri
 \section{Reeb-Graphen zur Gruppierung von Trajektorien} % (fold)
 \label{sec:trajek_reeb}
 Sei $\mathcal{X}$ wieder eine Menge von Entitäten, die sich entlang bekannter Trajektorien bewegen, die jeweils aus $\tau$ Kanten bestehen.
-Indem wir die $z$-Achse des $\mathbb{R}^3$ als Zeit auffassen erhalten wir für jede Entität $x$ durch das Verfolgen\todo{besseres Wort?} der $\varepsilon$-Scheibe entlang eines Segments der Trajektorie einen schiefen Zylinder im $\mathbb{R}^3$.
+Indem wir die $z$-Achse des $\mathbb{R}^3$ als Zeit auffassen erhalten wir für jede Entität $x$ durch Extrusion der $\varepsilon$-Scheibe entlang eines Segments der Trajektorie einen schiefen Zylinder im $\mathbb{R}^3$.
 Die Vereinigung der $\tau$ Zylinder liefert uns dann einen (ausgefüllten) \enquote{Schlauch} pro Entität, welche wir wiederum alle zu einem Teilraum\todo{Mfkt?} $\mathcal{M} \subset \mathbb{R}^3$ vereinigen (siehe \cref{fig:tubes}).
 Dies ist der Raum, dessen Reeb-Graph wir betrachten wollen.
 
 \begin{figure}[htbp]
 	\Centering
-	\missingfigure{Diese lustigen Tuben}
-	\caption{Der Raum $\mathcal{M}$ für die Entitäten $x_1, \ldots ,x_k$}\label{fig:tubes}
+	
+	\subfloat[Der Raum $\mathcal{M}$]{
+	\missingfigure[figwidth=.45\textwidth]{Diese lustigen Tuben }\label{fig:tubes}
+	}
+	\hspace{1em}
+	\subfloat[Reeb-Graph zu $\mathcal{M}$]{
+	\missingfigure[figwidth=.45\textwidth]{Reeb-Graph}}\label{fig:reeb_graph}
+	\caption{Der Raum $\mathcal{M}$ für die Entitäten $x_1, \ldots ,x_k$}
 \end{figure}
 
+Bezeichnet man nun mit $H_t$ die horizontale Ebene bei der Höhe $t$, so sind die Mengen $\mathcal{M} \cap H_t$ offensichtlich die Niveaumengen.
+Eine Zusammenhangskomponente von $\mathcal{M} \cap H_t$ entspricht genau einer Komponente im Sinne von \cref{cha:def_gruppe}, also einer maximalen Menge $\varepsilon$-zusammenhängender Entitäten zum Zeitpunkt $t$.
+Der Einfachheit halber nehmen wir im weiteren Verlauf folgendes an:
+\begin{itemize}
+	\item Die bekannten Positionen der Trajektorien sind alle an gleichen Zeitpunkten $t_0, \ldots ,t_\tau$.
+	\item Keine drei Entitäten werden zur gleichen Zeit $\varepsilon$-(un)zusammenhängend.
+\end{itemize}
+Es wird sich zeigen, dass diese Annahmen ohne Beschränkung der Allgemeinheit getroffen werden können.
+Die erste Annahme lässt sich durch das Zerteilen einzelner Segmente der Trajektorien zu geeigneten Zeitpunkten auch leicht künstlich herstellen.
+
+\begin{definition}[{name=[Reeb-Graph der \GrpStruktur]}]
+	Wir bezeichnen mit $\mathcal{R}$ den Reeb-Graphen zu $\mathcal{M}$ bezüglich der Höhenfunktion zu $\mathcal{M}$.
+\end{definition}
+
+An dieser Stelle sei angemerkt, dass $\mathcal{M}$ ein dreidimensionaler Raum ist (bis auf einige wenige Ausnahmen ist $\mathcal{M}$ eine 3-Mannigfaltigkeit mit Rand; in jedem Fall ist $\mathcal{M}$ ein dreidimensionaler CW-Komplex) im Gegensatz zum zweidimensionalen Torus, der eben betrachtet wurde.
+Das in \cref{fig:bsp_reeb_rand} betrachtete Beispiel zeigt, warum wir den dreidimensionalen Raum $\mathcal{M}$ und nicht dessen zweidimensionalen Rand betrachten.
+
+\begin{figure}[htbp]
+	\Centering
+	\begin{tikzpicture}[scale=1.3]
+		\foreach \x in {0,30,...,330}{
+			\filldraw[Firebrick2] (\x:1) circle[radius=.4];
+		}
+		\foreach \x in {0,30,...,330}{
+			\fill[white] (\x:1) circle[radius=.37];
+		}
+		\foreach \x in {0,30,...,330}{
+			\fill[DodgerBlue3,fill opacity=.5] (\x:1) circle[radius=.37];
+			\filldraw (\x:1) circle[radius=.04];
+		}
+ 	\end{tikzpicture}
+	\caption[Unterschiede bei den Zusammenhangskomponenten zwischen $\mathcal{M}$ und $\partial \mathcal{M}$]{Angenommen die gezeichneten Entitäten bewegen sich gar nicht. Jede Niveaumenge von $\mathcal{M}$ ist dann zusammenhängend, die Niveaumengen von $\partial \mathcal{M}$ bestehen aber stets aus zwei Zusammenhangskomponenten. Da obige Konfiguration (bei geeignetem $\delta$) nur eine maximale Gruppe bildet, wurde $\mathcal{R}$ als Reeb-Graph von $\mathcal{M}$ und nicht $\partial \mathcal{M}$ definiert.}\label{fig:bsp_reeb_rand}
+\end{figure}
+
+Wie in \cref{sec:background_reeb} erläutert, entsprechen die Vertices von $\mathcal{R}$ Zeitpunkten $t_v$, an denen sich die Komponenten ändern.
+Diese Zeitpunkte stimmen im Allgemeinen nicht mit den Zeitpunkten $t_0, \ldots, t_\tau$ überein, was auch in \cref{fig:tubes} zu erkennen ist.
+Jeder Vertex im Reeb-Graphen lässt sich eindeutig einer der folgenden Klassen zuordnen
+\begin{description}
+	\item[Start-Vertex] Für jede Komponente zum Zeitpunkt $t_0$ existiert ein Vertex; ein solcher Vertex ist ein \Index{Start-Vertex}.
+	Jeder Start-Vertex hat Eingangs-Grad 0 und Ausgangsgrad 1.
+	\item[End-Vertex] Genauso existiert für jede Komponente zum Zeitpunkt $t_\tau$ ein Vertex, ein sog. \Index{End-Vertex}.
+	Jeder End-Vertex hat Eingangs-Grad 1 und Ausgangsgrad 0.
+\end{description}
+Die verbleibenden Vertices können wir aufgrund der Annahme, dass keine drei Entitäten zur gleichen Zeit $\varepsilon$-(un)zusammenhängend werden, eindeutig einer der beiden folgenden Klassen zuordnen: Ein
+\begin{description}
+	\item[Merge-Vertex] hat Eingangs-Grad 2 und Ausgangsgrad 1, ein
+	\item[Split-Vertex] hat Eingangs-Grad 1 und Ausgangsgrad 2.
+\end{description}
+Eine gerichtete Kante $e=(u,v)$ in $\mathcal{R}$ entspricht einer Menge von Entitäten, die zu jedem Zeitpunkt $t \in \benbrace*{t_u,t_v}$ eine Komponente (im Sinne von \cref{cha:def_gruppe}) bildet.
+Wir halten fest, dass der Reeb-Graph $\mathcal{R}$ nur vom räumlichen Parameter $\varepsilon$, aber nicht von den beiden weiteren Parametern unseres Modells, $m$ und $\delta$, abhängt.
+
+Wie genau hängt der Reeb-Graph $\mathcal{R}$ nun mit den Trajektorien und den Gruppen zusammen? 
+Zunächst einmal folgt jede Entität einem Pfad in $\mathcal{R}$ von einem Start-Vertex zu einem End-Vertex.
+Analog lässt sich jeder (maximalen) Gruppe ein Pfad von einem Start- oder Merge-Vertex zu einem End- oder Split-Vertex zuordnen.
+Wählt man nun $m > 1$ oder $\delta > 0$, so kann es sein, dass einigen Kanten von $\mathcal{R}$ keine Gruppe zugeordnet ist und sie somit für die \GrpStruktur irrelevant sind.
+$\mathcal{R}$ ohne all diese Kanten ist der \Index{reduzierte Reeb-Graph}, den wir ebenfalls mit $\mathcal{R}$ bezeichnen (nur für die Komplexität von $\mathcal{R}$ nehmen wir gleich noch einmal den unreduzierten Fall an).
+
+
+\begin{definition}[{name=[{\GrpStruktur}]}]
+	Die \Index{\GrpStruktur} (\enquote{trajectory grouping structure}) zu $\mathcal{X}$ und den Parametern $(\varepsilon,\delta,m)$ besteht aus dem reduzierten Reeb-Graphen $\mathcal{R}$ und einer Abbildung, die jeder Kante eine Menge maximaler Gruppen zuordnet.
+\end{definition}
+
+
 % section trajek_reeb (end)
+
+\section{Komplexität der Anzahl maximaler Gruppen} % (fold)
+\label{sec:max_gruppen_komplex}
+
+% section max_gruppen_komplex (end)
 
