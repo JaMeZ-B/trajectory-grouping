@@ -187,15 +187,58 @@ Wählt man nun $m > 1$ oder $\delta > 0$, so kann es sein, dass einigen Kanten v
 $\mathcal{R}$ ohne all diese Kanten ist der \Index{reduzierte Reeb-Graph}, den wir ebenfalls mit $\mathcal{R}$ bezeichnen (nur für die Komplexität von $\mathcal{R}$ nehmen wir gleich noch einmal den unreduzierten Fall an).
 
 
-\begin{definition}[{name=[{\GrpStruktur}]}]
-	Die \Index{\GrpStruktur} (\enquote{trajectory grouping structure}) zu $\mathcal{X}$ und den Parametern $(\varepsilon,\delta,m)$ besteht aus dem reduzierten Reeb-Graphen $\mathcal{R}$ und einer Abbildung, die jeder Kante eine Menge maximaler Gruppen zuordnet.
+\begin{definition}[{name=[{\GrpStruktur}]},label=def:grpstrukur]
+	Die \Index{\GrpStruktur} (\enquote{trajectory grouping structure}) zu $\mathcal{X}$ und den Parametern $(\varepsilon,\delta,m)$ besteht aus dem reduzierten Reeb-Graphen $\mathcal{R}$ und einer Abbildung, die jeder Kante die zugehörige Menge maximaler Gruppen zuordnet.
 \end{definition}
-
-
 % section trajek_reeb (end)
 
-\section{Komplexität der Anzahl maximaler Gruppen} % (fold)
-\label{sec:max_gruppen_komplex}
+\section{Komplexität der \GrpStruktur} % (fold)
+\label{sec:komplex}
+Gemäß \cref{def:grpstrukur} müssen wir sowohl für die Komplexität des Reeb-Graphen $\mathcal{R}$ als auch die Anzahl maximaler Gruppen obere Schranken finden.
+Dazu folgen wir \textcite[Sec.~2.1~\&~2.2]{buchin2015} und beweisen wir Schranken von $\mathcal{O}(\tau n^2)$ für $\mathcal{R}$ und $\mathcal{O}(\tau n^3)$ für die Anzahl maximaler Gruppen, die im Worst-Case sogar scharf sind. 
 
-% section max_gruppen_komplex (end)
+\begin{lemma}[name={\cite[Lem.~1]{buchin2015}},label=lem:untereSchranke-Reeb]
+	Der Reeb-Graph $\mathcal{R}$ einer Menge $\mathcal{X}$ von $n$ Entitäten, von denen sich jede auf einer Trajektorie mit $\tau$ Kanten bewegt, kann $\Omega(\tau n^2)$ Vertices und $\Omega(\tau n^2)$ Kanten haben.
+\end{lemma}
+\begin{beweis}
+	Wir nehmen ohne Einschränkungen an, dass $n$ gerade sei; weiter können wir $\varepsilon=0$ wählen.
+	Wir wollen nun eine Menge von Trajektorien konstruieren, sodass $\mathcal{R}$ $\Omega(n^2)$ viele Vertices $v$ mit $t_v \in \benbrace*{t_i,t_{i+1}}$ hat für einen der Zeitpunkte $t_i$.
+	Diese Konstruktion wiederholen wir für alle Intervalle.
+	Dies liefert dann offensichtlich $\Omega(\tau n^2)$ viele Vertices und damit auch $\Omega(\tau n^2)$ viele Kanten, da jeder Knoten entweder Grad 1 oder Grad 3 hat (siehe oben).
+
+	\begin{figure}[htbp]
+		\Centering
+		\begin{tikzpicture}[scale=.3,>=Latex,font=\small]
+			\draw[dashed] (-7,-7) node[left]{$t_i$} -- (7,7);
+			\draw[dashed] (0,-12) node[left]{$t_{i+1}$} -- ++ (14,14);
+			\foreach \x in {1,2,3,4,5}{
+				\draw[->,thick] (-\x,-\x) node[left]{$r_{\x}$} -- ++ (12,0);
+				\draw[->,thick] (\x,\x) node[above,xshift=-1pt]{$d_{\x}$} -- ++ (0,-12);
+				\filldraw[fill=DodgerBlue3] (-\x,-\x) circle[radius=.15] ++ (12,0)circle[radius=.15];
+				\filldraw[fill=Firebrick2] (\x,\x) circle[radius=.15] ++ (0,-12) circle[radius=.15];
+			}
+		\end{tikzpicture}
+		\caption{Konstruktion für $\Omega(n^2)$ viele Vertices im Intervall $\benbrace*{t_i,t_{i+1}}$ am Beispiel $n=5$}\label{fig:vertices-intervall}
+	\end{figure}
+	
+	Wir teilen $\mathcal{X}$ -- wie in \cref{fig:vertices-intervall} gezeichnet -- in zwei Teilmengen $R= \set*{r_1, \ldots ,r_{n/2}}$, $D=\set*{d_1,\ldots ,d_{n/2}}$ auf, wobei die Entität $r_j$ bei $(-j,-j)$ und $d_\ell$ bei $(\ell,\ell)$ startet.
+	Alle Entitäten bewegen sich mit der Geschwindigkeit Eins, die $r_j$ nach rechts, die $d_\ell$ nach unten, und aus \cref{fig:vertices-intervall} ist klar ersichtlich, dass sich die Konstruktion mit vertauschten Rollen im nächsten Intervall wiederholen lässt.
+	Da sich $r_j$ und $d_\ell$ zum Zeitpunkt $t_i + j + \ell$ treffen, entsteht ein Vertex im Reeb-Graphen und wir erhalten insgesamt $\Omega(n^2)$ Vertices pro Zeitintervall.
+\end{beweis}
+
+\begin{satz}[name={\cite[Thm.~2]{buchin2015}},label=thm:schranke-Reeb]
+	Der Reeb-Graph $\mathcal{R}=(V,E)$ aus \cref{lem:untereSchranke-Reeb} hat $\mathcal{O}(\tau n^2)$ Vertices und Kanten.
+	Diese Schranke ist scharf im Worst-Case.
+\end{satz}
+\begin{beweis}
+	In \cref{lem:untereSchranke-Reeb} wurde bereits eine Konstruktion angegeben, die einen Reeb-Graphen mit $\Omega(\tau n^2)$ Vertices und Kanten liefert.
+	Wir müssen also nur noch zeigen, dass $\mathcal{O}(\tau n^2)$ Vertices und Kanten entstehen können.
+	Dazu nutzen wir aus, dass sich die Entitäten während eines Zeitintervalls $\benbrace*{t_i,t_{i+1}}$ auf Geraden bewegen.
+	Insbesondere ist nämlich der Abstand zwischen zwei Entitäten $x$ und $y$ während $\benbrace*{t_i,t_{i+1}}$ eine konvexe Funktion $\benbrace*{t_i,t_{i+1}} \to \mathbb{R}_+$, wie man sehr leicht mit Hilfe der Dreiecksungleichung zeigt.\footnote{dabei kann man sogar ganz allgemein eine beliebige Norm auf $\mathbb{R}^d$ betrachten}
+	Damit sind $x$ und $y$ höchstens während einem Intervall $I \subseteq \benbrace*{t_i,t_{i+1}}$ direkt-zusammenhängend.
+	Dieses Intervall liefert wiederum höchstens zwei Vertices in $\mathcal{R}$.
+	Da die Trajektorien aus je $\tau$ Kanten bestehen, erzeugt jedes Paar $(x,y)$ somit $\mathcal{O}(\tau)$ Vertices.
+	Damit gibt es insgesamt $\mathcal{O}(\tau n^2)$ Vertices und damit auch $\mathcal{O}(\tau n^2)$ Kanten, da der Knotengrad beschränkt ist.
+\end{beweis}
+% section komplex (end)
 
