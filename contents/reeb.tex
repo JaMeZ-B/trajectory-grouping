@@ -334,5 +334,92 @@ Dies gestaltet sich etwas schwieriger als die Komplexität des Reeb-Graphen: \to
 	Da jede Gruppe $S$ enthält, ist auch die Größe in $\Omega(n)$ wie gefordert.
 	Im nächsten Zeitintervall $\benbrace*{t_{u+1}, t_{u+2}}$ bewegen wir die Entitäten aus $D$ nun einfach wieder nach links und aus Symmetriegründen entstehen dabei auch wieder $\Omega(n^3)$ maximale Gruppen, sodass insgesamt $\Omega(\tau n^3)$ maximale Gruppen entstehen.
 \end{beweis}
+
+\begin{satz}[name={\cite[Thm.~5]{buchin2015}},label=satz:obereSchranke-Gruppen]
+	In der Situation von \cref{lem:untereSchranke-Gruppen} gibt es $\mathcal{O}(\tau n^3)$ maximale Gruppen.
+	Diese Schranke ist scharf im Worst-Case.
+\end{satz}
+\begin{beweis}
+	In \cref{lem:untereSchranke-Gruppen} haben wir bereits gesehen, dass es Konfigurationen gibt, die $\Omega(\tau n^3)$ maximale Gruppen haben.
+	Es bleibt die obere Schranke zu zeigen.
+	Da eine maximale Gruppe an einem Start- oder Merge-Vertex beginnt, genügt es zu zeigen, dass an jedem solchen $\mathcal{O}(n)$ maximale Gruppen entstehen können, da wir in \cref{thm:schranke-Reeb} gezeigt haben, dass $\mathcal{O}(\tau n^2)$ viele solche Vertices existieren.
+	Wir besprechen an dieser Stelle nur den Fall von Merge-Vertices, der Beweis für Start-Vertices verläuft genauso.\todo{überprüfen}
+	Weiter können wir $m=1$ und $\delta=0$ annehmen, da diese Wahlen der beiden Parameter die Anzahl maximaler Gruppen maximieren.
+	
+	\begin{figure}
+		\Centering
+		\subfloat[$\mathcal{R}'_v$ (durgezogene Linien) als Untergraph von $\mathcal{R}$ (gepunktet gezeichnet)]{
+		\begin{tikzpicture}[scale=.5]
+			% \draw[help lines] (-1,-3) grid (10,3);
+			\coordinate (v) at (0,0);
+			\draw (v) -- ++ (-1,1) node[left]{$S$};
+			\draw (v) -- ++ (-1,-1) node[left]{$T$};
+			% SubGraph zeichnen
+			\draw[very thick] (v) -- ++ (1,0) -- ++ (1,1) -- ++ (1,0) -- ++ (1,1) -- ++ (1,0)-- ++ (1,-1) -- ++ (4,0);
+			\draw[very thick] (v) -- ++ (1,0) -- ++ (1,1) -- ++ (1,0) -- ++ (1,-1) -- ++ (1,0)-- ++ (1,1) -- ++ (4,0);
+			\draw[very thick] (v) -- ++ (1,0) -- ++ (1,-1) -- ++ (1,0) -- ++ (1,1) -- ++ (1,0)-- ++ (1,1) -- ++ (4,0);
+			\draw[very thick] (v) -- ++ (1,0) -- ++ (1,-1) -- ++ (1,0) -- ++ (1,-1) -- ++ (1,0)-- ++ (1,1) -- ++ (1,0) -- ++ (2,2) -- ++ (1,0);
+			\draw[very thick] (v) -- ++ (1,0) -- ++ (1,-1) -- ++ (1,0) -- ++ (1,-1) -- ++ (1,0)-- ++ (1,-1) -- ++ (1,0) -- ++ (1,1) -- ++ (2,0);
+			\draw[very thick] (v) -- ++ (1,0) -- ++ (1,-1) -- ++ (1,0) -- ++ (1,-1) -- ++ (1,0)-- ++ (1,-1) -- ++ (2,0) -- ++ (1,1) -- ++ (1,0);
+			\draw[very thick] (v) -- ++ (1,0) -- ++ (1,-1) -- ++ (1,0) -- ++ (1,-1) -- ++ (1,0)-- ++ (1,-1) -- ++ (4,0);
+			% übriger Graph
+			\draw[dotted,thick] (v) ++ (-1,3) -- ++ (2,0) -- ++ (1,-1) -- ++ (2,0) -- ++ (1,-1) -- ++ (2,0) -- ++ (1,1) -- ++ (2,0);
+			\draw[dotted,thick] (v) ++ (-1,2) -- ++ (11,0);
+			\draw[dotted,thick] (v) ++ (-1,2) -- ++ (6,0) -- ++ (1,1) -- ++ (4,0);
+			\draw[dotted,thick] (v) ++ (-1,-2) -- ++ (1,1) -- ++ (3,0) -- ++ (1,1) -- ++ (1,0) -- ++ (1,-1) -- ++ (4,0);
+			\draw[dotted,thick] (v) ++ (-1,-3) -- ++ (1,0) -- ++ (1,1) -- ++ (6,0) -- ++ (1,1) -- ++ (2,0);
+			\draw[dotted,thick] (v) ++ (-1,-3) -- ++ (2,0) -- ++ (1,1) -- ++ (1,0) -- ++ (1,-1) -- ++ (2,0) -- ++ (1,1) -- ++ (3,0);
+			\draw[fill=DodgerBlue3,thick] (v) circle[radius=.1] node[above]{$v$};
+		\end{tikzpicture}\label{fig:entwirren-DAG}
+		}
+		\hspace{1.5cm}
+		\subfloat[Der Baum $\mathcal{T}_v$, der durch das Auftrennen von $\mathcal{R}'_v$ entsteht]{
+		\begin{tikzpicture}[scale=.5]
+			% \draw[help lines] (-1,-3) grid (10,3);
+			\coordinate (v) at (0,0);
+			% \draw (v) -- ++ (-1,1) node[left]{$S$};
+			% \draw (v) -- ++ (-1,-1) node[left]{$T$};
+			% SubGraph zeichnen
+			\draw[very thick] (v) -- ++ (1,0) -- ++ (1,1) -- ++ (1,0) -- ++ (1,1) -- ++ (1,0)-- ++ (1,-.8) -- ++ (4,0);
+			\draw[very thick] (v) -- ++ (1,0) -- ++ (1,1) -- ++ (1,0) -- ++ (1,-1) -- ++ (1,0)-- ++ (1,1) -- ++ (4,0);
+			\draw[very thick] (v) -- ++ (1,0) -- ++ (1,-1) -- ++ (1,0) -- ++ (1,.8) -- ++ (1,0)-- ++ (1,1) -- ++ (4,0);
+			\draw[very thick] (v) -- ++ (1,0) -- ++ (1,-1) -- ++ (1,0) -- ++ (1,-1) -- ++ (1,0)-- ++ (1,1) -- ++ (1,0) -- ++ (2,1.6) -- ++ (1,0);
+			\draw[very thick] (v) -- ++ (1,0) -- ++ (1,-1) -- ++ (1,0) -- ++ (1,-1) -- ++ (1,0)-- ++ (1,-1) -- ++ (1,0) -- ++ (1,1) -- ++ (2,0);
+			\draw[very thick] (v) -- ++ (1,0) -- ++ (1,-1) -- ++ (1,0) -- ++ (1,-1) -- ++ (1,0)-- ++ (1,-1) -- ++ (2,0) -- ++ (1,.8) -- ++ (1,0);
+			\draw[very thick] (v) -- ++ (1,0) -- ++ (1,-1) -- ++ (1,0) -- ++ (1,-1) -- ++ (1,0)-- ++ (1,-1) -- ++ (4,0);
+			% übriger Graph
+			\draw[white] (9,3) -- (10,3);
+			% \draw[dotted,thick] (v) ++ (-1,3) -- ++ (2,0) -- ++ (1,-1) -- ++ (2,0) -- ++ (1,-1) -- ++ (2,0) -- ++ (1,1) -- ++ (2,0);
+			% \draw[dotted,thick] (v) ++ (-1,2) -- ++ (11,0);
+			% \draw[dotted,thick] (v) ++ (-1,2) -- ++ (6,0) -- ++ (1,1) -- ++ (4,0);
+			% \draw[dotted,thick] (v) ++ (-1,-2) -- ++ (1,1) -- ++ (3,0) -- ++ (1,1) -- ++ (1,0) -- ++ (1,-1) -- ++ (4,0);
+			% \draw[dotted,thick] (v) ++ (-1,-3) -- ++ (1,0) -- ++ (1,1) -- ++ (6,0) -- ++ (1,1) -- ++ (2,0);
+			% \draw[dotted,thick] (v) ++ (-1,-3) -- ++ (2,0) -- ++ (1,1) -- ++ (1,0) -- ++ (1,-1) -- ++ (2,0) -- ++ (1,1) -- ++ (3,0);
+			\draw[fill=DodgerBlue3,thick] (v) circle[radius=.1] node[above]{$v$};
+		\end{tikzpicture}\label{fig:entwirren-baum}}
+		\caption{\enquote{Auftrennen} des gerichteten azyklischen Graphen $\mathcal{R}'_v$ zu einem Baum $\mathcal{T}_v$.}
+	\end{figure}
+	
+	Sei also $v$ ein Merge-Vertex, an dem die Komponenten $S \subset \mathcal{X}$ und $T \subset \mathcal{X}$ zu einer Komponente verschmelzen.
+	Wir bezeichnen mit $p_x$ den Pfad, dem die Entität $x \in S \cup T$ durch $\mathcal{R}$ folgt (existiert, da $m=1$ ist).
+	Die Vereinigung über alle $x \in S \cup T$ ist ein gerichteter azyklischer Graph $\mathcal{R}'_v$ und insbesondere ein Untergraph von $\mathcal{R}$ (siehe \cref{fig:entwirren-DAG}).
+	Wie in \cref{fig:entwirren-baum} zu sehen, können wir $\mathcal{R}'_v$ zu einem Baum $\mathcal{T}_v$ \enquote{auftrennen}:
+	Wenn sich zwei Pfade $p_x$ und $p_y$ an einem Vertex $u$ trennen und an einem weiteren Vertex $w$ wieder vereinigen (mit $t_w > t_u$), so duplizieren wir den Teilpfad, der bei $w$ beginnt. 
+	Beginnen wir dabei bei dem spätesten Zeitpunkt $t_w$ und duplizieren in zeitlich rückwärtiger Reihenfolge die entsprechenden Teilpfade, so entsteht ein Baum $\mathcal{T}_v$.
+	Dieser Baum hat die Wurzel $v$ und $\abs*{S}+ \abs*{T} \le n$ Blätter. 
+	Außerdem ist sichergestellt, dass die Knoten von $\mathcal{T}_v$ maximal Grad 3 haben.
+	
+	Es seien nun $G_1, \ldots ,G_k$ die maximalen Gruppen, die bei $v$ beginnen.
+	Jede von ihnen lässt sich durch einen Teilpfad in $\mathcal{T}_v$ repräsentieren, der bei $v$ beginnt.
+	Ein solcher Pfad endet entweder an einen Blatt oder an dem ersten Vertex, an dem sich zwei Entitäten $x,y \in G_i$ trennen.
+	Ein solcher Split von $p_x$ und $p_y$ wiederum kann nur an einem Knoten des Grades 3 auftreten.
+	Da $\mathcal{T}_v$ maximal $n$ Blätter hat, hat $\mathcal{T}_v$ auch maximal $\mathcal{O}(n)$ Grad-3-Knoten.
+	
+	Wir zeigen nun, dass maximal eine maximale Gruppe an einem gegebenen Blatt oder Grad-3-Knoten endet.
+	Angenommen es gäbe $G_i$ und $G_j$ mit $i \neq j$, sodass beide an einem gemeinsamen Knoten $U$ enden.
+	Dann damit auch die Pfade dorthin übereinstimmen, wäre dann aber auch $G_i \cup G_j$ eine Gruppe auf dem Intervall $I=\benbrace*{t_v,t_u}$ im Widerspruch zur Maximalität von $G_i$ und $G_j$.
+	Folglich kann $k$ höchstens die Summe der Blätterzahl mit der Anzahl der Grad-3-Knoten in $\mathcal{T}_v$ sein, woraus $k \in \mathcal{O}(n)$ folgt.
+	Summieren über alle $\mathcal{O}(\tau n^2)$ Start- und Merge-Vertices ergibt $\mathcal{O}(\tau n^3)$ maximale Gruppen insgesamt.
+\end{beweis}
 % section komplex (end)
 
