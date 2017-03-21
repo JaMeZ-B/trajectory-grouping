@@ -276,10 +276,10 @@ Dies gestaltet sich etwas schwieriger als die Komplexität des Reeb-Graphen: \to
 			\draw[|-|] (13,3.5) -- ++ (4,0) node[midway,fill=white]{$4r$};
 			\draw[|-|] (8,4) -- ++ (-4.4,0) node[midway,fill=white]{$4r + \frac{\varepsilon}{n}$};
 		\end{tikzpicture}
-		\caption{Konstruktion der unteren Schranke für die Anzahl maximaler Gruppen für $n=39$ zum Zeitpunkt $j_2$.}\label{fig:zinnen}
+		\caption{Konstruktion der unteren Schranke für die Anzahl maximaler Gruppen für $n=39$ zum Zeitpunkt $j_2$ in Runde drei.}\label{fig:zinnen}
 	\end{figure}
 	
-	Die Entitäten in $D$ hingegen bewegen sich auf der Geraden $y=2r$ in gleicher Geschwindigkeit nach rechts, wobei sie zum Zeitpunkt $t_u$ alle links der Scheiben von $S$ liegen.
+	Die Entitäten in $D$ hingegen bewegen sich auf der Geraden $y=2r$ in gleicher Geschwindigkeit nach rechts, wobei sie zum Zeitpunkt $t_u$ alle links der Scheiben von $S$ liegen und zu $t_{u+1}$ rechts davon.
 	Wir nummerieren die Elemente in $D$ von rechts nach links und ihr Abstand soll jeweils $4r + \frac{\varepsilon}{n}$ betragen (siehe \cref{fig:zinnen}).
 	
 	Die Ereignisse im Intervall $\benbrace*{t_u,t_{u+1}}$ lassen sich nun in mehrere \emph{Runden} einteilen.
@@ -291,10 +291,28 @@ Dies gestaltet sich etwas schwieriger als die Komplexität des Reeb-Graphen: \to
 	Beim Passieren legt $d_1$ eine Strecke von $4 \varepsilon$ zurück und nach jeweils $\frac{\varepsilon}{n}$ zurückgelegter Strecke, wird eine der bis zu $\frac{n}{13}-1$ vielen weiteren Entitäten mit $S$ verbunden.
 	Da $4 \varepsilon > \enbrace*{\frac{n}{13}-1 } \cdot \frac{\varepsilon}{n}$ gilt, ist nun obige Reihenfolge von Ereignissen gegeben.
 	
-	\begin{figure}[hbtp]
+	\begin{figure}[bhtp]
 		\Centering
-		\missingfigure{Figure 6 aus Paper übernehmen}
-		\caption{Die Zeitintervalle, währenddessen $G_{ab}$ eine maximale Gruppe ist.}\label{fig:gruppen-intervalle}
+		\begin{tikzpicture}[scale=.5,yscale=.9]
+			\pgfmathsetmacro{\height}{10}
+			\foreach \x in {1,...,4}{
+				\draw[dashed] ($(\x,0) - (1,0)$) node[below]{$j_\x$} -- ++ (0,\height);
+				\draw[dashed] ($(\x,0) + (12,0)$) node[below]{$\ell_\x$} -- ++ (0,\height);
+				\draw[ultra thick] ($(\x,\height) - (1,0) - 0.7*(0,\x)$) -- ($(13,\height)- 0.7*(0,\x)$);
+				\node at ($(-0.8,\height) - 0.7*(0,\x)$) {$G_{1\x}$};
+			}
+			\foreach \x in {2,3,4}{
+				\draw[ultra thick] ($(\x,\height) - (1,2.8) - 0.7*(0,\x)$) -- ++ ($(15,0) - (\x,0)$);
+				\node at ($(-0.8,\height) - (0,2.8) - 0.7*(0,\x)$) {$G_{2\x}$};
+			}
+			\foreach \x in {3,4}{
+				\draw[ultra thick] ($(\x,\height) - (1,4.9) - 0.7*(0,\x)$) -- ++ ($(16,0) - (\x,0)$);
+				\node at ($(-0.8,\height) - (0,4.9) - 0.7*(0,\x)$) {$G_{3\x}$};
+			}
+			\draw[ultra thick] ($(4,\height) - (1,9.1)$) -- ++ (13,0);
+			\node at ($(-0.8,\height) - (0,9.1)$) {$G_{44}$};
+		\end{tikzpicture}
+		\caption{Die Zeitintervalle der maximalen Gruppen $G_{ab}$.}\label{fig:gruppen-intervalle}
 	\end{figure}
 	
 	Setze $G_{ab} \coloneqq S \cup \bigcup_{h=a}^b d_h$.
@@ -308,6 +326,14 @@ Dies gestaltet sich etwas schwieriger als die Komplexität des Reeb-Graphen: \to
 		\sum_{i=0}^{k} (k-i)  \in \Omega(k^2)
 	\]
 	viele maximale Gruppen.
+	Damit erhalten wir für $m \le \frac{12n}{13}$ und ein beliebiges $\delta$ nun $\Omega(n^3)$ maximale Gruppen wie folgt:
+	
+	Wir können die Geschwindigkeit der Entitäten in $D$ so wählen, dass alle Gruppe eine mindestens eine Dauer von $\delta$ haben.
+	An den Runden $\frac{n}{13}, \ldots , \frac{2n}{13}$ sind per Konstruktion nun jeweils alle $\frac{n}{13}$ Elemente von $D$ beteiligt, da wir $\frac{2n}{13}$ \enquote{Zinnen} haben.
+	In jeder dieser $\frac{n}{13}$ Runden gilt also $k=\frac{n}{13}$.
+	Damit generiert jede dieser $\Omega(n)$ vielen Runden $\Omega(n^2)$ viele maximale Gruppen.
+	Da jede Gruppe $S$ enthält, ist auch die Größe in $\Omega(n)$ wie gefordert.
+	Im nächsten Zeitintervall $\benbrace*{t_{u+1}, t_{u+2}}$ bewegen wir die Entitäten aus $D$ nun einfach wieder nach links und aus Symmetriegründen entstehen dabei auch wieder $\Omega(n^3)$ maximale Gruppen, sodass insgesamt $\Omega(\tau n^3)$ maximale Gruppen entstehen.
 \end{beweis}
 % section komplex (end)
 
