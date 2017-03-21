@@ -240,5 +240,74 @@ Dazu folgen wir \textcite[Sec.~2.1~\&~2.2]{buchin2015} und beweisen wir Schranke
 	Da die Trajektorien aus je $\tau$ Kanten bestehen, erzeugt jedes Paar $(x,y)$ somit $\mathcal{O}(\tau)$ Vertices.
 	Damit gibt es insgesamt $\mathcal{O}(\tau n^2)$ Vertices und damit auch $\mathcal{O}(\tau n^2)$ Kanten, da der Knotengrad beschränkt ist.
 \end{beweis}
+
+Da sich die Konstruktion aus \cref{lem:untereSchranke-Reeb} kanonisch in den $\mathbb{R}^d$ einbetten lässt und das Argument mit der Konvexität der Abstandsfunktion in beliebigen Dimensionen funktioniert, gilt \cref{thm:schranke-Reeb} auch für Trajektorien im $\mathbb{R}^d$.
+
+Wir zeigen nun, dass die Anzahl der maximalen Gruppen in $\mathcal{O}(\tau n^3)$ liegt.
+Dies gestaltet sich etwas schwieriger als die Komplexität des Reeb-Graphen: \todo{Beispiel komplett einfügen?}
+
+\begin{lemma}[name={\cite[Lem.~4]{buchin2015}},label=lem:untereSchranke-Gruppen]
+	Für eine Menge $\mathcal{X}$ von $n$ Entitäten, von denen sich jeden entlang einer Trajektorie von $\tau$ Kanten bewegt, kann es $\Omega(\tau n^3)$ maximale Gruppen geben, wobei jede eine Größe von $\Omega(n)$ hat.
+\end{lemma}
+\begin{beweis}
+	Wir gehen ähnlich wie in \cref{lem:untereSchranke-Reeb} vor, das heißt wir konstruieren $n$ Kanten von Trajektorien für ein Zeitintervall $\benbrace*{t_u,t_{u+1}}$, welche $\Omega(n^3)$ maximale Gruppen mit $I_G \subseteq \benbrace*{t_u,t_{u+1}}$ erzeugen, sodass eine Wiederholung der Konstruktion für alle Zeitintervalle in der gewünschten Anzahl maximaler Gruppen resultiert.
+	
+	Wir nehmen ohne Einschränkungen an, dass $n$ durch 13 teilbar ist und zerteilen $\mathcal{X}$ in zwei Mengen $S$ und $D$ mit $\abs*{S}=\frac{12n}{13}$ und $\abs*{D}=\frac{n}{13}$.
+	Dabei platzieren wir $\frac{8n}{13}$ Entitäten auf der $x$-Achse mit Abstand $r$, wobei $\varepsilon< r < 2 \varepsilon$.
+	Oberhalb jeder vierten Entität $s_i$ platzieren wir zwei weitere auch mit dem Abstand $r$, sodass sich ein \enquote{Zinnenkranz} aus Zinnen $T_i$ entsteht (siehe \cref{fig:zinnen}).
+	Per Konstruktion hat $S$ $\frac{2n}{13}$ solcher Zinnen und $S$ ist $\varepsilon$-zusammenhängend.
+	Die Entitäten aus $S$ bleiben stationär.
+	
+	\begin{figure}[bthp]
+		\Centering
+		\begin{tikzpicture}[scale=.5]
+			\foreach \x in {1,...,24}{
+				\draw[fill=black,fill opacity=.7] (\x,0) circle[radius=.7];
+			}
+			\foreach \x in {1,2,...,6}{
+				\draw[fill=black,fill opacity=.7] ($4*(\x,0) - 3*(1,0) + (0,1)$) circle[radius=.7];
+				\draw[fill=black,fill opacity=.7] ($4*(\x,0) - 3*(1,0) + (0,2)$) circle[radius=.7];
+				\node at ($4*(\x,0) - 3*(1,0.4)$) {$T_\x$};
+			}
+			\foreach \x in {1,2,3}{
+				\draw[fill=Firebrick2,fill opacity=.7] ($(8,2) - 4.4*(\x,0) + 4.4*(1,0)$) circle[radius=.7] ;
+				\node at ($(8,2) - 4.4*(\x,0) + 4.4*(1,0.25)$) {$d_\x$};
+			}
+			\draw[|-|] (13,3.5) -- ++ (4,0) node[midway,fill=white]{$4r$};
+			\draw[|-|] (8,4) -- ++ (-4.4,0) node[midway,fill=white]{$4r + \frac{\varepsilon}{n}$};
+		\end{tikzpicture}
+		\caption{Konstruktion der unteren Schranke für die Anzahl maximaler Gruppen für $n=39$ zum Zeitpunkt $j_2$.}\label{fig:zinnen}
+	\end{figure}
+	
+	Die Entitäten in $D$ hingegen bewegen sich auf der Geraden $y=2r$ in gleicher Geschwindigkeit nach rechts, wobei sie zum Zeitpunkt $t_u$ alle links der Scheiben von $S$ liegen.
+	Wir nummerieren die Elemente in $D$ von rechts nach links und ihr Abstand soll jeweils $4r + \frac{\varepsilon}{n}$ betragen (siehe \cref{fig:zinnen}).
+	
+	Die Ereignisse im Intervall $\benbrace*{t_u,t_{u+1}}$ lassen sich nun in mehrere \emph{Runden} einteilen.
+	Eine Runde soll dabei die Ereignisse zusammenfassen, die passieren, während $d_1$ eine der \enquote{Zinnen} $T_i$ passiert.
+	Eine solche Runde $z$ startet mit $k$ Merge-Ereignissen zu den Zeitpunkten $j_1, \ldots , j_k$ gefolgt von $k$ Split-Ereignissen $\ell_1, \ldots, \ell_k$. 
+	Genauer wird $d_i$ zum Zeitpunkt $j_i$ direkt-zusammenhängend mit $S$ bei $T_{1+z-i}$ und ist es ab dem Zeitpunkt $\ell_i$ nicht länger.
+	
+	Diese Reihenfolge ist durch die Wahl des Abstandes $4r + \frac{\varepsilon}{n}$ sichergestellt: Damit alle Merge-Ereignisse vor den Split-Ereignissen stattfinden können, müssen alle weiteren an dieser Runde beteiligten Entitäten $\varepsilon$-zusammenhängend mit $S$ werden bevor $d_1$ nicht mehr mit $S$ verbunden ist.
+	Beim Passieren legt $d_1$ eine Strecke von $4 \varepsilon$ zurück und nach jeweils $\frac{\varepsilon}{n}$ zurückgelegter Strecke, wird eine der bis zu $\frac{n}{13}-1$ vielen weiteren Entitäten mit $S$ verbunden.
+	Da $4 \varepsilon > \enbrace*{\frac{n}{13}-1 } \cdot \frac{\varepsilon}{n}$ gilt, ist nun obige Reihenfolge von Ereignissen gegeben.
+	
+	\begin{figure}[hbtp]
+		\Centering
+		\missingfigure{Figure 6 aus Paper übernehmen}
+		\caption{Die Zeitintervalle, währenddessen $G_{ab}$ eine maximale Gruppe ist.}\label{fig:gruppen-intervalle}
+	\end{figure}
+	
+	Setze $G_{ab} \coloneqq S \cup \bigcup_{h=a}^b d_h$.
+	Jedes Merge-Ereignis startet eine neue maximale Gruppe $G_{1i}$, also sind nach den Merge-Ereignissen $k$ maximale Gruppen entstanden.
+	In den darauf folgenden Split-Ereignissen werden $d_1, \ldots , d_k$ nach und nach von $S$ getrennt -- wenn $d_i$ nicht mehr $\varepsilon$-zusammenhängend zu $S$ ist, enden die maximalen Gruppen $G_{ii}, \ldots , G_{ik}$.
+	Gleichzeitig werden nun aber die Gruppen, die bei $j_{i+1}$ gestartet sind zu maximalen Gruppen $G_{(i+1)h}$, da $d_i$ die Gruppe $G_{ih}$ verlassen hat (siehe \cref{fig:gruppen-intervalle}).
+	
+	Dies bedeutet, dass das Ereignis $\ell_i$ $k-1$ viele neue maximale Gruppen erzeugt.
+	Zusammen mit den $k$ maximalen Gruppen $G_{1i}$ erzeugt die Runde $z$ also 
+	\[
+		\sum_{i=0}^{k} (k-i)  \in \Omega(k^2)
+	\]
+	viele maximale Gruppen.
+\end{beweis}
 % section komplex (end)
 
