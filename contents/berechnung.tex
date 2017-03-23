@@ -8,7 +8,7 @@ Mit diesen Informationen ist die Reduktion von $\mathcal{R}$ ein trivialer Nachb
 Zunächst einmal erinnern wir uns, dass wir annehmen, dass alle bekannten Positionen der einzelnen Trajektorien an den gleichen Zeitpunkten sind.
 Bevor wir mit der eigentlichen Berechnung beginnen können, müssen wir alle Zeitpunkte berechnen, an denen zwei Entitäten $x$ und $y$ den Abstand $2 \varepsilon$ haben.
 Diese Zeitpunkte wollen wir unterteilen in \emph{Connect}- und \emph{Disconnect}-Ereignisse, wobei bei ersteren $x$ und $y$ direkt-zusammenhängend und bei letzteren nicht länger direkt-zusammenhängend werden.
-Zeitpunkte, die sich nicht sinnvoll derartig kategorisieren lassen, filtern wie heraus:
+Zeitpunkte, die sich nicht sinnvoll derartig kategorisieren lassen, filtern wir heraus.
 
 \paragraph{Ereignisse berechnen} % (fold)
 \label{par:ereignisse_berechnen}
@@ -27,7 +27,7 @@ Finden wir dadurch Zeitpunkte in $L_{xy}$, an denen sich der Zusammenhang von $x
 Die verbleibenden beschriften wir entsprechend mit \emph{Connect} oder \emph{Disconnect}.
 
 $L_{xy}$ besteht aus $\mathcal{O}(\tau)$ Zeitpunkten und alle obigen Berechnungen kosten zusammen $\Theta(\tau)$ Zeit.
-Berechnen wir diese Listen für alle $x,y$ und Vereinigen sie mittels \textsc{MergeSort} zu einer Liste $L$, so entstehen also insgesamt $\mathcal{O}(\tau n^2 \log n^2) = \mathcal{O}(\tau n^2 \log n)$ Kosten und $L$ enthält $\mathcal{O}(\tau n^2)$ Zeitpunkte.
+Berechnen wir diese Listen für alle $x,y$ und vereinigen sie mittels \textsc{MergeSort} zu einer Liste $L$, so entstehen also insgesamt $\mathcal{O}(\tau n^2 \log n^2) = \mathcal{O}(\tau n^2 \log n)$ Kosten und $L$ enthält $\mathcal{O}(\tau n^2)$ Zeitpunkte.
 % paragraph ereignisse_berechnen (end)
 
 
