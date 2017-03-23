@@ -1,0 +1,34 @@
+%!TEX root = ../trajectory-grouping.tex
+Zur Berechnung der \GrpStruktur müssen wir gemäß \cref{def:grpstrukur} den reduzierten Reeb-Graphen und die maximalen Gruppen berechnen.
+Dazu berechnen wir zunächst die unreduzierten Reeb-Graphen $\mathcal{R}$ und dann die maximalen Gruppen. 
+Mit diesen Informationen ist die Reduktion von $\mathcal{R}$ ein trivialer Nachbearbeitungsschritt.
+
+\section{Berechnung des Reeb-Graphen} % (fold)
+\label{sec:berechnung_reeb}
+Zunächst einmal erinnern wir uns, dass wir annehmen, dass alle bekannten Positionen der einzelnen Trajektorien an den gleichen Zeitpunkten sind.
+Bevor wir mit der eigentlichen Berechnung beginnen können, müssen wir alle Zeitpunkte berechnen, an denen zwei Entitäten $x$ und $y$ den Abstand $2 \varepsilon$ haben.
+Diese Zeitpunkte wollen wir unterteilen in \emph{Connect}- und \emph{Disconnect}-Ereignisse, wobei bei ersteren $x$ und $y$ direkt-zusammenhängend und bei letzteren nicht länger direkt-zusammenhängend werden.
+Zeitpunkte, die sich nicht sinnvoll derartig kategorisieren lassen, filtern wie heraus:
+
+\paragraph{Ereignisse berechnen} % (fold)
+\label{par:ereignisse_berechnen}
+Gegeben Entitäten $x$ und $y$ wollen wir eine Liste $L_{xy}$ aller Ereignisse berechnen.
+Diese soll chronologisch sortiert sein und nur echt verschiedene Zeitpunkte enthalten.
+Weiter müssen sich dann notwendigerweise \emph{Connect}- und \emph{Disconnect}-Ereignisse stets abwechseln.
+
+Dazu betrachten wir in zeitlicher Reihenfolge die $\tau$ Zeitintervalle.
+In einem solchen $\benbrace*{t_u,t_{u+1}}$ bewegen sich $x$ und $y$ nur entlang je einer Geraden, sodass der Abstand eine konvexe Funktion beschreibt.
+Insbesondere gibt es entweder $k$ mit $k \in \set*{0,1,2}$ Zeitpunkte aus $\benbrace*{t_u,t_{u+1}}$, an denen der Abstand genau $2 \varepsilon$ oder dies gilt für jeden Zeitpunkt $t \in \benbrace*{t_u,t_{u+1}}$.
+Es lässt sich in $\mathcal{O}(1)$ Zeit bestimmen, welcher der Fälle eintritt, und welches ggf. die $k$ Zeitpunkte sind.
+Im ersten Fall fügen wir die $k$ Zeitpunkte in die Liste ein, im zweiten nur die Randpunkte $t_u$ und $t_{u+1}$; in beiden Fällen fügen wir die Zeitpunkte nicht ein, falls dadurch die Eindeutigkeit verletzt werden würde (asymptotisch kein zusätzlicher Aufwand, da nur das zuletzt eingefügte Element betrachtet werden muss).
+
+In einem zweiten Schritt bereinigen wir $L_{xy}$ nun wie folgt: Wir iterieren über $L_{xy}$ und berechnen dabei für jeden Eintrag $t_i$, ob $x$ und $y$ im offenen Intervall $(t_i,t_{i+1})$ direkt-zusammenhängend sind (Abstand beim Mittelpunkt bestimmen). 
+Finden wir dadurch Zeitpunkte in $L_{xy}$, an denen sich der Zusammenhang von $x$ und $y$ nicht ändert, so entfernen wir diese aus der $L_{x,y}$.\todo{Zeichnung, dass der Fall tatsächlich eintreten kann}
+Die verbleibenden beschriften wir entsprechend mit \emph{Connect} oder \emph{Disconnect}.
+
+$L_{xy}$ besteht aus $\mathcal{O}(\tau)$ Zeitpunkten und alle obigen Berechnungen kosten zusammen $\Theta(\tau)$ Zeit.
+Berechnen wir diese Listen für alle $x,y$ und Vereinigen sie mittels \textsc{MergeSort} zu einer Liste $L$, so entstehen also insgesamt $\mathcal{O}(\tau n^2 \log n^2) = \mathcal{O}(\tau n^2 \log n)$ Kosten und $L$ enthält $\mathcal{O}(\tau n^2)$ Zeitpunkte.
+% paragraph ereignisse_berechnen (end)
+
+
+% section berechnung_reeb (end)
