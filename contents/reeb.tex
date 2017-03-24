@@ -30,6 +30,10 @@ Betrachtet man die positive Richtung in $\mathbb{R}$, so wird $\mathcal{R}(f)$ a
 
 \section{Differentialtopologische Hintergründe zum Reeb-Graphen} % (fold)
 \label{sec:background_reeb}
+Obwohl wir den Reeb-Graph allgemein definiert haben und auch im weiteren Verlauf keine differenzierbare Struktur auf $X$ benötigen, ist es an dieser Stelle sinnvoll einen kurzen Ausflug in die Differentialtopologie zu machen, um mit einem instruktiven Beispiel zu erläutern, wo genau die Knoten im Reeb-Graphen \enquote{herkommen}.
+Neben den gleich auch direkt referenzierten Büchern von \textcite{compTopo} und \textcite{MilnorMorse}, sei an dieser Stelle auf das Buch \citetitle{Miln} von \textcite{Miln} verwiesen, welches einen schnellen, lesenswerten Einstieg in die Grundlagen der Differentialtopologie vermittelt.
+
+Betrachtet man nicht einen beliebigen topologischen Raum $X$, sondern eine differenzierbare Mannigfaltigkeit $M$ wie zum Beispiel den 2-Torus (siehe \cref{fig:torus_reeb}), und eine glatte Funktion $f \colon M \to \mathbb{R}$ so kann man die Punkte von $M$ anhand des Differentials von $f$ in dem jeweiligen Punkt in sogenannte \bet{kritische}\index{kritische Punkte} und \Index{reguläre Punkte} unterteilen.
 \begin{figure}
 	\Centering
 	\begin{tikzpicture}[rotate=90, xscale=1, yscale=1, scale=0.7]
@@ -83,10 +87,6 @@ Betrachtet man die positive Richtung in $\mathbb{R}$, so wird $\mathcal{R}(f)$ a
 	\end{tikzpicture}
 	\caption[Höhenfunktion des aufrechten Torus mit dem dazugehörigen Reeb-Graphen]{Höhenfunktion des aufrechten Torus $T^2=S^1 \times S^1$ mit dem dazugehörigen Reeb-Graphen. Die grün und orange gekennzeichneten Niveaumengen enthalten je einen kritischen Punkt, die rote und blaue enthalten ausschließlich reguläre Werte. $f$ ist eine Morse-Funktion und die Knoten des Reeb-Graphen stehen in Bijektion zu den kritischen Punkten.}\label{fig:torus_reeb}
 \end{figure}
-Obwohl wir den Reeb-Graph allgemein definiert haben und auch im weiteren Verlauf keine differenzierbare Struktur auf $X$ benötigen, ist es an dieser Stelle sinnvoll einen kurzen Ausflug in die Differentialtopologie zu machen, um mit einem instruktiven Beispiel zu erläutern, wo genau die Knoten im Reeb-Graphen \enquote{herkommen}.
-Neben den gleich auch direkt referenzierten Büchern von \textcite{compTopo} und \textcite{MilnorMorse}, sei an dieser Stelle auf das Buch \citetitle{Miln} von \textcite{Miln} verwiesen, welches einen schnellen, lesenswerten Einstieg in die Grundlagen der Differentialtopologie vermittelt.
-
-Betrachtet man nicht einen beliebigen topologischen Raum $X$, sondern eine differenzierbare Mannigfaltigkeit $M$ wie zum Beispiel den 2-Torus (siehe \cref{fig:torus_reeb}), und eine glatte Funktion $f \colon M \to \mathbb{R}$ so kann man die Punkte von $M$ anhand des Differentials von $f$ in dem jeweiligen Punkt in sogenannte \bet{kritische}\index{kritische Punkte} und \Index{reguläre Punkte} unterteilen.
 Für den aufrechten Torus und die Höhenfunktion sind dies die beiden orange gekennzeichneten, einelementigen Niveaumengen in \cref{fig:torus_reeb}, sowie die beiden \enquote{Klebepunkte} der grün gezeichneten Niveaumengen.
 
 Durch das Betrachten der zweiten Ableitungen in lokalen Koordinaten, kann man die kritischen Punkte anhand der Hesse-Matrix in entartete und nicht entartete einteilen. 
@@ -103,7 +103,7 @@ Darüber hinaus kann diese Änderung als das Ankleben von Zellen realisiert werd
 
 Für den aufrechten Torus $T$ aus \cref{fig:torus_reeb} ist $T^a$ zum Beispiel zunächst topologisch gesehen eine Scheibe, wird beim Passieren der zweiten kritischen Punktes zu einem Zylinder, beim dritten zu einem Torus, aus dem eine Scheibe ausgeschnitten wurde, und schlussendlich am Maximum zum eigentlichen Torus.
 
-In Bezug auf den Reeb-Graphen bedeutet dies, dass sich auch die Zusammenhangskomponenten der Niveaumengen nun an den kritischen Werten ändern können.
+In Bezug auf den Reeb-Graphen bedeutet dies, dass sich auch die Zusammenhangskomponenten der Niveaumengen nur an den kritischen Werten ändern können.
 Ein Punkt $r \in \mathcal{R}(f)$ ist also ein Knoten, wenn $q^{-1}(u)$ einen kritischen Punkt enthält.
 \Cref{enum:def:morse:2} stellt dann sicher, dass es eine Bijektion zwischen den Knoten im Reeb-Graphen und den kritischen Punkten gibt, die in \cref{fig:torus_reeb} klar ersichtlich ist.
 % section background_reeb (end)
