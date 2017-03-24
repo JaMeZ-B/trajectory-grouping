@@ -204,7 +204,8 @@ Dazu folgen wir \textcite[Sec.~2.1~\&~2.2]{buchin2015} und beweisen wir Schranke
 	Wir wollen nun eine Menge von Trajektorien konstruieren, sodass $\mathcal{R}$ $\Omega(n^2)$ viele Vertices $v$ mit $t_v \in \benbrace*{t_i,t_{i+1}}$ hat für einen der Zeitpunkte $t_i$.
 	Diese Konstruktion wiederholen wir für alle Intervalle.
 	Dies liefert dann offensichtlich $\Omega(\tau n^2)$ viele Vertices und damit auch $\Omega(\tau n^2)$ viele Kanten, da jeder Knoten entweder Grad 1 oder Grad 3 hat (siehe oben).
-
+	
+	Wir teilen $\mathcal{X}$ -- wie in \cref{fig:vertices-intervall} gezeichnet -- in zwei Teilmengen $R= \set*{r_1, \ldots ,r_{n/2}}$, $D=\set*{d_1,\ldots ,d_{n/2}}$ auf, wobei die Entität $r_j$ bei $(-j,-j)$ und $d_\ell$ bei $(\ell,\ell)$ startet.
 	\begin{figure}
 		\Centering
 		\begin{tikzpicture}[scale=.3,>=Latex,font=\small]
@@ -219,8 +220,6 @@ Dazu folgen wir \textcite[Sec.~2.1~\&~2.2]{buchin2015} und beweisen wir Schranke
 		\end{tikzpicture}
 		\caption{Konstruktion für $\Omega(n^2)$ viele Vertices im Intervall $\benbrace*{t_i,t_{i+1}}$ am Beispiel $n=5$}\label{fig:vertices-intervall}
 	\end{figure}
-	
-	Wir teilen $\mathcal{X}$ -- wie in \cref{fig:vertices-intervall} gezeichnet -- in zwei Teilmengen $R= \set*{r_1, \ldots ,r_{n/2}}$, $D=\set*{d_1,\ldots ,d_{n/2}}$ auf, wobei die Entität $r_j$ bei $(-j,-j)$ und $d_\ell$ bei $(\ell,\ell)$ startet.
 	Alle Entitäten bewegen sich mit der Geschwindigkeit Eins, die $r_j$ nach rechts, die $d_\ell$ nach unten, und aus \cref{fig:vertices-intervall} ist klar ersichtlich, dass sich die Konstruktion mit vertauschten Rollen im nächsten Intervall wiederholen lässt.
 	Da sich $r_j$ und $d_\ell$ zum Zeitpunkt $t_i + j + \ell$ treffen, entsteht ein Vertex im Reeb-Graphen und wir erhalten insgesamt $\Omega(n^2)$ Vertices pro Zeitintervall.
 \end{beweis}
