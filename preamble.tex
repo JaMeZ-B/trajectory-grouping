@@ -157,10 +157,43 @@
 % ======================================================================================
 \usepackage[hidelinks, pdfpagelabels, bookmarksopen=true, bookmarksnumbered=true, linkcolor=black, urlcolor=SkyBlue2, plainpages=false,pagebackref, citecolor=black, hypertexnames=true, pdfauthor={Jannes Bantje}, pdfborderstyle={/S/U}, linkbordercolor=SkyBlue2, colorlinks=false,backref=false]{hyperref}
 \hypersetup{final}
+% ======================================================================================
+
+%--Für Algorithmen
+% ======================================================================================
+\DeclareNewTOC[
+  type=algorithm,
+  types=algorithms,
+  float,
+  floatpos=h,
+  name=Algorithmus,
+  listname={Algorithmenverzeichnis},
+  counterwithin=chapter
+]{loalg}
+\usepackage{algpseudocode}
+\makeatletter
+\algrenewcommand\algorithmicfunction{\texttt{\textbf{function}}}
+\algrenewcommand\algorithmicif{\texttt{\textbf{if}}}
+\algrenewcommand\algorithmicthen{\texttt{\textbf{then}}}
+\algrenewcommand\algorithmicelse{\texttt{\textbf{else}}}
+\algrenewcommand\algorithmicreturn{\texttt{\textbf{return}}}
+\algrenewcommand\algorithmicend{\texttt{\textbf{end}}}
+% \addto\captionsngerman{\renewcommand{\ALG@name}{Algorithmus}}
+\makeatother
+% ======================================================================================
+
+% -- Konfiguration von Cleveref
+% ======================================================================================
 \usepackage[nameinlink,noabbrev]{cleveref}
-% \newcommand{\appendLink}[1]{#1\,\faExternalLink}
-% \newcommand{\hrefsym}[2]{\href{#1}{\texttt{\appendLink{#2}}}}
-% \renewcommand{\url}[1]{\hrefsym{#1}{\nolinkurl{#1}}}
+\providecommand\algorithmname{Algorithmus}
+\makeatletter
+\newcounter{algorithmicH}% New algorithmic-like hyperref counter
+\let\oldalgorithmic\algorithmic
+\renewcommand{\algorithmic}{%
+  \stepcounter{algorithmicH}% Step counter
+  \oldalgorithmic}% Do what was always done with algorithmic environment
+\renewcommand{\theHALG@line}{ALG@line.\thealgorithmicH.\arabic{ALG@line}}
+\makeatother
 % ======================================================================================
 
 %-- Schöne Emailadressen setzen (nach http://tex.stackexchange.com/a/663/67086)
