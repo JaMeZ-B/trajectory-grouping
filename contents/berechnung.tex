@@ -6,7 +6,7 @@ Mit diesen Informationen ist die Reduktion von $\mathcal{R}$ ein trivialer Nachb
 Für die Berechnung des Reeb-Graphen ist eine Datenstruktur zur dynamischen Speicherung von Bäumen nötig.
 Eine solche verwaltet einen Wald von Bäumen mit disjunkten Knotenmengen und unterstützt dabei eine Reihe von Operationen auf diesen Bäumen.
 Die Operationen, die wir benötigen, sind in \cref{tbl:operationenST} aufgeführt.
-\begin{table}[hbtp]
+\begin{table}[p]
 	\Centering
 	\caption{Operationen, die von ST-Bäumen unterstützt werden (nach \cite{parsaReeb})}\label{tbl:operationenST}
 	\begin{tabular}{lp{.7\textwidth}}
@@ -59,6 +59,7 @@ Die Verbleibenden beschriften wir entsprechend mit \emph{Connect} oder \emph{Dis
 $L_{xy}$ besteht aus $\mathcal{O}(\tau)$ Zeitpunkten und alle obigen Berechnungen kosten zusammen $\Theta(\tau)$ Zeit.
 Berechnen wir diese Listen für alle $x,y$ und vereinigen sie mittels \textsc{MergeSort} zu einer Liste $L$, so entstehen also insgesamt $\mathcal{O}(\tau n^2 \log n^2) = \mathcal{O}(\tau n^2 \log n)$ Kosten und $L$ enthält $\mathcal{O}(\tau n^2)$ Zeitpunkte.
 Beim Zusammenführen der Listen $L_{xy}$ speichern wir zu jedem \emph{Connect}-Ereignis einen Zeiger auf das nächste \emph{Disconnect}-Ereignis der gleichen Entitäten, sofern dies existiert.
+Falls dies nicht existiert, soll der Zeiger auf $t_\tau$, also das Ende des betrachteten Zeitraumes, zeigen.
 Dies ist asymptotisch betrachtet kein zusätzlicher Aufwand. 
 % subsection berechnung_queue (end)
 
@@ -70,9 +71,63 @@ Das Gewicht der Kante $(x,y)$ ist der nächste Zeitpunkt, an dem $x$ und $y$ nic
 Eine Zusammenhangskomponente von $G$ entspricht genau einer Komponente (im Sinne von \cref{cha:def_gruppe}).
 Um einen effizienten Zugriff auf die Komponenten zu bekommen, verwalten wir außerdem einen maximalen Spannbaum $F$ von $G$, den wir als ST-Baum speichern.
 
-Die wertvolle Erkenntnis von \textcite{parsaReeb} war es nun, dass man durch obige Konstruktion nicht nur in $\mathcal{O}(\log n)$ Zeit herausfinden kann, in welcher Komponente sich eine Entität befindet, sondern $G$ und $F$ auch in $\mathcal{O}(\log n)$ Zeit aktualisieren kann!
+Die wertvolle Erkenntnis von \textcite{parsaReeb} war es nun, dass man durch obige Konstruktion nicht nur in $\mathcal{O}(\log n)$ Zeit herausfinden kann, in welcher Komponente sich eine Entität befindet, sondern $G$ \emph{und} $F$ auch in $\mathcal{O}(\log n)$ Zeit aktualisieren kann!
 Dazu muss man ausnutzen, dass alle Ereignisse, die eine Aktualisierung nötig machen, schon im ersten Arbeitsschritt berechnet wurden.
 
+Wir definieren unter Benutzung der Operationen eines ST-Baumes (siehe \cref{tbl:operationenST}) drei Funktionen $\textsc{Find}(x)$, $\textsc{Insert}(x,y)$ und $\textsc{Delete}(x,y)$, siehe \cref{alg:funktionen}.
+Da die Operationen des ST-Baumes alle $\mathcal{O}(\log n)$ Zeit kosten, gilt dies auch für diese drei Funktionen und ermöglichen uns somit effiziente Zusammenhangsabfragen und Aktualisierungen von $F$.
+
+\begin{algorithm}[p]
+	\caption{Funktionen zur Zusammenhangsabfrage und Aktualisierung des maximalen Spannbaums $F$ nach \cite[Sec.~4.2]{parsaReeb}.}
+	\label{alg:funktionen}
+	\vspace{.5em}
+	
+	\begin{minipage}[c]{.35\textwidth}
+		\mbox{ }
+		\hrule
+		\begin{algorithmic}
+			\Function{Find}{x}
+			\State \Return $\mathtt{root}(x)$
+			\EndFunction
+		\end{algorithmic}
+		\hrule\vspace{2cm}
+	
+		\hrule
+		\begin{algorithmic}
+			\Function{Delete}{x,y}
+			\State Lösche $(x,y)$ aus $G$
+			\If{$(x,y)$ ist Kante in $F$}
+			\State{$\mathtt{cut}(x,y)$}
+			\EndIf
+			\EndFunction
+		\end{algorithmic}
+		\hrule
+	\end{minipage}\hfil
+	\begin{minipage}[c]{.6\textwidth}
+		\mbox{ }
+		\hrule
+		\begin{algorithmic}
+			\Function{Insert}{x,y}
+			\State $\omega \coloneqq$ Gewicht von $(x,y)$ \Comment{aus $L$ in $\mathcal{O}(1)$ auslesen}
+			\State Füge $(x,y)$ mit Gewicht $\omega$ in $G$ ein
+			\If{$\mathtt{root}(x) = \mathtt{root}(y)$}
+			\State $\mathtt{evert}(x)$
+			\State $x' \coloneqq \mathtt{minWeight}(y)$
+			\State $\omega' \coloneqq$ Gewicht von $x'$ zum Elternknoten
+			\If{$\omega' < \omega$}
+			\State $\mathtt{cut} \enbrace*{x', \mathtt{parent}(x')}$
+			\State $\mathtt{link}(x,y,\omega)$
+			\EndIf
+			\Else
+			\State $\mathtt{link}(x,y,\omega)$
+			\EndIf
+			\EndFunction
+		\end{algorithmic}
+		\hrule
+	\end{minipage}
+\end{algorithm}
+
+Neben $G$ und $F$ tritt im Laufe der Berechnung von $\mathcal{R}=(V,E)$ noch eine injektive Abbildung $M \colon \pi_0(G) \to V$ auf; jede Zusammenhangskomponente von $G$ (bzw. $F$) ist also noch eindeutig mit einem Knoten des Reeb-Graphen beschriftet.
 % subsection xy_struktur (end)
 
 \subsection{Behandlung der Ereignisse} % (fold)
