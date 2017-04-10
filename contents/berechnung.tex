@@ -75,7 +75,7 @@ Die wertvolle Erkenntnis von \textcite{parsaReeb} war es nun, dass man durch obi
 Dazu muss man ausnutzen, dass alle Ereignisse, die eine Aktualisierung nötig machen, schon im ersten Arbeitsschritt berechnet wurden.
 
 Wir definieren unter Benutzung der Operationen eines ST-Baumes (siehe \cref{tbl:operationenST}) drei Funktionen $\textsc{Find}(x)$, $\textsc{Insert}(x,y)$ und $\textsc{Delete}(x,y)$, siehe \cref{alg:funktionen}.
-Da die Operationen des ST-Baumes alle $\mathcal{O}(\log n)$ Zeit kosten, gilt dies auch für diese drei Funktionen und ermöglichen uns somit effiziente Zusammenhangsabfragen und Aktualisierungen von $F$.
+Da die Operationen des ST-Baumes alle $\mathcal{O}(\log n)$ Zeit kosten, gilt dies auch für diese drei Funktionen und diese ermöglichen uns somit effiziente Zusammenhangsabfragen und Aktualisierungen von $F$.
 
 \begin{algorithm}[p]
 	\caption{Funktionen zur Zusammenhangsabfrage und Aktualisierung des maximalen Spannbaums $F$ nach \cite[Sec.~4.2]{parsaReeb}.}
@@ -127,13 +127,33 @@ Da die Operationen des ST-Baumes alle $\mathcal{O}(\log n)$ Zeit kosten, gilt di
 	\end{minipage}
 \end{algorithm}
 
-Neben $G$ und $F$ tritt im Laufe der Berechnung von $\mathcal{R}=(V,E)$ noch eine injektive Abbildung $M \colon \pi_0(G) \to V$ auf; jede Zusammenhangskomponente von $G$ (bzw. $F$) ist also noch eindeutig mit einem Knoten des Reeb-Graphen beschriftet.
+Neben $G$ und $F$ tritt im Laufe der Berechnung von $\mathcal{R}=(V,E)$ noch eine injektive Abbildung $M \colon \pi_0(G) = \set*{\mathtt{root}(x) \given x \in \mathcal{X}} \to V$ auf; jede Zusammenhangskomponente von $G$ (bzw. $F$) ist also noch eindeutig mit einem Knoten des Reeb-Graphen beschriftet.
 % subsection xy_struktur (end)
 
 \subsection{Behandlung der Ereignisse} % (fold)
 \label{sub:behandlung_der_ereignisse}
+Der Graph $G$ wird für $t_0$ mittels \emph{brute-force} während der Initialisierung der Queue berechnet, da dort bereits alle Paare $(x,y)$ zur Berechnung der Listen $L_{x,y}$ betrachtet werden und somit die Kantengewichte für $G$ bekannt sind.
+Ist $G$ für $t_0$ bekannt, so lässt sich $F$ in $\mathcal{O}(n^2)$ Zeit berechnen; zum Beispiel mit dem Algorithmus von \textsc{Prim}.
+Für jede Komponente von $G$ fügen wir einen Start-Vertex in $\mathcal{R}$ ein und initialisieren die Abbildung $M$ dementsprechend.
 
+Beim Behandeln eines \emph{Connect}-Ereignisses der Entitäten $x$ und $y$ zum Zeitpunkt $t$ bestimmen wir nun zunächst die Komponenten $C_x$ und $C_y$ mittels $\mathtt{Find}$ und mittels $M$ die entsprechenden Vertices $v_x$ und $v_y$ in $\mathcal{R}$.
+Wenn $C_x \neq C_y$, so fügen wir einen neuen Merge-Vertex $v$ in $\mathcal{R}$ mit Zeitpunkt $t_v = t$ ein zusammen mit zwei Kanten $(v_y,v)$ und $(v_x,v)$, die wir mit $C_x$ bzw. $C_y$ beschriften.
+Falls $C_x = C_y$ ist, so aktualisieren wir $\mathcal{R}$ nicht, da $x$ und $y$ dann bereits vorher $\varepsilon$-zusammenhängend waren.
+In jedem Fall rufen wir $\textsc{Insert}(x,y)$ auf und aktualisieren auch $M$ entsprechend.
+
+Bei einem \emph{Disconnect}-Ereignis benutzen wir zunächst $F$, um die Komponente $C$ zu finden, die $x$ und $y$ bisher enthalten hat.
+Mittels $M$ finden wir den zugehörigen Vertex $u$ in $\mathcal{R}$.
+Wir rufen nun $\textsc{Delete}(x,y)$ auf und ermitteln die neuen Komponenten $C_x$ und $C_y$ mittels $F$.
+Im Fall $C_x=C_y$ ist nichts weiteres zu tun, da $x$ und $y$ weiterhin $\varepsilon$-zusammenhängend sind.
+Sind $x$ aber nicht mehr $\varepsilon$-zusammenhängend, fügen wir einen Split-Vertex $v$ mit Zeitpunkt $t_v=t$ sowie eine Kante $e=(u,v)$ beschriftet mit $C_e=C$ in $\mathcal{R}$ ein und aktualisieren $M$ entsprechend.
+
+Sind wir am Ende der Queue $L$ angelangt, also beim Zeitpunkt $t_\tau$, so fügen wir für jede Komponente $C$ in $F$ einen End-Vertex $v$ mit $t_v=t_\tau$ ein und verbinden diesen mit $u=M(C)$ mittels einer Kante, die mit $C$ beschriftet ist.
 % subsection behandlung_der_ereignisse (end)
+
+\subsection{Korrektheit} % (fold)
+\label{sub:korrektheit_xy}
+Die Korrektheit von $\textsc{Insert}(x,y)$ und $\textsc{Delete}(x,y)$ ist noch zu begründen, das heißt für beide Fälle muss gezeigt werden, dass $F$ auch nach dem Aufruf noch ein maximaler Spannbaum ist.
+% subsection korrektheit_xy (end)
 
 
 
