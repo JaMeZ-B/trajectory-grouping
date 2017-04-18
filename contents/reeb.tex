@@ -4,7 +4,7 @@ Dann bezeichnet man für einen Wert $a \in \mathbb{R}$ das Urbild unter $f$ als 
 Die Niveaumengen bilden offensichtlich eine Partition von $X$.
 
 Anschaulich stellt man sich $f$ meist als \Index{Höhenfunktion} vor. 
-So könnte $X$ beispielsweise das Gebiet einer Karte in einem handelsüblichen Atlas sein (=eine Teilmenge der zweidimensionalen Ebene) und $f$ gibt die Höhe über NN an.
+So könnte $X$ beispielsweise das Gebiet einer Karte in einem handelsüblichen Atlas sein (= eine Teilmenge der zweidimensionalen Ebene) und $f$ gibt die Höhe über NN an.
 Dann sind die Niveaumengen $f^{-1}(\set{a})$ genau die Niveaulinien, die man in detaillierten topografischen Karten findet (ein Beispiel einer solchen Karte findet sich in \cref{sec:karte_niveau}).
 
 Um den \Index{Reeb-Graph} von $f$ zu erhalten, benutzen wir nun die Zusammenhangskomponenten von $f^{-1}(\set{a})$ wie folgt (Definition nach \textcite[\RM{6}.4]{compTopo})
@@ -245,7 +245,7 @@ Wir zeigen nun, dass die Anzahl der maximalen Gruppen in $\mathcal{O}(\tau n^3)$
 Dies gestaltet sich etwas schwieriger als die Komplexität des Reeb-Graphen: \todo{Beispiel komplett einfügen?}
 
 \begin{lemma}[name={\cite[Lem.~4]{buchin2015}},label=lem:untereSchranke-Gruppen]
-	Für eine Menge $\mathcal{X}$ von $n$ Entitäten, von denen sich jeden entlang einer Trajektorie von $\tau$ Kanten bewegt, kann es $\Omega(\tau n^3)$ maximale Gruppen geben, wobei jede eine Größe von $\Omega(n)$ hat.
+	Für eine Menge $\mathcal{X}$ von $n$ Entitäten, von denen sich jede entlang einer Trajektorie von $\tau$ Kanten bewegt, kann es $\Omega(\tau n^3)$ maximale Gruppen geben, wobei jede eine Größe von $\Omega(n)$ hat.
 \end{lemma}
 \begin{beweis}
 	Wir gehen ähnlich wie in \cref{lem:untereSchranke-Reeb} vor, das heißt wir konstruieren $n$ Kanten von Trajektorien für ein Zeitintervall $\benbrace*{t_u,t_{u+1}}$, welche $\Omega(n^3)$ maximale Gruppen mit $I_G \subseteq \benbrace*{t_u,t_{u+1}}$ erzeugen, sodass eine Wiederholung der Konstruktion für alle Zeitintervalle in der gewünschten Anzahl maximaler Gruppen resultiert.
