@@ -1,6 +1,6 @@
 %!TEX root = ../trajectory-grouping.tex
 Zur Berechnung der \GrpStruktur müssen wir gemäß \cref{def:grpstrukur} den reduzierten Reeb-Graphen und die maximalen Gruppen berechnen.
-Dazu berechnen wir zunächst die unreduzierten Reeb-Graphen $\mathcal{R}$ und dann die maximalen Gruppen. 
+Dazu berechnen wir zunächst den unreduzierten Reeb-Graphen $\mathcal{R}$ und dann die maximalen Gruppen. 
 Mit diesen Informationen ist die Reduktion von $\mathcal{R}$ ein trivialer Nachbearbeitungsschritt.
 
 Für die Berechnung des Reeb-Graphen ist eine Datenstruktur zur dynamischen Speicherung von Bäumen nötig.
@@ -27,8 +27,8 @@ Das im Folgenden geschilderte Vorgehen von \textcite{buchin2015} zur Berechnung 
 \label{sec:berechnung_reeb}
 \todo[inline]{Bild zum Reeb-Graphen erneut einfügen oder referenzieren}
 Wir wollen den Reeb-Graphen $\mathcal{R}$ des dreidimensionalen Raumes $\mathcal{M}$ aus \cref{sec:trajek_reeb} bezüglich der Höhenfunktion berechnen -- die \enquote{Höhe} ist hier aber die Zeit! 
-Folglich ist es natürlich die Berechnung mittels eines Sweep-Algorithmus zu realisieren.
-Unsere Sweep-Ebene ist also die $xy$-Ebene, die $\mathcal{M}$ von unten nach oben überstreicht.
+Folglich ist es natürlich, die Berechnung mittels eines Sweep-Algorithmus zu realisieren.
+Unsere Sweep-Ebene ist also die $xy$-Ebene, die $\mathcal{M}$ von unten nach oben -- also chronologisch -- überstreicht.
 
 In \cref{sec:background_reeb} über die differentialtopologischen Hintergründe haben wir bereits gesehen, dass sich der Reeb-Graph nur an den kritischen Werten verändert.\footnote{unter der Annahme, dass $\mathcal{M}$ eine glatte Mannigfaltigkeit ist, sodass kritische Werte überhaupt definiert sind}
 Dies ermöglicht uns die notwendige Diskretisierung des Sweeps: Ein Knoten im Reeb-Graph kann nur auftreten, wenn zwei Komponenten verschmelzen (Merge), eine Komponente zerteilt wird (Split) oder eine Komponente beginnt oder endet, was alles notwendigerweise dadurch verursacht wird, dass zwei Entitäten direkt zusammenhängend werden (\emph{Connect}-Ereignis) oder es nicht länger sind (\emph{Disconnect}-Ereignis).\footnote{oder, dass das Ende des Beobachtungszeitraumes erreicht ist}
@@ -42,7 +42,7 @@ In \cref{sub:xy_struktur} wird dann die für einen Sweep-Algorithmus außerdem b
 
 \subsection{Berechnung der Queue} % (fold)
 \label{sub:berechnung_queue}
-Gegeben Entitäten $x$ und $y$ wollen wir eine Liste $L_{xy}$ aller Ereignisse berechnen.
+Gegeben Entitäten $x$ und $y$ wollen wir eine Liste $L_{xy}$ aller Ereignisse berechnen, die diese beiden Entitäten betreffen.
 Diese soll chronologisch sortiert sein und nur echt verschiedene Zeitpunkte enthalten.
 Weiter sollen sich \emph{Connect}- und \emph{Disconnect}-Ereignisse stets abwechseln, was dazu dient, für den Reeb-Graphen uninteressante Ereignisse herauszufiltern wie zum Beispiel den Fall, dass der Abstand von $x$ und $y$ nur bis auf exakt $2 \varepsilon$ sinkt und danach wieder steigt.
 
@@ -133,7 +133,7 @@ Neben $G$ und $F$ tritt im Laufe der Berechnung von $\mathcal{R}=(V,E)$ noch ein
 \subsection{Behandlung der Ereignisse} % (fold)
 \label{sub:behandlung_der_ereignisse}
 Der Graph $G$ wird für $t_0$ mittels \emph{brute-force} während der Initialisierung der Queue berechnet, da dort bereits alle Paare $(x,y)$ zur Berechnung der Listen $L_{x,y}$ betrachtet werden und somit die Kantengewichte für $G$ bekannt sind.
-Ist $G$ für $t_0$ bekannt, so lässt sich $F$ in $\mathcal{O}(n^2)$ Zeit berechnen; zum Beispiel mit dem Algorithmus von \textsc{Prim}.
+Ist $G$ für $t_0$ bekannt, so lässt sich $F$ in $\mathcal{O}(n^2)$ Zeit berechnen; zum Beispiel mit dem Algorithmus von \textsc{Prim}.\todo{Referenz}
 Für jede Komponente von $G$ fügen wir einen Start-Vertex in $\mathcal{R}$ ein und initialisieren die Abbildung $M$ dementsprechend.
 
 Beim Behandeln eines \emph{Connect}-Ereignisses der Entitäten $x$ und $y$ zum Zeitpunkt $t$ bestimmen wir nun zunächst die Komponenten $C_x$ und $C_y$ mittels $\mathtt{Find}$ und mittels $M$ die entsprechenden Vertices $v_x$ und $v_y$ in $\mathcal{R}$.
@@ -153,8 +153,22 @@ Sind wir am Ende der Queue $L$ angelangt, also beim Zeitpunkt $t_\tau$, so füge
 \subsection{Korrektheit} % (fold)
 \label{sub:korrektheit_xy}
 Die Korrektheit von $\textsc{Insert}(x,y)$ und $\textsc{Delete}(x,y)$ ist noch zu begründen, das heißt für beide Fälle muss gezeigt werden, dass $F$ auch nach dem Aufruf noch ein maximaler Spannbaum ist.
+
+Sind bei $\textsc{Insert}(x,y)$ die Entitäten vor dem Aufruf in unterschiedlichen Zusammenhangskomponenten von $G$ gewesen, so ist $F$ nach dem Hinzufügen von $(x,y)$ notwendigerweise wieder ein maximaler Spannbaum, da die Kante $(x,y)$ zu $F$ gehören muss, da nur sie die beiden vorher getrennten Zusammenhangskomponenten verbindet.
+Im anderen Fall würde das Hinzufügen von $(x,y)$ zu $F$ einen Zykel erzeugen.
+Dieser wird aufgelöst, indem die Kante mit dem minimalen Gewicht entfernt wird.
+
+Beim Aufruf von $\textsc{Delete}(x,y)$ wird ein Baum in $F$ in zwei geteilt.
+Es kann dabei keine weitere Kante in $G$ geben, die diese beiden Zusammenhangskomponenten verbindet, da eine solche dann ein geringeres Gewicht haben müsste (weil sie keine Kante von $F$ gewesen ist) und deshalb aber schon vorher hätte gelöscht werden müssen, da das Gewicht ja der Zeitpunkt des Löschens (oder $t_\tau$) ist.
 % subsection korrektheit_xy (end)
 
+\begin{satz}[{name={\cite[Thm.~7]{buchin2015}}}]
+	Für eine Menge $\mathcal{X}$ von $n$ Entitäten, von denen sich jede entlang einer Trajektorie von $\tau$ Kanten bewegt, besteht der Reeb-Graph $\mathcal{R}$ aus $\mathcal{O}(\tau n^2)$ Knoten und Kanten und kann in $\mathcal{O}(\tau n^2 \log n)$ Zeit berechnet werden.
+\end{satz}
+\begin{beweis}
+	Wie oben bereits erwähnt, kostet die Initialisierung $\mathcal{O}(\tau n^2 \log n)$ Zeit.
+	Die Verarbeitung der $\mathcal{O}(\tau n^2)$ Ereignisse kostet dank der Funktionen aus \cref{alg:funktionen} jeweils nur $\mathcal{O}(\log n)$ Zeit.
+\end{beweis}
 
 
 
