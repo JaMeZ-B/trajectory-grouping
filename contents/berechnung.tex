@@ -179,6 +179,23 @@ Wie man den Algorithmus für beliebige $m$ und $\delta$ anpassen muss, erläuter
 
 Für jede solche Kante $e=(v,u)$ wollen wir dazu eine Menge maximaler Gruppen $\mathcal{G}_e$ berechnen, die alle maximalen Gruppen $G$ enthält, die zu einem Zeitpunkt $t \le t_u$ entstanden sind und für die $G \subseteq C_e$ gilt.
 Dazu werden wir ausnutzen, dass eine Gruppe entweder dadurch maximal wird, dass sie bei einem Merge-Vertex als solche entsteht oder bei einem Split-Vertex aus Entitäten gebildet wird, die sich weiterhin zusammen bewegen.
+Dies ermöglicht es uns, $\mathcal{G}_e$ durch die Daten der bei $v$ eingehenden Kanten zu berechnen, sofern wir die Vertices in topologischer Reihenfolge traversieren.
+
+Im Falle eines Start-Vertex können wir einfach $\mathcal{G}_e \coloneqq \set*{(C_e,t_0)}$ setzen (Start-Vertices haben nur eine ausgehende Kante).
+Bei einem Merge-Vertex $v$ bleiben die bereits existenten maximalen Gruppen aus den eingehenden Kanten $\mathcal{G}_{e_1}$ und $\mathcal{G}_{e_2}$ bestehen, ist entsteht aber noch eine neue maximale Gruppe $(C_e,t_v)$ an der ausgehenden Kante $e=(v,u)$.
+Man setzt also $\mathcal{G}_e \coloneqq \mathcal{G}_{e_1} \cup \mathcal{G}_{e_2} \cup \set*{(C_e,t_v)}$.
+Da End-Vertices keine ausgehenden Kanten haben, ist bei diesen nichts zu tun.
+
+Wenn der aktuell betrachtete Knoten $v$ ein Split-Vertex ist, so hat $v$ eine eingehende Kante $e$ und zwei ausgehende Kanten $e_1$ und $e_2$.
+Eine maximale Gruppe $G \in \mathcal{G}_e$ kann nun
+\begin{itemize}
+	\item bei $v$ aufhören zu existieren,
+	\item auf $e_1$ oder $e_2$ weiterhin bestehen oder
+	\item eine neue maximale Gruppe $G' \subset G$ auf $e_1$ oder $e_2$ erzeugen
+\end{itemize}
+Insbesondere können keine neuen Gruppen auf $e_1$ oder $e_2$ \enquote{aus dem Nichts} entstehen, denn für jede Gruppe $G' \in \mathcal{G}_{e_i}$ gibt es eine Gruppe $G \in \mathcal{G}_e$, sodass $G' = G \cap C_{e_i} \neq \emptyset$.
+Der Startzeitpunkt von $G'$ ist gegeben durch $t' = \min \set*{t \given (G,t) \in \mathcal{G}_e \wedge G' \subseteq G}$.
+Im Unterschied zu den anderen Typen von Vertices, ist die Behandlung Split-Vertices also aufwändiger, sodass eine geeignete Datenstruktur zum Speichern der Gruppen in $\mathcal{G}_e$ benutzt werden sollte.
 
 % section berechnung_maximale_gruppen (end)
 
