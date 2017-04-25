@@ -179,7 +179,7 @@ Wie man den Algorithmus für beliebige $m$ und $\delta$ anpassen muss, erläuter
 
 Für jede solche Kante $e=(v,u)$ wollen wir dazu eine Menge maximaler Gruppen $\mathcal{G}_e$ berechnen, die alle maximalen Gruppen $G$ enthält, die zu einem Zeitpunkt $t \le t_u$ entstanden sind und für die $G \subseteq C_e$ gilt.
 Dazu werden wir ausnutzen, dass eine Gruppe entweder dadurch maximal wird, dass sie bei einem Merge-Vertex als solche entsteht oder bei einem Split-Vertex aus Entitäten gebildet wird, die sich weiterhin zusammen bewegen.
-Dies ermöglicht es uns, $\mathcal{G}_e$ durch die Daten der bei $v$ eingehenden Kanten zu berechnen, sofern wir die Vertices in topologischer Reihenfolge traversieren.
+Dies ermöglicht es uns, $\mathcal{G}_e$ durch die Daten der bei $v$ eingehenden Kanten zu berechnen, sofern wir die Vertices in topologischer Reihenfolge traversieren.\todo{topologische Reihenfolge klären}
 
 Im Falle eines Start-Vertex können wir einfach $\mathcal{G}_e \coloneqq \set*{(C_e,t_0)}$ setzen (Start-Vertices haben nur eine ausgehende Kante).
 Bei einem Merge-Vertex $v$ bleiben die bereits existenten maximalen Gruppen aus den eingehenden Kanten $\mathcal{G}_{e_1}$ und $\mathcal{G}_{e_2}$ bestehen, ist entsteht aber noch eine neue maximale Gruppe $(C_e,t_v)$ an der ausgehenden Kante $e=(v,u)$.
@@ -197,6 +197,65 @@ Insbesondere können keine neuen Gruppen auf $e_1$ oder $e_2$ \enquote{aus dem N
 Der Startzeitpunkt von $G'$ ist gegeben durch $t' = \min \set*{t \given (G,t) \in \mathcal{G}_e \wedge G' \subseteq G}$.
 Im Unterschied zu den anderen Typen von Vertices, ist die Behandlung Split-Vertices also aufwändiger, sodass eine geeignete Datenstruktur zum Speichern der Gruppen in $\mathcal{G}_e$ benutzt werden sollte.
 
+\subsection{Speicherung der maximalen Gruppen} % (fold)
+\label{sub:speicherung_der_maximalen_gruppen}
+In diesem Unterabschnitt soll gezeigt werden, wie die Menge $\mathcal{G}_e$ der maximalen Gruppen zur Kante $e=(v,u)$ in einem Baum $\mathcal{T}_e$ speichern können, sodass eine effiziente Behandlung von Split-Vertices möglich wird.
+Dazu benötigen wir die folgende Aussage über \emph{Untergruppen}.
+
+\begin{definition}[{name=[Untergruppe]}]
+	Eine Gruppe $G$ heißt \Index{Untergruppe} der Gruppe $H$, wenn $G \subseteq H$ und $I_H \subseteq I_G$ gilt.\marginnote{Beachte: Sowohl $G$ als auch $H$ können maximal sein!}
+\end{definition}
+
+\begin{lemma}[{name={\cite[Lem.~8]{buchin2015}}},label=lem:untergruppen]
+	Sei $e$ eine Kante von $\mathcal{R}$ und $S,T$ maximale Gruppen in $\mathcal{G}_e$ mit Startzeitpunkten $t_S$ und $t_T$.
+	Dann gibt es eine maximale Gruppe $G \supseteq S \cup T$ auf $e$ mit Startzeitpunkt $t_G \ge \max(t_S,t_T)$.
+	Falls $S \cap T \neq \emptyset$, dann ist $S$ Untergruppe von $T$ oder umgekehrt.
+\end{lemma}
+\begin{beweis}
+	Da $S,T \subseteq C_e$ gilt $S \cup T \subseteq C_e$.
+	Per Konstruktion ist $C_e$ auch eine maximale Gruppe und zwar diejenige mit dem jüngsten Startzeitpunkt von allen maximalen Gruppen in $\mathcal{G}_e$.
+	Folglich findet man stets $G \in \mathcal{G}_e$ mit $t_G \ge \max(t_S,t_T)$.
+	
+	Angenommen es gelte $S \cap T \neq \emptyset$ aber weder $S \subseteq T$ noch $T \subseteq S$.
+	Ohne Einschränkungen können wir $t_S \le t_T$ annehmen.
+	Da alle Entitäten von $S$ für jede Zeit $t \ge t_T \ge t_S$ in einer einzelnen Komponente enthalten sind und dies für die Entitäten von $T$ für $t \ge t_T$ ebenfalls gilt, folgt aus der Voraussetzung, dass diese Komponenten gleich sein müssen.
+	Daraus muss nun aber direkt $S \subseteq T $ folgen, denn andernfalls, wäre die Gruppe $S \cup T$ (bei $t_T$ startend) ein Widerspruch zur Maximalität von $T$.
+\end{beweis}
+
+Der Baum $\mathcal{T}_e$ zur Kante $e$ soll nun wie folgt aussehen: Jeder Knoten $v$ in $\mathcal{T}_e$ repräsentiert eine Gruppe $G_v \in \mathcal{G}_e$.
+Die Kinder eines Knoten sind die größten maximalen Untergruppen von $G_v$.
+\Cref{lem:untergruppen} stellt sicher, dass zwei solcher Kinder stets disjunkt sein müssen.
+Insbesondere taucht jede Entität $x \in G_v$ in genau einem Kind von $v$ auf.
+
+Weiter stellt man fest, dass die Startzeitpunkte monoton fallen auf jedem Pfad von der Wurzel zu einem Blatt und dass die Blätter zu Gruppen gehören müssen, die schon seit $t_0$ bestehen, was oftmals auf einelementige Gruppen hinausläuft.
+Da jede Entität nur in genau einem Blatt enthalten sein kann, hat $\mathcal{T}_e$ $\mathcal{O}(n)$ Blätter und damit auch insgesamt die Größe $\mathcal{O}(n)$; die summierte Größe der maximalen Gruppen ist $\mathcal{O}(n^2)$, da jede maximale Gruppe $\mathcal{O}(n)$ Entitäten enthält.
+% subsection speicherung_der_maximalen_gruppen (end)
+
+
+
+\begin{algorithm}
+	\caption{Traversieren von $\mathcal{R}=(V,E)$ zur Berechnung der maximalen Gruppen}
+	\vspace{1em}
+	\hrule\vspace{1em}
+	
+	\begin{algorithmic}
+		\State Sortiere $V$ in topologischer Reihenfolge
+		\For{$v \in V$}
+			\If{$v$ ist Start-Vertex} \Comment{$v$ hat nur eine ausgehende Kante }
+			\State Sei $e=(v,u)$ die ausgehende Kante
+			\State $\mathcal{G}_e \coloneqq \set*{(C_e,t_0)}$
+			\ElsIf{$v$ ist Merge-Vertex} 
+			\State Seien $e_1$ und $e_2$ die beiden eingehenden Kanten, sei $e$ die ausgehende Kante
+			\State $\mathcal{G}_e \coloneqq \mathcal{G}_{e_1} \cup \mathcal{G}_{e_2} \cup \set*{(C_e,t_v)}$
+			\ElsIf{$v$ ist Split-Vertex}
+			\State Sei $e$ die eingehende Kante und $e_1,e_2$ die beiden ausgehenden
+			\State (kommt noch)
+			\ElsIf{$v$ ist End-Vertex}
+			\EndIf
+		\EndFor
+	\end{algorithmic}
+	\hrule
+\end{algorithm}
 % section berechnung_maximale_gruppen (end)
 
 
