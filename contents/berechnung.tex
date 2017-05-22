@@ -265,13 +265,57 @@ Da jede Entität nur in genau einem Blatt enthalten sein kann, hat $\mathcal{T}_
 \end{algorithm}
 
 Der erste Schritt zur Berechnung ist, wie oben schon erläutert eine topologische Sortierung der Vertices von $\mathcal{R}=(V,E)$.
-Dies ist zum Beispiel mit dem in \textcite[Sec.~22.4]{cormenIntroduction}\todo{tatsächlich nachschlagen} erläuterten Algorithmus möglich.
+Dies ist zum Beispiel mit dem in \textcite[Sec.~22.4]{cormenIntroduction} erläuterten Algorithmus \textsc{Topological-Sort} möglich.
 Dieser benutzt eine Tiefensuche und kostet $\mathcal{O}(\abs*{V} + \abs*{E}) = \mathcal{O}(\tau n^2)$ Zeit (nach \cref{thm:schranke-Reeb}).
 Die Behandlung der Start- und Merge-Vertices kostet offensichtlich $\mathcal{O}(1)$ Zeit pro Vertex.
 
 Ein Split-Vertex verursacht aufgrund der notwendigen Traversierung von $\mathcal{T}_e$ Kosten von $\mathcal{O}(\abs*{\mathcal{T}_e}) = \mathcal{O}(n)$.
-Die \enquote{Bottom-Up}-Konstruktion der Bäume $\mathcal{T}_{e_1}$ und $\mathcal{T}_{e_2}$ während der Traversierung kostet dabei pro Knoten in $\mathcal{T}_e$ nur konstante Zeit, sodass der Algorithmus insgesamt Kosten von $\mathcal{O}(n \abs*{\mathcal{R}}) = \mathcal{O}(\tau n^3)$ verursacht.
+Die \enquote{Bottom-Up}-Konstruktion der Bäume $\mathcal{T}_{e_1}$ und $\mathcal{T}_{e_2}$ während der Traversierung (Zusammenfügen von Teilbäumen bei Rückkehr aus rekursiven Aufrufen) kostet dabei pro Knoten in $\mathcal{T}_e$ nur konstante Zeit, sodass der Algorithmus insgesamt Kosten von $\mathcal{O}(n \abs*{\mathcal{R}}) = \mathcal{O}(\tau n^3)$ verursacht.
 % subsection algorithmus_und_analyse (end)
+
+\subsection{Ausgabe der maximalen Gruppen und Einbeziehung der Parameter $m,\delta$} % (fold)
+\label{sub:ausgabe_der_maximalen_gruppen_und_einbeziehung_der_parameter_m_delta}
+Wir müssen noch erläutern, wie \cref{alg:max_groups} angepasst werden muss, um bei der Ausführung alle maximalen Gruppen aufzulisten und wie dabei die Parameter $m$ (Mindestanzahl) und $\delta$ (Mindestdauer) überprüft werden kann.
+Offensichtlich kann eine maximale Gruppe nur an einem Split- oder End-Vertex vernichtet werden, sodass nur die entsprechenden \texttt{if}-Blöcke modifiziert werden müssen.
+\Cref{alg:max_groups_final} zeigt diese Modifizierungen.
+\begin{algorithm}[hbt]
+	\caption{Traversieren von $\mathcal{R}=(V,E)$ zur Berechnung und Ausgabe der maximalen Gruppen unter Beachtung der Parameter $m$ und $\delta$} \label{alg:max_groups_final}
+	\vspace{.5em}
+	\hrule\vspace{.5em}
+	
+	\begin{algorithmic}
+		\Procedure{ComputeGroupingTrees}{$\mathcal{R}=(V,E)$}
+		\State Sortiere $V$ in topologischer Reihenfolge
+		\For{$v \in V$}
+			\If{$v$ ist Start-Vertex} 
+			\State Sei $e=(v,u)$ die ausgehende Kante
+			\State $\mathcal{G}_e \coloneqq \set*{(C_e,t_0)}$, $\mathcal{T}_e \coloneqq \mathcal{G}_e$
+			\ElsIf{$v$ ist Merge-Vertex} 
+			\State Seien $e_1$ und $e_2$ die beiden eingehenden Kanten, sei $e$ die ausgehende Kante
+			\State $\mathcal{G}_e \coloneqq \mathcal{G}_{e_1} \cup \mathcal{G}_{e_2} \cup \set*{(C_e,t_v)}$
+			\State $\mathcal{T}_e \coloneqq$ Baum mit Wurzel $\mathcal{G}_e$ mit Kindern $\mathcal{T}_{e_1}$ und $\mathcal{T}_{e_2}$
+			\ElsIf{$v$ ist Split-Vertex}
+			\State Sei $e$ die eingehende Kante, seien $e_1,e_2$ die beiden ausgehenden Kanten
+			\State Traversiere $\mathcal{T}_e$ in Post-Order 
+			\State Überprüfe für jeden Knoten, ob er Knoten in $\mathcal{T}_{e_1}$ und/oder $\mathcal{T}_{e_2}$ induziert
+			\State Erzeuge dabei $\mathcal{T}_{e_1}$ und $\mathcal{T}_{e_2}$ \enquote{bottom-up}
+			\ElsIf{$v$ ist End-Vertex}
+			\State Traversiere $\mathcal{T}_e$, den Baum der eingehenden Kante $e$ in Prä-Order
+			\State Gib dabei alle maximalen Gruppen aus, die die Bedingungen durch $m,\delta$ erfüllen
+			\EndIf
+		\EndFor
+		\EndProcedure
+	\end{algorithmic}
+	\hrule
+\end{algorithm}
+
+Im Falle eines End-Vertex traversieren wir einfach den Baum der eingehenden Kante in Prä-Order und geben dabei alle maximalen Gruppen $G$ aus mit $\abs{I_G}\ge \delta$ und $\abs*{G}\ge m$.
+Aufgrund der oben erwähnten Monotonie der Bäume, können wir es dabei einrichten nur die Knoten zu besuchen, deren zugeordnete maximale Gruppe die Bedingung an $m$ erfüllt.
+
+Um festzustellen, welchen maximalen Gruppen an einem 
+
+
+% subsection ausgabe_der_maximalen_gruppen_und_einbeziehung_der_parameter_m_delta (end)
 
 
 
