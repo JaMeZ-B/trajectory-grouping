@@ -3,7 +3,7 @@ Sei $X$ ein topologischer Raum und $f \colon X \to \mathbb{R}$ eine stetige Funk
 Dann bezeichnet man für einen Wert $a \in \mathbb{R}$ das Urbild unter $f$ als \Index{Niveaumenge} (engl. \emph{level set}) von $a$.
 Die Niveaumengen bilden offensichtlich eine Partition von $X$.
 
-Anschaulich stellt man sich $f$ meist als \Index{Höhenfunktion} vor. 
+Anschaulich stellt man sich $f$ meist als \Index{Höhenfunktion} vor.
 So könnte $X$ beispielsweise das Gebiet einer Karte in einem handelsüblichen Atlas sein (= eine Teilmenge der zweidimensionalen Ebene) und $f$ gibt die Höhe über NN an.
 Dann sind die Niveaumengen $f^{-1}(\set{a})$ genau die Niveaulinien, die man in detaillierten topografischen Karten findet (ein Beispiel einer solchen Karte findet sich in \cref{sec:karte_niveau}).
 
@@ -12,7 +12,7 @@ Um den \Index{Reeb-Graph} von $f$ zu erhalten, benutzen wir nun die Zusammenhang
 \begin{definition}[{name=[Reeb-Graph]}]
 	Der \Index{Reeb-Graph} zu $f \colon X \to \mathbb{R}$ ist der Quotientenraum $\mathcal{R}(f) \coloneqq X/{\sim}$ bezüglich der folgenden Äquivalenzrelation
 	\[
-		x \sim y \,:\mkern-3mu\iff \exists a \in \mathbb{R} : x,y \text{ liegen in der gleichen Zusammenhangskomponente von } f^{-1}(\set{a}) 
+		x \sim y \,:\mkern-3mu\iff \exists a \in \mathbb{R} : x,y \text{ liegen in der gleichen Zusammenhangskomponente von } f^{-1}(\set{a})
 	\]
 	Die Elemente von $\mathcal{R}(f)$ bezeichnen wir als \Index{Konturen} von $f$.
 \end{definition}
@@ -74,7 +74,7 @@ Betrachtet man nicht einen beliebigen topologischen Raum $X$, sondern eine diffe
 			\draw[thick] (-3.5,-12) node{} -- ++(1.75,0) .. controls +(80:1.5) and +(100:1.5) .. ++(3.5,0) node{};
 			\draw[thick] (3.5,-12) node{}-- ++(-1.75,0) .. controls +(-100:1.5) and +(-80:1.5) .. ++(-3.5,0) node{};
 		\end{scope}
-		\node at (3,-11) {$\mathcal{R}(f)$}; 
+		\node at (3,-11) {$\mathcal{R}(f)$};
 		
 		\draw[thick] (-3.5,0) .. controls (-3.5,2) and (-1.5,2.5) .. (0,2.5);
 		\draw[thick,xscale=-1] (-3.5,0) .. controls (-3.5,2) and (-1.5,2.5) .. (0,2.5);
@@ -89,11 +89,11 @@ Betrachtet man nicht einen beliebigen topologischen Raum $X$, sondern eine diffe
 \end{figure}
 Für den aufrechten Torus und die Höhenfunktion sind dies die beiden orange gekennzeichneten, einelementigen Niveaumengen in \cref{fig:torus_reeb}, sowie die beiden \enquote{Klebepunkte} der grün gezeichneten Niveaumengen.
 
-Durch das Betrachten der zweiten Ableitungen in lokalen Koordinaten, kann man die kritischen Punkte anhand der Hesse-Matrix in entartete und nicht entartete einteilen. 
-Nach \textcite{compTopo} heißt $f$ dann \Index{Morse-Funktion}, wenn 
+Durch das Betrachten der zweiten Ableitungen in lokalen Koordinaten, kann man die kritischen Punkte anhand der Hesse-Matrix in entartete und nicht entartete einteilen.
+Nach \textcite{compTopo} heißt $f$ dann \Index{Morse-Funktion}, wenn
 \begin{enumerate}[(i)]
 	\item alle kritischen Punkte nicht entartet sind und\marginnote{einige Autoren verzichten auf \cref{enum:def:morse:2}}
-	\item\label{enum:def:morse:2} die kritischen Punkte paarweise verschiedene Werte haben. 
+	\item\label{enum:def:morse:2} die kritischen Punkte paarweise verschiedene Werte haben.
 \end{enumerate}
 Beliebige glatte Funktionen $f \colon M \to \mathbb{R}$ lassen sich nach \textcite[Corr.~6.8]{MilnorMorse} gut durch Morse-Funktionen approximieren.
 
@@ -179,7 +179,7 @@ Die verbleibenden Vertices können wir aufgrund der Annahme, dass keine drei Ent
 Eine gerichtete Kante $e=(u,v)$ in $\mathcal{R}$ entspricht einer Menge von Entitäten, die zu jedem Zeitpunkt $t \in \benbrace*{t_u,t_v}$ eine Komponente (im Sinne von \cref{cha:def_gruppe}) bildet.
 Wir halten fest, dass der Reeb-Graph $\mathcal{R}$ nur vom räumlichen Parameter $\varepsilon$, aber nicht von den beiden weiteren Parametern unseres Modells, $m$ und $\delta$, abhängt.
 
-Wie genau hängt der Reeb-Graph $\mathcal{R}$ nun mit den Trajektorien und den Gruppen zusammen? 
+Wie genau hängt der Reeb-Graph $\mathcal{R}$ nun mit den Trajektorien und den Gruppen zusammen?
 Zunächst einmal folgt jede Entität einem Pfad in $\mathcal{R}$ von einem Start-Vertex zu einem End-Vertex.
 Analog lässt sich jeder (maximalen) Gruppe ein Pfad von einem Start- oder Merge-Vertex zu einem End- oder Split-Vertex zuordnen.
 Wählt man nun $m > 1$ oder $\delta > 0$, so kann es sein, dass einigen Kanten von $\mathcal{R}$ keine Gruppe zugeordnet ist und sie somit für die \GrpStruktur irrelevant sind.
@@ -194,7 +194,7 @@ $\mathcal{R}$ ohne all diese Kanten ist der \Index{reduzierte Reeb-Graph}, den w
 \section{Komplexität der \GrpStruktur} % (fold)
 \label{sec:komplex}
 Gemäß \cref{def:grpstrukur} müssen wir sowohl für die Komplexität des Reeb-Graphen $\mathcal{R}$ als auch die Anzahl maximaler Gruppen obere Schranken finden.
-Dazu folgen wir \textcite[Sec.~2.1~\&~2.2]{buchin2015} und beweisen wir Schranken von $\mathcal{O}(\tau n^2)$ für $\mathcal{R}$ und $\mathcal{O}(\tau n^3)$ für die Anzahl maximaler Gruppen, die im Worst-Case sogar scharf sind. 
+Dazu folgen wir \textcite[Sec.~2.1~\&~2.2]{buchin2015} und beweisen wir Schranken von $\mathcal{O}(\tau n^2)$ für $\mathcal{R}$ und $\mathcal{O}(\tau n^3)$ für die Anzahl maximaler Gruppen, die im Worst-Case sogar scharf sind.
 
 \begin{lemma}[name={\cite[Lem.~1]{buchin2015}},label=lem:untereSchranke-Reeb]
 	Der Reeb-Graph $\mathcal{R}$ einer Menge $\mathcal{X}$ von $n$ Entitäten, von denen sich jede auf einer Trajektorie mit $\tau$ Kanten bewegt, kann $\Omega(\tau n^2)$ Vertices und $\Omega(\tau n^2)$ Kanten haben.
@@ -205,7 +205,7 @@ Dazu folgen wir \textcite[Sec.~2.1~\&~2.2]{buchin2015} und beweisen wir Schranke
 	Diese Konstruktion wiederholen wir für alle Intervalle.
 	Dies liefert dann offensichtlich $\Omega(\tau n^2)$ viele Vertices und damit auch $\Omega(\tau n^2)$ viele Kanten, da jeder Knoten entweder Grad 1 oder Grad 3 hat (siehe oben).
 	
-	Wir teilen $\mathcal{X}$ -- wie in \cref{fig:vertices-intervall} gezeichnet -- in zwei Teilmengen $R= \set*{r_1, \ldots ,r_{n/2}}$, $D=\set*{d_1,\ldots ,d_{n/2}}$ auf, wobei die Entität $r_j$ bei $(-j,-j)$ und $d_\ell$ bei $(\ell,\ell)$ startet.
+	Wir teilen $\mathcal{X}$ -- wie in \cref{fig:vertices-intervall} gezeichnet -- in zwei Teilmengen $R= \set*{r_1, \ldots ,r_{n/2}}$, $D=\set*{d_1,\ldots ,d_{n/2}}$ auf, wobei die Entität $r_j$ bei $(-j,-j)$ und $d_\ell$ bei $(\ell,\ell)$ startet.\todo{Lindenmayer-System?}
 	\begin{figure}
 		\Centering
 		\begin{tikzpicture}[scale=.3,>=Latex,font=\small]
@@ -282,7 +282,7 @@ Dies gestaltet sich etwas schwieriger als die Komplexität des Reeb-Graphen: \to
 	
 	Die Ereignisse im Intervall $\benbrace*{t_u,t_{u+1}}$ lassen sich nun in mehrere \emph{Runden} einteilen.
 	Eine Runde soll dabei die Ereignisse zusammenfassen, die passieren, während $d_1$ eine der \enquote{Zinnen} $T_i$ passiert.
-	Eine solche Runde $z$ startet mit $k$ Merge-Ereignissen zu den Zeitpunkten $j_1, \ldots , j_k$ gefolgt von $k$ Split-Ereignissen $\ell_1, \ldots, \ell_k$. 
+	Eine solche Runde $z$ startet mit $k$ Merge-Ereignissen zu den Zeitpunkten $j_1, \ldots , j_k$ gefolgt von $k$ Split-Ereignissen $\ell_1, \ldots, \ell_k$.
 	Genauer wird $d_i$ zum Zeitpunkt $j_i$ direkt-zusammenhängend mit $S$ bei $T_{1+z-i}$ und ist es ab dem Zeitpunkt $\ell_i$ nicht länger.
 	
 	Diese Reihenfolge ist durch die Wahl des Abstandes $4r + \frac{\varepsilon}{n}$ sichergestellt: Damit alle Merge-Ereignisse vor den Split-Ereignissen stattfinden können, müssen alle weiteren an dieser Runde beteiligten Entitäten $\varepsilon$-zusammenhängend mit $S$ werden bevor $d_1$ nicht mehr mit $S$ verbunden ist.
@@ -319,7 +319,7 @@ Dies gestaltet sich etwas schwieriger als die Komplexität des Reeb-Graphen: \to
 	Gleichzeitig werden nun aber die Gruppen, die bei $j_{i+1}$ gestartet sind zu maximalen Gruppen $G_{(i+1)h}$, da $d_i$ die Gruppe $G_{ih}$ verlassen hat (siehe \cref{fig:gruppen-intervalle}).
 	
 	Dies bedeutet, dass das Ereignis $\ell_i$ $k-1$ viele neue maximale Gruppen erzeugt.
-	Zusammen mit den $k$ maximalen Gruppen $G_{1i}$ erzeugt die Runde $z$ also 
+	Zusammen mit den $k$ maximalen Gruppen $G_{1i}$ erzeugt die Runde $z$ also
 	\[
 		\sum_{i=0}^{k} (k-i)  \in \Omega(k^2)
 	\]
@@ -403,9 +403,9 @@ Dies gestaltet sich etwas schwieriger als die Komplexität des Reeb-Graphen: \to
 	Wir bezeichnen mit $p_x$ den Pfad, dem die Entität $x \in S \cup T$ durch $\mathcal{R}$ folgt (existiert, da $m=1$ ist).
 	Die Vereinigung über alle $x \in S \cup T$ ist ein gerichteter azyklischer Graph $\mathcal{R}'_v$ und insbesondere ein Untergraph von $\mathcal{R}$ (siehe \cref{fig:entwirren-DAG}).
 	Wie in \cref{fig:entwirren-baum} zu sehen, können wir $\mathcal{R}'_v$ zu einem Baum $\mathcal{T}_v$ \enquote{auftrennen}:
-	Wenn sich zwei Pfade $p_x$ und $p_y$ an einem Vertex $u$ trennen und an einem weiteren Vertex $w$ wieder vereinigen (mit $t_w > t_u$), so duplizieren wir den Teilpfad, der bei $w$ beginnt. 
+	Wenn sich zwei Pfade $p_x$ und $p_y$ an einem Vertex $u$ trennen und an einem weiteren Vertex $w$ wieder vereinigen (mit $t_w > t_u$), so duplizieren wir den Teilpfad, der bei $w$ beginnt.
 	Beginnen wir dabei bei dem spätesten Zeitpunkt $t_w$ und duplizieren in zeitlich rückwärtiger Reihenfolge die entsprechenden Teilpfade, so entsteht ein Baum $\mathcal{T}_v$.
-	Dieser Baum hat die Wurzel $v$ und $\abs*{S}+ \abs*{T} \le n$ Blätter. 
+	Dieser Baum hat die Wurzel $v$ und $\abs*{S}+ \abs*{T} \le n$ Blätter.
 	Außerdem ist sichergestellt, dass die Knoten von $\mathcal{T}_v$ maximal Grad 3 haben.
 	
 	Es seien nun $G_1, \ldots ,G_k$ die maximalen Gruppen, die bei $v$ beginnen.
@@ -421,4 +421,3 @@ Dies gestaltet sich etwas schwieriger als die Komplexität des Reeb-Graphen: \to
 	Summieren über alle $\mathcal{O}(\tau n^2)$ Start- und Merge-Vertices ergibt $\mathcal{O}(\tau n^3)$ maximale Gruppen insgesamt.
 \end{beweis}
 % section komplex (end)
-
