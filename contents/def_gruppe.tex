@@ -88,11 +88,11 @@ Die Menge der Komponenten zum Zeitpunkt $t$ bezeichnen wir mit $\mathcal{C}(t)$;
 	\begin{enumerate}[(i)]
 		\item $G$ enthält mindestens $m$ Entitäten, also $k \ge m$
 		\item die Länge von $I$ ist mindestens $\delta$
-		\item \label{enum:3:def:gruppe}zu jeder Zeit $t \in I$ existiert eine Komponente $C \in \mathcal{C}(t)$ mit $G \subseteq C$.
+		\item\label{enum:3:def:gruppe}zu jeder Zeit $t \in I$ existiert eine Komponente $C \in \mathcal{C}(t)$ mit $G \subseteq C$.
 	\end{enumerate}
 	Das Intervall $I=[t_s,t_e]$ der Gruppe $G$ bezeichnen wir auch mit $I_G$.
 	Eine Gruppe $H$ \bet{überlagert}\index{Gruppe!überlagernde} $G$, falls $G \subseteq H$ und $I_G \subseteq I_H$ gilt.
-	Falls kein solches $H$ existiert, so heißt $G$ \bet{maximal}\index{Gruppe!maximale}. 
+	Falls kein solches $H$ existiert, so heißt $G$ \bet{maximal}\index{Gruppe!maximale}.
 \end{definition}
 
 \begin{figure}[thbp]
@@ -161,7 +161,7 @@ Tatsächlich benötigen wir aber alle diese Informationen, um später die Entwic
 
 Wie \cref{fig:components} bereits zeigt, hat die Wahl des Parameters $\varepsilon$ einen großen Einfluss auf die Komponenten und es stellt sich die Frage, wie sich die (maximalen) Gruppen bei Variation dieses Parameters sowie der anderen beiden $\delta$ und $m$ verändern.
 
-Wenn $G$ eine Gruppe auf dem Intervall $I$ ist, so bleibt sie es offensichtlich bei Verminderung der Mindestgröße $m$ und der minimalen Dauer $\delta$; des Weiteren bleibt eine maximale Gruppe maximal. 
+Wenn $G$ eine Gruppe auf dem Intervall $I$ ist, so bleibt sie es offensichtlich bei Verminderung der Mindestgröße $m$ und der minimalen Dauer $\delta$; des Weiteren bleibt eine maximale Gruppe maximal.
 Eine ähnliche Monotonie-Eigenschaft erhalten wir auch für den räumlichen Parameter $\varepsilon$:
 Vergrößert man $\varepsilon$, so entstehen potentiell zu jedem Zeitpunk weniger, aber dafür größere Komponenten, sodass \cref{enum:3:def:gruppe} aus \cref{def:gruppe} eher erfüllt ist.
 Folglich gibt es zu einer Gruppe $G$ bezüglich des ursprünglichen Parameters $\varepsilon$ eine Gruppe $G'$ mit $G \subseteq G'$.
@@ -170,7 +170,7 @@ Diese Monotonie-Eigenschaften haben zur Folge, dass bei einer detaillierten Sich
 Dabei können sich Größe und Dauer einer maximalen Gruppe durch ein größeres $\varepsilon$ allerdings ausdehnen.
 
 Wir werden im weiteren Verlauf die \Index{\GrpStruktur} bestehend aus der Menge der maximalen Gruppen und einem sogenannten \Index{Reeb-Graphen} betrachten.
-Neben dem Partitionieren in der Trajektorien wird es uns diese \GrpStruktur erlauben, diverse Fragen an die gegeben Daten, wie zum Beispiel die folgenden, zu beantworten:
+Neben dem Partitionieren in Trajektorien wird es uns diese \GrpStruktur erlauben, diverse Fragen an die gegeben Daten, wie zum Beispiel die folgenden, zu beantworten:
 \begin{itemize}
 	\item Was ist die größte/am längsten andauernde maximale Gruppe zum Zeitpunkt $t$?
 	\item Wie viele Entitäten sind momentan (nicht) in einer maximalen Gruppe?
