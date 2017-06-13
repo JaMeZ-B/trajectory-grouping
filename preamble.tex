@@ -1,6 +1,7 @@
 %!TEX root = trajectory-grouping.tex
-%!TEX TS-options = -shell-escape
-%!BIB programm = biber
+%!TEX program = pdflatex
+%!TEX enableShellEscape = true
+%!TEX format = pdf
 % -- Author: Jannes Bantje, j.bantje@wwu.de
 \documentclass[%
 	paper=a4,
@@ -11,7 +12,7 @@
 	cleardoublepage=empty,
 	headinclude,
 	footinclude,
-	headheight=20.7pt,
+	headheight=21pt,
 	footheight=18pt,
 	headings=optiontohead,
 	toc=bibliography,toc=listof,
@@ -134,18 +135,16 @@
 	style=alphabetic
 	]%
 {biblatex}
-\renewcommand*{\mkbibnamelast}[1]{%
+\renewcommand*{\mkbibnamefamily}[1]{%
   \ifmknamesc{\textsc{#1}}{#1}}
-
 \renewcommand*{\mkbibnameprefix}[1]{%
   \ifboolexpr{ test {\ifmknamesc} and test {\ifuseprefix} }
     {\textsc{#1}}
     {#1}}
-
 \def\ifmknamesc{%
   \ifboolexpr{ test {\ifcurrentname{labelname}}
                or test {\ifcurrentname{author}}
-               or ( test {\ifnameundef{author}} and test {\ifcurrentname{editor}} ) }}
+               or ( test {\ifnameundef{author}} and test {\ifcurrentname{editor}} ) }}% chktex 37
 \addbibresource{quellen.bib}
 \DefineBibliographyStrings{ngerman}{%
   andothers = {et\addabbrvspace al\adddot}
@@ -249,8 +248,8 @@
 
 %-- Inhaltsverzeichnis konfigurieren
 % ======================================================================================
-\usepackage[tocindentauto]{tocstyle}
-\usetocstyle{KOMAlike}
+% \usepackage[tocindentauto]{tocstyle}
+% \usetocstyle{KOMAlike}
 % ======================================================================================
 
 
