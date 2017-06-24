@@ -137,6 +137,9 @@ pantone312, 	% WWU-Design in hellblau
                or test {\ifcurrentname{author}}
                or ( test {\ifnameundef{author}} and test {\ifcurrentname{editor}} ) }}
 \addbibresource{quellen.bib}
+\DefineBibliographyStrings{ngerman}{%
+  andothers = {et\addabbrvspace al\adddot}
+}
 \setbeamertemplate{bibliography item}[text]
 
 
@@ -168,17 +171,49 @@ pantone312, 	% WWU-Design in hellblau
   \maketitle
 \end{frame}
 
+\section{Einleitung}
 \begin{frame}{Einleitung/Warum ist das interessant?}
-    
+    \begin{block}{Problemstellung}
+        Gegeben eine Menge von $n$ Entitäten, die sich entlang gegebener Trajektorien bewegen, welche davon bewegen sich \enquote{zusammen}/in einer \enquote{Gruppe}?
+    \end{block}
+    Zahlreiche mögliche Anwendungsgebiete:
+    \begin{itemize}
+        \item Bewegungen von Tieren in der Verhaltensbiologie (Herden und Rudel)
+        \item Analyse von Verkehrsteilnehmern (z.B. zur Stau)
+    \end{itemize}
+    Bearbeitung der Problemstellung:
+    \begin{enumerate}
+        \item Überführe menschliche Intuition einer kollektiven Bewegung in eine mathematische Definition
+        \item Finde einen Weg, die so definierten \enquote{Gruppen} effektiv zu berechnen
+    \end{enumerate}
 \end{frame}
 
 \begin{frame}{Ziel dieses Vortrags}
-    
+    \begin{center}
+        \texttt{<Video hier>}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Tracectory Grouping Structure nach \textcite{buchin2015}}
+    \begin{block}{Problemstellung}
+        Gegeben eine Menge von $n$ Entitäten, die sich entlang gegebener Trajektorien bewegen, welche davon bewegen sich \enquote{zusammen}/in einer \enquote{Gruppe}?
+    \end{block}
+    Die \bet{Trajectory Grouping Structure} nach \textcite{buchin2015} zeichnet folgendes aus
+    \begin{itemize}
+        \item Intuitive Definition einer Gruppe von Trajektorien
+        \item Neben der Identifikation von Gruppen wird auch das \enquote{Leben} von Gruppen betrachtet (Start, End, Merge und Split)
+        \item Das Modell erfasst diese Änderungen der Gruppen zu kontinuierlichen Zeitpunkten
+        \item Diese Struktur lässt sich effizient berechnen
+        \item Gruppierung kann auf unterschiedlichen Maßstäben untersucht werden
+        \item Das Modell kann robust gegenüber Störungen gemacht werden
+    \end{itemize}
 \end{frame}
 
 \begin{frame}{Running Example: Skatenight in Münster}
     
 \end{frame}
+
+\section{Definition einer Gruppe}
 
 
 \section*{Quellen}
