@@ -5,7 +5,7 @@
 % -----------------------------------------
 % modified by Jannes Bantje (j.bantje@wwu.de)
 % -----------------------------------------
-% 
+%
 % A beamer style file following the corporate design of the WWU
 % Muenster.
 %
@@ -14,7 +14,7 @@
 % Version: 1.6 (07.09.2012) Added institutelogo{,small} for institute logos
 % Version: 1.3 (01.03.2012) Make compatible with tikzlibrary "external"
 % Version: 1.2 (30.01.2012) Added option "english" for english WWU claim
-% Version: 1.1 (04.03.2011) Added new version of maketitle command for 
+% Version: 1.1 (04.03.2011) Added new version of maketitle command for
 %                           article, scrbook, etc classes in WWU style
 % Version: 1.0 (03.03.2011) Small adjustments for publication. Colors
 %                           are now globally defined and may be used in
@@ -39,16 +39,16 @@
 %           file, thats all!
 %           You may reset the main color by using COLORCODE
 %           as an option to the package, where COLORCODE is the
-%           name of the color (in one word, all in small letters) 
-%           as defined in the corporate design manual which is 
+%           name of the color (in one word, all in small letters)
+%           as defined in the corporate design manual which is
 %           to be found on the web:
 %           http://www.wwu.de/corporate-design/
 %           Furthermore, if you choose the option "wide", you will get
-%           presentations in 16:10. 
+%           presentations in 16:10.
 % Remark:   This uses the MetaNormal font, which is to be found as
-%           a latex font on the homepage of the WWU and should be available 
+%           a latex font on the homepage of the WWU and should be available
 %           for employees in the tex distribution on the WWU workstations.
-% Author:   Sven Kaulmann 
+% Author:   Sven Kaulmann
 % Maintainer: Martin Drohmann (mdrohmann at uni-muenster dot de)
 
 %% ========= Required Packages =============
@@ -63,11 +63,12 @@
 % font setup
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[T1]{fontenc}
+\RequirePackage{eulervm}
 \RequirePackage{textcomp}
 
 % use FiraSans as the standard non-serif font
 \RequirePackage{microtype}
-\RequirePackage[sfdefault,semibold]{FiraSans}
+\RequirePackage[sfdefault,semibold,scale=.95]{FiraSans}
 \RequirePackage[lining,scale=.9]{FiraMono}
 \DisableLigatures{encoding = *, family = tt* } % disable ligatures for mono-spacing font
 
@@ -92,7 +93,7 @@
 \definecolor{scrum-green}{rgb}{0,0.59,0.41}
 \definecolor{blackberry}{rgb}{0.53, 0.0, 0.25}
 
-% set pantone390 as the default main color 
+% set pantone390 as the default main color
 \definecolor{maincolor}{named}{pantone390}
 
 % set the main color
@@ -205,7 +206,7 @@
   %% wissen
   \node (wissen)  {
     \color{pantoneblack7}
-    \fontsize{3.8mm}{1mm}\selectfont 
+    \fontsize{3.8mm}{1mm}\selectfont
     % \usefont{T1}{fMt}{}{}
     \claimTextWissen
   };
@@ -213,9 +214,9 @@
   \node [circle,
     minimum width=0.9mm,
     inner sep=0,
-    fill=maincolor, 
-    yshift=-1mm, 
-    xshift=\claimPunktXShift, 
+    fill=maincolor,
+    yshift=-1mm,
+    xshift=\claimPunktXShift,
     right of=wissen] (Punkt) {};
   %% leben
   \node[
@@ -236,7 +237,7 @@
   %% Münster
   \node[
     xshift=\claimWWUXXShift,
-    right of=WWU] {\textcolor{pantoneblack7!50}{\fontsize{3.8mm}{1mm}\selectfont 
+    right of=WWU] {\textcolor{pantoneblack7!50}{\fontsize{3.8mm}{1mm}\selectfont
         % \usefont{T1}{fMt}{}{}
         M\"unster}};
 \end{tikzpicture}
@@ -307,7 +308,7 @@
   % Wilhelms-Universität
   \node[mytextnode,
   yshift=-11.3mm,
-  xshift=47.9mm] {
+  xshift=47.4mm] {
     \fontsize{4mm}{1mm}\selectfont
     % \usefont{T1}{fMt}{b}{sc}
 	\bfseries\scshape
@@ -423,7 +424,7 @@
 \setbeamertemplate{frametitle}{
   \fontsize{14pt}{1pt}
   \selectfont
-    \hskip-2.4mm 
+    \hskip-2.4mm
     \color{maincolor}
     \begin{minipage}[b][20pt]{\textwidth}
       %\textgreater\,
@@ -448,7 +449,7 @@
   }
   \hfill
   \ifthenelse{\equal{\secname}{}}{\insertshorttitle}{\secname}
-  % \insertshorttitle 
+  % \insertshorttitle
   \hskip2mm %title on the right
   \parbox[b]{10mm}{
     {\color{maincolor}\rule{0.8pt}{7mm} }
@@ -460,7 +461,7 @@
 \setbeamertemplate{title page}{
  \fontsize{11pt}{1pt}
   \selectfont
-  \setlength{\leftmargin}{0mm}% 
+  \setlength{\leftmargin}{0mm}%
   %% set the title and the author
   \setlength{\unitlength}{1mm}
   \begin{picture}(0,0)
@@ -481,7 +482,7 @@
     {
     \skipexternalization
     \begin{tikzpicture}[overlay,remember picture]
-      \node (authornode) [yshift=0.5cm, inner sep=0,text width=0.43\linewidth, text centered, anchor=base] at (current page.south) 
+      \node (authornode) [yshift=0.5cm, inner sep=0,text width=0.43\linewidth, text centered, anchor=base] at (current page.south)
      {\color{pantoneblack7}
        \fontsize{8pt}{14pt}
        \selectfont
@@ -500,7 +501,7 @@
   \begin{tikzpicture}[remember picture,overlay]
     %% the 1. rectangle
     \node [xshift=-0.1cm,yshift=-1.95cm] at (current page.north east)
-    [rectangle, 
+    [rectangle,
     inner sep=0mm,
     minimum height=0.45cm,
     minimum width=0.19cm,
@@ -509,7 +510,7 @@
 
     %% the 2. rectangle
     \node [xshift=-0.27cm,yshift=-2.49cm] at (current page.north east)
-    [rectangle, 
+    [rectangle,
     inner sep=0mm,
     minimum height=0.21cm,
     minimum width=0.53cm,
@@ -517,7 +518,7 @@
     ] {};
     %% the 3. rectangle
     \node [xshift=-0.415cm,yshift=-3.54cm] (thirdrec) at (current page.north east)
-    [rectangle, 
+    [rectangle,
     inner sep=0,
     minimum height=0.45cm,
     minimum width=0.85cm,
@@ -586,7 +587,7 @@
 \begin{titlepage}
  {
  \sf
- \setlength{\leftmargin}{0mm}% 
+ \setlength{\leftmargin}{0mm}%
  \setlength{\unitlength}{1mm}
  \skipexternalization
  \begin{tikzpicture}[remember picture,overlay]
@@ -611,7 +612,7 @@
     };
     %% the 1. rectangle
     \node [yshift=-5.2cm,anchor=north east] at (current page.north east)
-    [rectangle, 
+    [rectangle,
     inner sep=0mm,
     minimum height=1.4cm,
     minimum width=0.45cm,
@@ -619,7 +620,7 @@
     ] {};
     %% the 2. rectangle
     \node [yshift=-7.2cm,anchor=north east] at (current page.north east)
-    [rectangle, 
+    [rectangle,
     inner sep=0mm,
     minimum height=0.7cm,
     minimum width=1.25cm,
@@ -627,7 +628,7 @@
     ] {};
     %% the 3. rectangle
     \node [yshift=-10.5cm,anchor=north east] (thirdrec) at (current page.north east)
-    [rectangle, 
+    [rectangle,
     inner sep=0,
     minimum height=1.4cm,
     minimum width=2.2cm,
@@ -636,7 +637,7 @@
     %% the 4. rectangle
     \node [yshift=-13.2cm, anchor=north west] (fourthrec) at (current
     page.north west)
-    [rectangle, 
+    [rectangle,
     inner sep=0,
     minimum height=1.4cm,
     minimum width=16.450cm,
@@ -645,7 +646,7 @@
     %% the 5. rectangle
     \node [yshift=-17.2cm, anchor=north west] (fifthrec) at (current
     page.north west)
-    [rectangle, 
+    [rectangle,
     inner sep=0,
     minimum height=0.7cm,
     minimum width=21cm,
@@ -654,7 +655,7 @@
     %% the 6. rectangle
     \node [yshift=-23.1cm, anchor=north west] (sixthrec) at (current
     page.north west)
-    [rectangle, 
+    [rectangle,
     inner sep=0,
     minimum height=1.4cm,
     minimum width=21cm,
