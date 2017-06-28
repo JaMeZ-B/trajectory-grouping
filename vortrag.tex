@@ -601,6 +601,23 @@ euler-digits,
     \end{columns}
 \end{frame}
 
+\begin{frame}{Komplexität des Reeb-Graphen II.}
+    \begin{satz}[{\cite[Thm.~2]{buchin2015}}]
+    	Der Reeb-Graph $\mathcal{R}=(V,E)$ aus dem vorigen Lemma hat $\mathcal{O}(\tau n^2)$ Vertices und Kanten.
+    	Diese Schranke ist scharf im Worst-Case.
+    \end{satz}
+    \begin{beweis} \pause
+        Mit dem vorigen Lemma muss nur gezeigt werden, dass $\mathcal{R}$ $\mathcal{O}(\tau n^2)$ Vertices und Kanten hat.\pause
+        \begin{itemize}[<+->]
+            \item Während eines Zeitabschnitts $[t_i,t_{i+1}]$ bewegen sich zwei Entitäten $x,y$ auf Geraden.
+            \item Eine einfache Rechnung zeigt: Ihr Abstand wird währendessen durch eine konvexe Funktion beschrieben.
+            \item Also sind $x$ und $y$ nur innerhalb höchstens eines Intervalls $I \subseteq [t_i,t_{i+1}]$ direkt zusammenhängend.
+            \item Dies induziert höchstens zwei Knoten in $\mathcal{R}$ $\implies$ Für jedes Paar $x,y$ existieren $\mathcal{O}(\tau)$ Knoten in $\mathcal{R}$.
+        \end{itemize}
+        \onslide<7->{Damit folgt die Behauptung (wieder hat jeder Knoten konstanten Grad).}
+    \end{beweis}
+\end{frame}
+
 \section*{Quellen}
 \begin{frame}[allowframebreaks]{\secname}
 	\printbibliography
