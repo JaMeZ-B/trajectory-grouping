@@ -504,7 +504,7 @@ pantone312, 	% WWU-Design in hellblau
     \end{itemize}\pause
     Weitere Details: Siehe Ausarbeitung, \textcite{compTopo}, \textcite{MilnorMorse} \pause\vspace{1em}
     \begin{center}
-        \large Und nun zurück zu unseren Trajektorien \ldots   
+        \large Und nun zurück zu unseren Trajektorien \ldots
     \end{center}
 \end{frame}
 
@@ -522,23 +522,33 @@ pantone312, 	% WWU-Design in hellblau
 
 \begin{frame}[t]{Beispiel: Reeb-Graph von $\mathcal{M}$}
     \begin{center}
-        \uncover<1>{\includegraphics[width=1.05\textwidth]{Bilder/manifold.pdf}}
-        \mbox{ }\hfill {\small Quelle: \cite[Fig.~2]{buchin2015}}\\[1em]
-        $\mathcal{M}$ ist eine 3-dimensionale Mannigfaltigkeit mit Rand \textcolor{gray}{in den meisten Fällen}
+        \includegraphics[width=1.05\textwidth]{Bilder/manifold.pdf}
+        \mbox{ }\hfill {\small Quelle: \cite[Fig.~2]{buchin2015}}\pause
+        \begin{itemize}[<+->]
+            \item $\mathcal{M}$ ist eine 3-dimensionale Mannigfaltigkeit mit Rand \textcolor{gray}{in den meisten Fällen}
+            \item Der Reeb-Graph beschreibt wie sich die Komponenten mit der Zeit verändern
+        \end{itemize}
     \end{center}
 \end{frame}
 
 \begin{frame}{Knoten des Reeb-Graphen}
     \begin{columns}
         \column{.6\textwidth}
-        Wir nehmen im weiteren Verlauf stets folgendes an:
         \begin{itemize}
-            \item Die bekannten Positionen der Trajektorien sind alle an gleichen Zeitpunkten $t_0, \ldots ,t_\tau$.
-        	\item Keine drei Entitäten werden zur gleichen Zeit $\varepsilon$-(un)zusammenhängend.
+            \item Annahmen im weiteren Verlauf:
+            \begin{itemize}
+                \item Die bekannten Positionen der Trajektorien sind alle an gleichen Zeitpunkten $t_0, \ldots ,t_\tau$.
+            	\item Keine drei Entitäten werden zur gleichen Zeit $\varepsilon$-(un)zusammenhängend.
+            \end{itemize}
+            \item Damit können wir die Knoten des Reeb-Graphen in vier Typen unterteilen.
+            \item Jeder Kante lassen sich die zugehörigen Entitäten und Gruppen zuordnen.
+            \item Wenn $\delta>0$ oder $m>1$ reduziere $\mathcal{R}$.
         \end{itemize}
-        Damit können wir die Knoten des Reeb-Graphen in vier Typen unterteilen.
-        \column{.4\textwidth}
-        \centering
+        \begin{definition}
+            Die \bet{Trajectory Grouping Structure} zu $\mathcal{X}$ ist $\mathcal{R}$ zusammen mit einer Abbildung, die jeder Kante die zugehörige Menge maximaler Gruppen zuordnet.
+        \end{definition}
+        \column{.36\textwidth}
+        % \centering
         \begin{tabular}{lcc}
             \toprule
             Typ & In-Degree & Out-Degree \\
@@ -548,8 +558,8 @@ pantone312, 	% WWU-Design in hellblau
             Merge & 2 & 1\\
             Split & 1 & 2\\
             \bottomrule
-        \end{tabular}\\[2em]
-        \includegraphics[width=\textwidth]{Bilder/manifold_right.pdf}
+        \end{tabular}\\[4em]
+        \includegraphics[width=1.1\textwidth]{Bilder/manifold_right.pdf}
     \end{columns}
 \end{frame}
 
