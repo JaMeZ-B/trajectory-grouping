@@ -488,6 +488,41 @@ pantone312, 	% WWU-Design in hellblau
 		
 		\draw[-to] (0,-3.5) -- (0,-5) node[above, midway]{$f$};
 	\end{tikzpicture}
+    % \uncover<9->{Die grünen und orangenen Punkte sind die kritischen Werte von $f$.}
+\end{frame}
+
+\begin{frame}{Identifikation der Knoten im Reeb-Graph}
+    Wo kommen die Knoten im Reeb-Graph $\mathcal{R}(f)$ her? \pause
+    % Unter folgenden Zusatzannahmen können die Knoten in $\mathcal{R}(f)$ leicht charakterisiert werden
+    \begin{itemize}[<+->]
+        \item Unter Zusatzannahmen ist eine mathematisch zufriendenstellende Antwort möglich
+        \item Dafür muss $X$ eine Mannigfaltigkeit und $f \colon X \to \mathbb{R}$ eine sog. Morse-Funktion sein
+        \item Zentrale Erkenntnis der Morse-Theorie: Die Topologie von $X$ ändert sich nur an den \bet{kritischen Werten} von $f$!
+        \item Folglich können sich die Zusammenhangskomponenten der Niveaumengen auch nur an kritischen Werten ändern
+        \item[$\Rightarrow$] Bijektion zwischen Knoten in $\mathcal{R}(f)$ und kritischen Punkten von $f$
+    \end{itemize}\pause
+    Weitere Details: Siehe Ausarbeitung, \textcite{compTopo}, \textcite{MilnorMorse} \pause\vspace{1em}
+    \begin{center}
+        \large Und nun zurück zu unseren Trajektorien \ldots   
+    \end{center}
+\end{frame}
+
+\begin{frame}{Reeb-Graph zu einer Menge von Trajektorien}
+    Sei $\mathcal{X}$ wieder die Menge der Entitäten, von denen sich jede entlang einer Trajektorie aus $\tau$ Kanten bewegt.
+    \begin{itemize}
+        \item Extrusion der $\varepsilon$-Scheibe um $x$ über die Zeit liefert eine Teilmenge $\mathcal{M}_x \subseteq \mathbb{R}^3$ zusammengesetzt aus schiefen Zylindern
+        \item Vereinigen liefert Raum $\mathcal{M} \coloneqq \bigcup_{x \in \mathcal{X}} \mathcal{M}_x  \subseteq \mathbb{R}^3$, dessen Reeb-Graph wir betrachten wollen
+        \item Sei $H_t$ horizontale Ebene zum Zeitpunkt $t$, dann ist $\mathcal{M} \cap H_t$ Niveaumenge und Zusammenhangskomponenten von $\mathcal{M} \cap H_t$ entsprechen Komponenten im Sinne von Definition 1.
+    \end{itemize}
+    \begin{definition}
+        Wir bezeichnen mit $\mathcal{R}$ den Reeb-Graph zu $\mathcal{M}$ bezüglich der $z$-Höhenfunktion.
+    \end{definition}
+\end{frame}
+
+\begin{frame}{Beispiel: Reeb-Graph von $\mathcal{M}$}
+    \begin{center}
+        \includegraphics[width=1.05\textwidth]{Bilder/manifold.pdf}
+    \end{center}
 \end{frame}
 
 \section*{Quellen}
