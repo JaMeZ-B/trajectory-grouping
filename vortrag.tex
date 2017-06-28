@@ -607,7 +607,7 @@ euler-digits,
     	Diese Schranke ist scharf im Worst-Case.
     \end{satz}
     \begin{beweis} \pause
-        Mit dem vorigen Lemma muss nur gezeigt werden, dass $\mathcal{R}$ $\mathcal{O}(\tau n^2)$ Vertices und Kanten hat.\pause
+        Mit dem vorigen Lemma muss nur gezeigt werden, dass der Reeb-Graph $\mathcal{O}(\tau n^2)$ Vertices und Kanten hat.\pause
         \begin{itemize}[<+->]
             \item Während eines Zeitabschnitts $[t_i,t_{i+1}]$ bewegen sich zwei Entitäten $x,y$ auf Geraden.
             \item Eine einfache Rechnung zeigt: Ihr Abstand wird währendessen durch eine konvexe Funktion beschrieben.
@@ -616,6 +616,20 @@ euler-digits,
         \end{itemize}
         \onslide<7->{Damit folgt die Behauptung (wieder hat jeder Knoten konstanten Grad).}
     \end{beweis}
+\end{frame}
+
+\begin{frame}{Schranke für die Anzahl maximaler Gruppen}
+    \pause
+    \begin{itemize}[<+->]
+        \item Erste Idee: Jeder Knoten in $\mathcal{R}$ erzeugt höchstens so viele maximale Gruppen, wie er ausgehende Kanten hat.
+        \item Problem: Dass eine Gruppe maximal ist, kann man oft erst feststellen, wenn eine überlagernde maximale Gruppe endet
+        \item Man kann Beispiele konstruieren, bei denen an einem Split-Knoten sehr viele maximale Gruppen entdeckt werden, siehe \cite[S.~81, Fig.~4]{buchin2015}.
+        \item Mit etwas Aufwand lässt sich trotzdem folgendes beweisen:
+    \end{itemize}
+    \begin{satz}<6->[{\cite[Thm.~5]{buchin2015}}]
+    	Für eine Menge $\mathcal{X}$ von $n$ Entitäten, von denen sich jede enthalt einer Trajektorie von $\tau$ Kanten bewegt, gibt es $\mathcal{O}(\tau n^3)$ maximale Gruppen.
+    	Diese Schranke ist scharf im Worst-Case.
+    \end{satz}
 \end{frame}
 
 \section*{Quellen}
