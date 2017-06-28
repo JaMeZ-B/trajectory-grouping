@@ -60,7 +60,7 @@ euler-digits,
 
 %-- um Inkompatibilitaeten von quotes und polyglossia bzw. babel zu vermeiden
 \usepackage{tikz}
-\usetikzlibrary{calc,fadings,decorations.pathreplacing}
+\usetikzlibrary{calc,fadings,decorations.pathreplacing,arrows.meta,arrows}
 
 \tikzset{
   every picture/.append style={
@@ -399,6 +399,8 @@ euler-digits,
     \end{itemize}
 \end{frame}
 
+\section{Der Reeb-Graph}
+
 \begin{frame}{Reeb-Graph}
     Sei $X$ ein topologischer Raum und $f \colon X \to \mathbb{R}$ stetig, wobei wir uns $f$ als Höhenfunktion vorstellen.
     \begin{definition}<2->[Reeb-Graph]
@@ -544,7 +546,7 @@ euler-digits,
             \end{itemize}
             \item Damit können wir die Knoten des Reeb-Graphen in vier Typen unterteilen.
             \item Jeder Kante lassen sich die zugehörigen Entitäten und Gruppen zuordnen.
-            \item Wenn $\delta>0$ oder $m>1$ reduziere $\mathcal{R}$.
+            \item Wenn $\delta>0$ oder $m>1$ \enquote{reduziere} $\mathcal{R}$.
         \end{itemize}
         \begin{definition}
             Die \bet{Trajectory Grouping Structure} zu $\mathcal{X}$ ist $\mathcal{R}$ zusammen mit einer Abbildung, die jeder Kante die zugehörige Menge maximaler Gruppen zuordnet.
@@ -562,6 +564,40 @@ euler-digits,
             \bottomrule
         \end{tabular}\\[4em]
         \includegraphics[width=1.1\textwidth]{Bilder/manifold_right.pdf}
+    \end{columns}
+\end{frame}
+
+\section{Komplexität der Gruppierungsstruktur}
+\label{sec:Komplexität der Gruppierungsstruktur}
+
+\begin{frame}{Komplexität des Reeb-Graphen}
+    \begin{lemma}[{\cite[Lem.~1]{buchin2015}}]
+    	Der Reeb-Graph $\mathcal{R}$ einer Menge $\mathcal{X}$ von $n$ Entitäten, von denen sich jede auf einer Trajektorie mit $\tau$ Kanten bewegt, kann $\Omega(\tau n^2)$ Vertices und $\Omega(\tau n^2)$ Kanten haben.
+    \end{lemma}
+    \begin{columns}
+        \column[T]{.45\textwidth}
+        \centering
+        \uncover<4->{\begin{tikzpicture}[scale=.25,>=Latex,font=\small]
+			\draw[dashed] (-7,-7) node[left]{$t_i$} -- (7,7);
+			\draw[dashed] (0,-12) node[left]{$t_{i+1}$} -- ++ (14,14);
+			\foreach \x in {1,2,3,4,5}{
+				\draw[->,thick] (-\x,-\x) node[left]{$r_{\x}$} -- ++ (12,0);
+				\draw[->,thick] (\x,\x) node[above,xshift=-1pt]{$d_{\x}$} -- ++ (0,-12);
+				\filldraw[fill=DodgerBlue3] (-\x,-\x) circle[radius=.15] ++ (12,0)circle[radius=.15];
+				\filldraw[fill=Firebrick2] (\x,\x) circle[radius=.15] ++ (0,-12) circle[radius=.15];
+			}
+		\end{tikzpicture}}
+        \column[T]{.55\textwidth}
+        \begin{beweis}
+            \onslide<2->{O.B.d.A. sei $n$ gerade, wähle $\varepsilon=0$.}
+            \begin{itemize}
+                \item<3-> Teile die $n$ Entitäten in zwei gleichgroße Mengen
+                \item<4-> In jedem Intervall $[t_i,t_{i+1}]$ bewegen sich die Entitäten, wie in nebenstehender Skizze in konstanter Geschwindigkeit.
+                \item<5-> Während $[t_i,t_{i+1}]$ erzeugt jede Entität $d_j$ mit jeder Entität $r_\ell$ einen Knoten in $\mathcal{R}$
+                \item<6-> Pro Zeitabschnitt also $\mathcal{O}(n^2)$ viele Knoten.
+            \end{itemize}
+            \onslide<7->{Es folgt die Behauptung.}
+        \end{beweis}
     \end{columns}
 \end{frame}
 
