@@ -31,6 +31,7 @@ pantone312, 	% WWU-Design in hellblau
 
 \usepackage[ngerman]{babel}
 \usepackage{multirow}
+\usepackage{booktabs}
 \usepackage{xspace}
 
 % -- Aufzählungen, Anführungszeichen etc.
@@ -519,10 +520,37 @@ pantone312, 	% WWU-Design in hellblau
     \end{definition}
 \end{frame}
 
-\begin{frame}{Beispiel: Reeb-Graph von $\mathcal{M}$}
+\begin{frame}[t]{Beispiel: Reeb-Graph von $\mathcal{M}$}
     \begin{center}
-        \includegraphics[width=1.05\textwidth]{Bilder/manifold.pdf}
+        \uncover<1>{\includegraphics[width=1.05\textwidth]{Bilder/manifold.pdf}}
+        \mbox{ }\hfill {\small Quelle: \cite[Fig.~2]{buchin2015}}\\[1em]
+        $\mathcal{M}$ ist eine 3-dimensionale Mannigfaltigkeit mit Rand \textcolor{gray}{in den meisten Fällen}
     \end{center}
+\end{frame}
+
+\begin{frame}{Knoten des Reeb-Graphen}
+    \begin{columns}
+        \column{.6\textwidth}
+        Wir nehmen im weiteren Verlauf stets folgendes an:
+        \begin{itemize}
+            \item Die bekannten Positionen der Trajektorien sind alle an gleichen Zeitpunkten $t_0, \ldots ,t_\tau$.
+        	\item Keine drei Entitäten werden zur gleichen Zeit $\varepsilon$-(un)zusammenhängend.
+        \end{itemize}
+        Damit können wir die Knoten des Reeb-Graphen in vier Typen unterteilen.
+        \column{.4\textwidth}
+        \centering
+        \begin{tabular}{lcc}
+            \toprule
+            Typ & In-Degree & Out-Degree \\
+            \midrule
+            Start & 0 & 1\\
+            End & 1 & 0\\
+            Merge & 2 & 1\\
+            Split & 1 & 2\\
+            \bottomrule
+        \end{tabular}\\[2em]
+        \includegraphics[width=\textwidth]{Bilder/manifold_right.pdf}
+    \end{columns}
 \end{frame}
 
 \section*{Quellen}
