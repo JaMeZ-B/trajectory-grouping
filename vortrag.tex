@@ -635,6 +635,19 @@ euler-digits,
 \section{Berechung der Gruppierungsstruktur}
 \label{sec:Berechung der Gruppierungsstruktur}
 
+\begin{frame}{Berechung der Gruppierungsstruktur}
+    \begin{itemize}
+        \item Grundsätzliches Vorgehen: 
+        \begin{enumerate}
+            \item Berechne den Reeb-Graphen $\mathcal{R}$
+            \item Beschrifte die Kanten mit den maximalen Gruppen.
+        \end{enumerate}
+        \item Wie berechnet man den Reeb-Graphen? 
+        \item Eine Repräsentation von $\mathcal{M}$ will man auf keinen Fall generieren!
+        \item Betrachte dazu noch einmal das Beispiel von vorhin \ldots
+    \end{itemize}
+\end{frame}
+
 \begin{frame}{Erinnerung: Konstruktion des Reeb-Graphen zum Torus}
     \centering
     \begin{tikzpicture}[rotate=90, xscale=1, yscale=1, scale=0.7]
@@ -710,6 +723,19 @@ euler-digits,
 		
 		\draw[-to] (0,-3.5) -- (0,-5) node[above, midway]{$f$};
 	\end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Sweep zur Berechnung von $\mathcal{R}$}
+    \begin{itemize}
+        \item Frage: Wie diskretisiert man den Sweep? 
+        \item Anders formuliert: Wie sieht die Queue aus?
+        \item Im Allgemeinen ändern sich die Komponenten nicht zu den Zeitpunkten $t_0, \ldots, t_\tau$, sondern dazwischen.
+        \item Knoten im Reeb-Graph entsprechen kritischen Werten, also brauchen wir eigentlich nur ein Liste ebendieser
+        \item Da sich diese nicht so einfach berechen lassen: 
+    \end{itemize}
+    \begin{block}{Queue}
+        Liste aller \emph{Connect}- und \emph{Disconnect}-Ereignisse, d.h. sortierte Liste von Zeitpunkten an denen zwei Entitäten direkt (un)zusammenhängend werden.
+    \end{block}
 \end{frame}
 
 
