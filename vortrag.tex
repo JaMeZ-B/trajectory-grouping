@@ -637,12 +637,12 @@ euler-digits,
 
 \begin{frame}{Berechung der Gruppierungsstruktur}
     \begin{itemize}
-        \item Grundsätzliches Vorgehen: 
+        \item Grundsätzliches Vorgehen:
         \begin{enumerate}
             \item Berechne den Reeb-Graphen $\mathcal{R}$
             \item Beschrifte die Kanten mit den maximalen Gruppen.
         \end{enumerate}
-        \item Wie berechnet man den Reeb-Graphen? 
+        \item Wie berechnet man den Reeb-Graphen?
         \item Eine Repräsentation von $\mathcal{M}$ will man auf keinen Fall generieren!
         \item Betrachte dazu noch einmal das Beispiel von vorhin \ldots
     \end{itemize}
@@ -727,7 +727,7 @@ euler-digits,
 
 \begin{frame}{Sweep zur Berechnung von $\mathcal{R}$}
     \begin{itemize}
-        \item Frage: Wie diskretisiert man den Sweep? 
+        \item Frage: Wie diskretisiert man den Sweep?
         \item Anders formuliert: Wie sieht die Queue aus?
         \item Im Allgemeinen ändern sich die Komponenten nicht zu den Zeitpunkten $t_0, \ldots, t_\tau$, sondern dazwischen.
         \item Knoten im Reeb-Graph entsprechen kritischen Werten, also brauchen wir eigentlich nur ein Liste ebendieser
@@ -736,6 +736,17 @@ euler-digits,
     \begin{block}{Queue}
         Liste aller \emph{Connect}- und \emph{Disconnect}-Ereignisse, d.h. sortierte Liste von Zeitpunkten an denen zwei Entitäten direkt (un)zusammenhängend werden.
     \end{block}
+    \begin{itemize}
+        \item Diese Liste mit $\mathcal{O}(\tau n^2)$ Ereignisse lässt sich in $\mathcal{O}(\tau n^2 \log n)$ Zeit berechnen.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Die $xy$-Struktur}
+    \begin{itemize}
+        \item Gewichteter Graph $G=(\mathcal{X},Z)$, der die \enquote{direkt zusammenhängend}-Relation repräsentiert
+        \item Die Gewichte sind die Zeitpunkte, wann die Kante wieder entfernt wird.
+        \item Maximaler Spannbaum zur Verwaltung der Zusammenhangskomponenten von $G$.
+    \end{itemize}
 \end{frame}
 
 
