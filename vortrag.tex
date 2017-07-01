@@ -741,11 +741,46 @@ euler-digits,
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Die $xy$-Struktur}
+\begin{frame}%{Die $xy$-Struktur}
+    \begin{block}{$xy$-Struktur}
+        \begin{itemize}
+            \item Gewichteter Graph $G=(\mathcal{X},Z)$, der die \enquote{direkt zusammenhängend}-Relation repräsentiert
+            \item Die Gewichte sind die Zeitpunkte, wann die Kante wieder entfernt wird.
+            \item Maximaler Spannbaum $F$ zur Verwaltung der Zusammenhangskomponenten von $G$.
+        \end{itemize}
+    \end{block}
     \begin{itemize}
-        \item Gewichteter Graph $G=(\mathcal{X},Z)$, der die \enquote{direkt zusammenhängend}-Relation repräsentiert
-        \item Die Gewichte sind die Zeitpunkte, wann die Kante wieder entfernt wird.
-        \item Maximaler Spannbaum zur Verwaltung der Zusammenhangskomponenten von $G$.
+        \item Geschicktes Ausnutzen der Gewichte und geeignete Datenstruktur für $F$ ermöglicht Updates von $G$ und $F$ in $\mathcal{O}(\log n)$ Zeit, siehe Ausarbeitung bzw. \cites{buchin2015}{parsaReeb}.
+        \item Bei der Behandlung der Ereignisse muss überprüft werden, ob die Änderung des direkten Zusammenhangs zweier Entitäten auch die Komponenten ändern.
+    \end{itemize}
+    \begin{satz}[{\cite[Thm.~7]{buchin2015}}]
+    	Für eine Menge $\mathcal{X}$ von $n$ Entitäten, von denen sich jede entlang einer Trajektorie von $\tau$ Kanten bewegt, besteht der Reeb-Graph $\mathcal{R}$ aus $\mathcal{O}(\tau n^2)$ Knoten und Kanten und kann in $\mathcal{O}(\tau n^2 \log n)$ Zeit berechnet werden.
+    \end{satz}
+\end{frame}
+
+\begin{frame}{Berechnung der maximalen Gruppen}
+    \begin{itemize}
+        \item Idee: Betrachte $\mathcal{R}$, berechne aus den bereits beschrifteten eingehenden Kanten Beschriftungen mit maximalen Gruppen für die ausgehenden Kanten.
+        \item Traversiere $\mathcal{R}$ dazu in \bet{topologischer Reihenfolge}.
+        \item Problematisch ist dabei die effiziente Behandlung von Split-Knoten.
+        \item Lösung: Assoziiere zur jeder Kante in $\mathcal{R}$ einen Baum, um $\mathcal{R}$ nicht zusätzlich \enquote{rückwärts} traversieren zu müssen.
+        \item Details: Ausarbeitung und \textcite{buchin2015}
+    \end{itemize}
+    \begin{satz}[{\cite[Thm.~9]{buchin2015}}]
+        Alle maximalen Gruppen lassen sich in $\mathcal{O}(\tau n^3 + N)$ Zeit berechnen, wobei $N$ die Ausgabegröße ist.
+    \end{satz}
+\end{frame}
+
+\begin{frame}{Evaluation}
+    \begin{center}
+        \texttt{<Video hier>}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Ausblick}
+    \begin{itemize}
+        \item Modell lässt sich \enquote{robust} gegenüber kleinen Störungen machen, siehe \textcite[Sec.~4]{buchin2015}.
+        \item Die Autoren haben das Modell inzwischen weiter überarbeitet, siehe \textcite{grouping_improved}.
     \end{itemize}
 \end{frame}
 
