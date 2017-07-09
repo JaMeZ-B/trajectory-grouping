@@ -740,34 +740,34 @@ euler-digits,
 \end{frame}
 
 \begin{frame}{Sweep zur Berechnung von $\mathcal{R}$}
-    \begin{itemize}
+    \begin{itemize}[<+->]
         \item Frage: Wie diskretisiert man den Sweep?
         \item Anders formuliert: Wie sieht die Queue aus?
         \item Problem: Im Allgemeinen ändern sich die Komponenten nicht zu den Zeitpunkten $t_0, \ldots, t_\tau$, sondern dazwischen.
         \item Knoten im Reeb-Graph entsprechen kritischen Werten, also brauchen wir eigentlich nur ein Liste ebendieser
         \item Da sich diese nicht so einfach berechen lassen, nehmen wir folgende Obermenge:
     \end{itemize}
-    \begin{block}{Queue}
+    \begin{block}<6->{Queue}
         Liste aller \emph{Connect}- und \emph{Disconnect}-Ereignisse, d.h. sortierte Liste von Zeitpunkten an denen zwei Entitäten direkt (un)zusammenhängend werden.
     \end{block}
     \begin{itemize}
-        \item Diese Liste mit $\mathcal{O}(\tau n^2)$ Ereignisse lässt sich in $\mathcal{O}(\tau n^2 \log n)$ Zeit berechnen.
+        \item<7-> Diese Liste mit $\mathcal{O}(\tau n^2)$ Ereignisse lässt sich in $\mathcal{O}(\tau n^2 \log n)$ Zeit berechnen.
     \end{itemize}
 \end{frame}
 
 \begin{frame}%{Die $xy$-Struktur}
-    \begin{block}{$xy$-Struktur}
-        \begin{itemize}
+    \begin{block}{$xy$-Struktur}\pause
+        \begin{itemize}[<+->]
             \item Gewichteter Graph $G=(\mathcal{X},Z)$, der die \enquote{direkt zusammenhängend}-Relation repräsentiert
             \item Die Gewichte sind die Zeitpunkte, wann die Kante wieder entfernt wird.
             \item Maximaler Spannbaum $F$ zur Verwaltung der Zusammenhangskomponenten von $G$.
         \end{itemize}
     \end{block}
     \begin{itemize}
-        \item Geschicktes Ausnutzen der Gewichte und geeignete Datenstruktur für $F$ ermöglicht Updates von $G$ und $F$ in $\mathcal{O}(\log n)$ Zeit, siehe Ausarbeitung bzw. \cites{buchin2015}{parsaReeb}.
-        \item Bei der Behandlung der Ereignisse muss überprüft werden, ob die Änderung des direkten Zusammenhangs zweier Entitäten auch die Komponenten ändern.
+        \item<5-> Geschicktes Ausnutzen der Gewichte und geeignete Datenstruktur für $F$ ermöglicht Updates von $G$ und $F$ in $\mathcal{O}(\log n)$ Zeit, siehe Ausarbeitung bzw. \cites{buchin2015}{parsaReeb}.
+        \item<6-> Bei der Behandlung der Ereignisse muss überprüft werden, ob die Änderung des direkten Zusammenhangs zweier Entitäten auch die Komponenten ändern.
     \end{itemize}
-    \begin{satz}[{\cite[Thm.~7]{buchin2015}}]
+    \begin{satz}<7->[{\cite[Thm.~7]{buchin2015}}]
     	Für eine Menge $\mathcal{X}$ von $n$ Entitäten, von denen sich jede entlang einer Trajektorie von $\tau$ Kanten bewegt, besteht der Reeb-Graph $\mathcal{R}$ aus $\mathcal{O}(\tau n^2)$ Knoten und Kanten und kann in $\mathcal{O}(\tau n^2 \log n)$ Zeit berechnet werden.
     \end{satz}
 \end{frame}
