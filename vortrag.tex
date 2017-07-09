@@ -56,6 +56,11 @@ euler-digits,
   \end{frame}
 }
 
+\newcommand{\aheader}[2]{\action<#1-|alert@#1>{#2}}
+% first argument: slide number to appear from, second argument: content of header
+\newcommand{\hiddencell}[2]{\action<#1->{#2}}
+% first argument: slide number to appear from, second argument: content of cell
+
 \DeclareRobustCommand{\GrpStruktur}{Gruppierungs-Struktur\xspace}
 
 %-- um Inkompatibilitaeten von quotes und polyglossia bzw. babel zu vermeiden
@@ -228,21 +233,16 @@ euler-digits,
 
 \begin{frame}{Was zeichnet eine kollektive Bewegung aus?}
     \begin{tabular}{rp{8cm}c}
-        \bet{Räumliche Nähe} & Die einzelnen Entitäten dürfen nicht zu weit voneinander entfernt sein & $\varepsilon>0$\\
-        \bet{Mindestgröße} & In den meisten Anwendungsfällen sollten einzelne Entitäten keine Gruppe bilden & $m \in \mathbb{N}$ \\
-        \bet{Dauer} & eine kurze Begegnung von Entitäten sollte keine gemeinsame Bewegung sein & $\delta \ge 0$ \\
+        \hiddencell{2}{\bet{Räumliche Nähe}} & \hiddencell{2}{Die einzelnen Entitäten dürfen nicht zu weit voneinander entfernt sein} & \hiddencell{5}{$\varepsilon>0$}\\
+        \hiddencell{3}{\bet{Mindestgröße}} & \hiddencell{3}{In den meisten Anwendungsfällen sollten einzelne Entitäten keine Gruppe bilden} & \hiddencell{6}{$m \in \mathbb{N}$} \\
+        \hiddencell{4}{\bet{Dauer}} & \hiddencell{4}{eine kurze Begegnung von Entitäten sollte keine gemeinsame Bewegung sein} & \hiddencell{7}{$\delta \ge 0$} \\
     \end{tabular}
     \vspace{1em}
-    
-    % \begin{description}
-    %     \item[Räumliche Nähe] Die einzelnen Entitäten dürfen nicht zu weit voneinander entfernt sein
-    %     \item[Mindestgröße]
-    %     \item[Dauer] eine kurze Begegnung von Entitäten sollte keine gemeinsame Bewegung sein
-    % \end{description}
-    Variation der Parameter ermöglicht:
+
+    \onslide<8->{Variation der Parameter ermöglicht:}
     \begin{itemize}
-        \item Betonen bestimmter Aspekte (z.B. nur lange bestehende Gruppen durch großes $\delta$)
-        \item Steuerung des Detailgrades, d.h. der Anzahl der Gruppen
+        \item<9-> Betonen bestimmter Aspekte (z.B. nur lange bestehende Gruppen durch großes $\delta$)
+        \item<10-> Steuerung des Detailgrades, d.h. der Anzahl der Gruppen
     \end{itemize}
 \end{frame}
 
