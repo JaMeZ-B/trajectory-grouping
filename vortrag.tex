@@ -538,7 +538,7 @@ euler-digits,
 \begin{frame}{Knoten des Reeb-Graphen}
     \begin{columns}
         \column{.6\textwidth}
-        \begin{itemize}
+        \begin{itemize}[<+->]
             \item Annahmen im weiteren Verlauf:
             \begin{itemize}
                 \item Die bekannten Positionen der Trajektorien sind alle an gleichen Zeitpunkten $t_0, \ldots ,t_\tau$.
@@ -546,14 +546,14 @@ euler-digits,
             \end{itemize}
             \item Damit können wir die Knoten des Reeb-Graphen in vier Typen unterteilen.
             \item Jeder Kante lassen sich die zugehörigen Entitäten und Gruppen zuordnen.
-            \item Wenn $\delta>0$ oder $m>1$ \enquote{reduziere} $\mathcal{R}$.
+            \item Wenn $\delta>0$ oder $m>1$, so \enquote{reduziere} $\mathcal{R}$.
         \end{itemize}
-        \begin{definition}
+        \begin{definition}<7->
             Die \bet{Trajectory Grouping Structure} zu $\mathcal{X}$ ist $\mathcal{R}$ zusammen mit einer Abbildung, die jeder Kante die zugehörige Menge maximaler Gruppen zuordnet.
         \end{definition}
         \column{.36\textwidth}
         % \centering
-        \begin{tabular}{lcc}
+        \uncover<4->{\begin{tabular}{lcc}
             \toprule
             Typ & In-Degree & Out-Degree \\
             \midrule
@@ -562,8 +562,8 @@ euler-digits,
             Merge & 2 & 1\\
             Split & 1 & 2\\
             \bottomrule
-        \end{tabular}\\[4em]
-        \includegraphics[width=1.1\textwidth]{Bilder/manifold_right.pdf}
+        \end{tabular}}\\[4em]
+        \uncover<4->{\includegraphics[width=1.1\textwidth]{Bilder/manifold_right.pdf}}
     \end{columns}
 \end{frame}
 
@@ -577,16 +577,30 @@ euler-digits,
     \begin{columns}
         \column[T]{.45\textwidth}
         \centering
-        \uncover<4->{\begin{tikzpicture}[scale=.25,>=Latex,font=\small]
+        \begin{tikzpicture}[scale=.25,>=Latex,font=\small]
+            \only<3->{
 			\draw[dashed] (-7,-7) node[left]{$t_i$} -- (7,7);
 			\draw[dashed] (0,-12) node[left]{$t_{i+1}$} -- ++ (14,14);
+            }
 			\foreach \x in {1,2,3,4,5}{
+                \only<3>{
+                \path (-\x,-\x) node[left]{$r_{\x}$} ;
+                \path (\x,\x) node[above,xshift=-1pt]{$d_{\x}$} ;
+                }
+                \only<4->{
 				\draw[->,thick] (-\x,-\x) node[left]{$r_{\x}$} -- ++ (12,0);
 				\draw[->,thick] (\x,\x) node[above,xshift=-1pt]{$d_{\x}$} -- ++ (0,-12);
+                }
+                \only<3>{
+				\filldraw[fill=DodgerBlue3] (-\x,-\x) circle[radius=.15];
+				\filldraw[fill=Firebrick2] (\x,\x) circle[radius=.15];
+                }
+                \only<4->{
 				\filldraw[fill=DodgerBlue3] (-\x,-\x) circle[radius=.15] ++ (12,0)circle[radius=.15];
 				\filldraw[fill=Firebrick2] (\x,\x) circle[radius=.15] ++ (0,-12) circle[radius=.15];
+                }
 			}
-		\end{tikzpicture}}
+		\end{tikzpicture}
         \column[T]{.55\textwidth}
         \begin{beweis}
             \onslide<2->{O.B.d.A. sei $n$ gerade, wähle $\varepsilon=0$.}
@@ -704,7 +718,7 @@ euler-digits,
             \only<5>{\clip (-3.7,-10) rectangle (0,-14); }
             \only<6>{\clip (-3.7,-10) rectangle (1.9,-14); }
             \only<7>{\clip (-3.7,-10) rectangle (3.7,-14); }
-            \only<8>{\clip (-3.7,-10) rectangle (3.7,-14); }
+            % \only<8>{\clip (-3.7,-10) rectangle (3.7,-14); }
 			\draw[thick] (-3.5,-12) coordinate (a1) -- ++(1.75,0) coordinate (a2) .. controls +(80:1.5) and +(100:1.5) .. ++(3.5,0) coordinate (a3);
 			\draw[thick] (3.5,-12) coordinate (a4) -- ++(-1.75,0) .. controls +(-100:1.5) and +(-80:1.5) .. ++(-3.5,0);
             \foreach \x in {1,2,3,4}{
@@ -729,7 +743,7 @@ euler-digits,
     \begin{itemize}
         \item Frage: Wie diskretisiert man den Sweep?
         \item Anders formuliert: Wie sieht die Queue aus?
-        \item Im Allgemeinen ändern sich die Komponenten nicht zu den Zeitpunkten $t_0, \ldots, t_\tau$, sondern dazwischen.
+        \item Problem: Im Allgemeinen ändern sich die Komponenten nicht zu den Zeitpunkten $t_0, \ldots, t_\tau$, sondern dazwischen.
         \item Knoten im Reeb-Graph entsprechen kritischen Werten, also brauchen wir eigentlich nur ein Liste ebendieser
         \item Da sich diese nicht so einfach berechen lassen, nehmen wir folgende Obermenge:
     \end{itemize}
