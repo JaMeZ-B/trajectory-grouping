@@ -773,14 +773,14 @@ euler-digits,
 \end{frame}
 
 \begin{frame}{Berechnung der maximalen Gruppen}
-    \begin{itemize}
+    \begin{itemize}[<+->]
         \item Idee: Betrachte $\mathcal{R}$, berechne aus den bereits beschrifteten eingehenden Kanten Beschriftungen mit maximalen Gruppen für die ausgehenden Kanten.
         \item Traversiere $\mathcal{R}$ dazu in \bet{topologischer Reihenfolge}.
         \item Problematisch ist dabei die effiziente Behandlung von Split-Knoten.
         \item Lösung: Assoziiere zur jeder Kante in $\mathcal{R}$ einen Baum, um $\mathcal{R}$ nicht zusätzlich \enquote{rückwärts} traversieren zu müssen.
         \item Details: Ausarbeitung und \textcite{buchin2015}
     \end{itemize}
-    \begin{satz}[{\cite[Thm.~9]{buchin2015}}]
+    \begin{satz}<6->[{\cite[Thm.~9]{buchin2015}}]
         Alle maximalen Gruppen lassen sich in $\mathcal{O}(\tau n^3 + N)$ Zeit berechnen, wobei $N$ die Ausgabegröße ist.
     \end{satz}
 \end{frame}
