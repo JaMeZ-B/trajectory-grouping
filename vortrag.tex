@@ -48,14 +48,11 @@ euler-digits,
 
 % \usepackage{array}
 
-\AtBeginSection[]{
-  \begin{frame}
-  \vfill
-  \centering
-  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
-    \usebeamerfont{title}\insertsectionhead\par%
+\AtBeginSection[]{%
+  \begin{frame}[c]
+  \begin{beamercolorbox}[sep=12pt,shadow=true,center]{block title}
+    \usebeamerfont{title}\huge\bfseries\insertsectionhead\par%
   \end{beamercolorbox}
-  \vfill
   \end{frame}
 }
 
