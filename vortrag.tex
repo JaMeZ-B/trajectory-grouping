@@ -23,9 +23,10 @@ euler-digits,
 % \usepackage{newpxtext}
 % \usepackage{palatino}
 % \usepackage[bigdelims,varbb,varg]{newpxmath}
-
+\usepackage{fontawesome}
 \usepackage{wwustyle2}
 \usepackage{mathtools}
+\usepackage{siunitx}
 % \usepackage{newpxtext}
 % \usepackage[bigdelims,varbb,varg]{newpxmath}
 \usepackage{eulervm}
@@ -35,6 +36,8 @@ euler-digits,
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{xspace}
+
+\usepackage{multimedia}
 
 % -- Aufzählungen, Anführungszeichen etc.
 % \usepackage[shortlabels,inline]{enumitem}
@@ -786,9 +789,27 @@ euler-digits,
 \end{frame}
 
 \begin{frame}{Evaluation}
-    \begin{center}
-        \texttt{<Video hier>}
-    \end{center}
+    \begin{columns}[t]
+        \column{.4\textwidth}
+        \begin{itemize}
+            \item Positionsdaten von Hirschen, Elchen und Rindern im Starkey Wald in Oregon.
+            \item Zeitraum: 30 Tage
+            \item 126 Trajektorien mit je 1264 Positionen
+            \item Trackingdaten unvollständig $\to$ Sampling der Daten war nötig
+            \item $\varepsilon=\SI{200}{\metre}$, $\delta = \SI{4}{\hour}$, $m=\num{5}$
+        \end{itemize}
+        Man stellt fest, dass die Gruppierungen menschlicher Intuition entsprechen.\\[1.4em]
+        {\footnotesize\copyright Frank \textsc{Staals},\\[-1ex]
+        \url{https://fstaals.net/grouping/}}
+        \column{.6\textwidth}
+        \vspace{-5.3em}
+        \begin{center}%
+            \movie[autostart,loop]{\begin{tikzpicture}[yscale=.97,xscale=1.14]
+                \filldraw (0,0) rectangle (8,8);
+                \node[white] at (4,4) {\scalebox{2}{\Huge\faPlayCircle}};
+            \end{tikzpicture}}{videos/starkey.mov}%
+        \end{center}%
+    \end{columns}
 \end{frame}
 
 \begin{frame}{Ausblick}
