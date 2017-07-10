@@ -205,9 +205,13 @@ euler-digits,
 \end{frame}
 
 \begin{frame}{Ziel dieses Vortrags}
-    \begin{center}
-        \texttt{<Video hier>}
-    \end{center}
+    \vspace{-.6em}
+    \begin{center}%
+        \rule{.8cm}{0pt}\movie[autostart,loop]{\begin{tikzpicture}[yscale=.88,xscale=1.3]
+            \filldraw (0,0) rectangle (8,8);
+            \node[white] at (4,4) {\scalebox{2}{\Huge\faPlayCircle}};
+        \end{tikzpicture}}{videos/trajectories_400_818_3_100_4.mov}%
+    \end{center}%
 \end{frame}
 
 \begin{frame}{Tracectory Grouping Structure nach \textcite{buchin2015}}
@@ -804,7 +808,7 @@ euler-digits,
         \column{.58\textwidth}
         \vspace{-5.3em}
         \begin{flushright}%
-            \rule{.8cm}{0pt}\movie[autostart,loop]{\begin{tikzpicture}[yscale=.97,xscale=1]
+            \rule{.8cm}{0pt}\movie[autostart,loop]{\begin{tikzpicture}[yscale=1,xscale=1]
                 \filldraw (0,0) rectangle (8,8);
                 \node[white] at (4,4) {\scalebox{2}{\Huge\faPlayCircle}};
             \end{tikzpicture}}{videos/starkey.mov}%
