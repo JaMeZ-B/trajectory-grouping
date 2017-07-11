@@ -788,11 +788,11 @@ euler-digits,
         \item Idee: Betrachte $\mathcal{R}$, berechne aus den bereits beschrifteten eingehenden Kanten Beschriftungen mit maximalen Gruppen für die ausgehenden Kanten.
         \item Traversiere $\mathcal{R}$ dazu in \bet{topologischer Reihenfolge}.
         \item Problematisch ist dabei die effiziente Behandlung von Split-Knoten.
-        \item Lösung: Assoziiere zur jeder Kante in $\mathcal{R}$ einen Baum, um $\mathcal{R}$ nicht zusätzlich \enquote{rückwärts} traversieren zu müssen.
-        \item Details: Ausarbeitung und \textcite{buchin2015}
+        \item Lösung: Speichere die maximalen Gruppen zu jeder Kante in $\mathcal{R}$ in einen Baum, um $\mathcal{R}$ nicht zusätzlich \enquote{rückwärts} traversieren zu müssen.
+        \item Details: Siehe Ausarbeitung und \textcite{buchin2015}
     \end{itemize}
     \begin{satz}<6->[{\cite[Thm.~9]{buchin2015}}]
-        Alle maximalen Gruppen lassen sich in $\mathcal{O}(\tau n^3 + N)$ Zeit berechnen, wobei $N$ die Ausgabegröße ist.
+        Alle maximalen Gruppen lassen sich in $\mathcal{O}(\tau n^3 + N)$ Zeit berechnen, wobei $N \in \mathcal{O}(\tau n^4)$ die Ausgabegröße ist.
     \end{satz}
 \end{frame}
 
@@ -809,7 +809,7 @@ euler-digits,
         Man stellt fest, dass die Gruppierungen menschlicher Intuition entsprechen.\\[1.4em]
         {\footnotesize\copyright Frank \textsc{Staals},\\[-1ex]
         \url{https://fstaals.net/grouping/}}
-        \column[T]{.58\textwidth}
+        \column[T]{.56\textwidth}
         \vspace{-3em}
         \rule{1.5cm}{0pt}\includefilm{starkey}{.86\textwidth}%
     \end{columns}
