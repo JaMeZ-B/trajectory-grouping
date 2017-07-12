@@ -156,7 +156,7 @@ euler-digits,
 \setbeamertemplate{bibliography item}[text]
 
 \newcommand{\includefilm}[2]{%
-    \movie[autostart,loop]{\begin{tikzpicture}%
+    \movie[autostart]{\begin{tikzpicture}%
         \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=#2]{videos/#1.png}};
         \begin{scope}[x={(image.south east)},y={(image.north west)}]%
             \node[white] at (.5,.5) {\scalebox{2}{\Huge\faPlayCircle}};
@@ -201,7 +201,7 @@ euler-digits,
     Zahlreiche mögliche Anwendungsgebiete:\pause
     \begin{itemize}[<+->]
         \item Bewegungen von Tieren in der Verhaltensbiologie (Herden und Rudel)
-        \item Analyse von Verkehrsteilnehmern (z.B. zur Stau)
+        \item Analyse von Verkehrsteilnehmern
     \end{itemize}
     \onslide<5->{Bearbeitung der Problemstellung:}
     \begin{enumerate}
@@ -218,13 +218,13 @@ euler-digits,
     \end{center}%
 \end{frame}
 
-\begin{frame}{Tracectory Grouping Structure nach \textcite{buchin2015}}
+\begin{frame}{Trajectory Grouping Structure nach \textcite{buchin2015}}
     \begin{block}{Problemstellung}
         Gegeben eine Menge von $n$ Entitäten, die sich entlang gegebener Trajektorien bewegen, welche davon bewegen sich \enquote{zusammen}/in einer \enquote{Gruppe}?
     \end{block}
     Die \bet{Trajectory Grouping Structure} nach \textcite{buchin2015} zeichnet folgendes aus\pause
     \begin{itemize}[<+->]
-        \item Intuitive Definition einer Gruppe von Trajektorien
+        \item Intuitive Definition einer \bet{Gruppe} von Trajektorien
         \item Neben der Identifikation von Gruppen wird auch das \enquote{Leben} von Gruppen betrachtet (Start, End, Merge und Split)
         \item Das Modell erfasst diese Änderungen der Gruppen zu kontinuierlichen Zeitpunkten
         \item Diese Struktur lässt sich effizient berechnen
@@ -250,7 +250,7 @@ euler-digits,
     \begin{tabular}{rp{8cm}c}
         \hiddencell{2}{\bet{Räumliche Nähe} & Die einzelnen Entitäten dürfen nicht zu weit voneinander entfernt sein} & \hiddencell{5}{$\varepsilon \ge 0$}\\
         \hiddencell{3}{\bet{Mindestgröße} & In den meisten Anwendungsfällen sollten einzelne Entitäten keine Gruppe bilden} & \hiddencell{6}{$m \in \mathbb{N}$} \\
-        \hiddencell{4}{\bet{Dauer} & eine kurze Begegnung von Entitäten sollte keine gemeinsame Bewegung sein} & \hiddencell{7}{$\delta \ge 0$} \\
+        \hiddencell{4}{\bet{Dauer} & eine zu kurze Begegnung von Entitäten sollte keine gemeinsame Bewegung sein} & \hiddencell{7}{$\delta \ge 0$} \\
     \end{tabular}
     \vspace{1em}
 
@@ -325,8 +325,8 @@ euler-digits,
     		\item zu jeder Zeit $t \in I$ existiert eine Komponente $C \in \mathcal{C}(t)$ mit $G \subseteq C$.
     	\end{enumerate}
     	Das Intervall $I=[t_s,t_e]$ der Gruppe $G$ bezeichnen wir auch mit $I_G$.
-    	Eine Gruppe $H$ \bet{überlagert} $G$, falls $G \subseteq H$ und $I_G \subseteq I_H$ gilt.
-    	Falls kein solches $H$ existiert, so heißt $G$ \bet{maximal}.
+    	Eine Gruppe $H$ \bet{überlagert} $G$, falls $G \subseteq H$ \emph{und} $I_G \subseteq I_H$ gilt.
+    	Falls für jedes solches $H$ schon $G=H$ und $I_G=I_H$ folgt, so heißt $G$ \bet{maximal}.
     \end{definition}\pause
     Es liegen folgende Monotonieeigenschaften vor:\pause
     \begin{itemize}[<+->]
@@ -337,7 +337,7 @@ euler-digits,
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Beispiel maximaler Gruppen}
+\begin{frame}{Beispiel: Maximale Gruppen}
     \begin{center}
         \begin{tikzpicture}[scale=1.3]
     		% Zeitpunkte definieren
@@ -394,7 +394,7 @@ euler-digits,
     		}
     	\end{tikzpicture}
     \end{center}
-    Maximalen Gruppen: \pause
+    Maximale Gruppen: \pause
     $\set*{x_1,x_2}$ während $[t_0,t_3]$, \pause
     $\set*{x_1,x_2,x_3}$ während $[t_2,t_3]$, \pause
     $\set*{x_2,x_3}$ während $[t_2,t_5]$, \pause
@@ -411,6 +411,7 @@ euler-digits,
         \item Definition der sog. \bet{\GrpStruktur} bestehend aus der Menge der maximalen Gruppen und dem \bet{Reeb-Graphen}
         \item Komplexität der \GrpStruktur
         \item Berechnung der \GrpStruktur
+        \item Verbesserungen des Modells
     \end{itemize}
 \end{frame}
 
@@ -520,8 +521,8 @@ euler-digits,
         \item Zentrale Erkenntnis der Morse-Theorie: Die Topologie von $X$ ändert sich nur an den \bet{kritischen Werten} von $f$!
         \item Folglich können sich die Zusammenhangskomponenten der Niveaumengen auch nur an kritischen Werten ändern
         \item[$\Rightarrow$] Bijektion zwischen Knoten in $\mathcal{R}(f)$ und kritischen Punkten von $f$
-    \end{itemize}\pause
-    Weitere Details: Siehe Ausarbeitung, \textcite{compTopo}, \textcite{MilnorMorse} \pause\vspace{1em}
+    \end{itemize}
+    \onslide<7->{Weitere Details: Siehe Ausarbeitung, \textcite{compTopo}, \textcite{MilnorMorse} \pause\vspace{1em}}
     \begin{center}
         \large Und nun zurück zu unseren Trajektorien \ldots
     \end{center}
@@ -530,11 +531,11 @@ euler-digits,
 \begin{frame}{Reeb-Graph zu einer Menge von Trajektorien}
     Sei $\mathcal{X}$ wieder die Menge der Entitäten, von denen sich jede entlang einer Trajektorie aus $\tau$ Kanten bewegt.
     \begin{itemize}
-        \item Extrusion der $\varepsilon$-Scheibe um $x$ über die Zeit liefert eine Teilmenge $\mathcal{M}_x \subseteq \mathbb{R}^3$ zusammengesetzt aus schiefen Zylindern
-        \item Vereinigen liefert Raum $\mathcal{M} \coloneqq \bigcup_{x \in \mathcal{X}} \mathcal{M}_x  \subseteq \mathbb{R}^3$, dessen Reeb-Graph wir betrachten wollen
-        \item Sei $H_t$ horizontale Ebene zum Zeitpunkt $t$, dann ist $\mathcal{M} \cap H_t$ Niveaumenge und Zusammenhangskomponenten von $\mathcal{M} \cap H_t$ entsprechen Komponenten im Sinne von Definition 1.
+        \item<2-> Extrusion der $\varepsilon$-Scheibe um $x$ über die Zeit liefert eine Teilmenge $\mathcal{M}_x \subseteq \mathbb{R}^3$ zusammengesetzt aus schiefen Zylindern
+        \item<3-> Vereinigen liefert Raum $\mathcal{M} \coloneqq \bigcup_{x \in \mathcal{X}} \mathcal{M}_x  \subseteq \mathbb{R}^3$, dessen Reeb-Graph wir betrachten wollen
+        \item<4-> Sei $H_t$ horizontale Ebene zum Zeitpunkt $t$, dann ist $\mathcal{M} \cap H_t$ Niveaumenge und Zusammenhangskomponenten von $\mathcal{M} \cap H_t$ entsprechen Komponenten im Sinne von Definition 1.
     \end{itemize}
-    \begin{definition}
+    \begin{definition}<5->
         Wir bezeichnen mit $\mathcal{R}$ den Reeb-Graph zu $\mathcal{M}$ bezüglich der $z$-Höhenfunktion.
     \end{definition}
 \end{frame}
@@ -667,7 +668,7 @@ euler-digits,
 \label{sec:Berechung der Gruppierungsstruktur}
 
 \begin{frame}{Berechung der Gruppierungsstruktur}
-    \begin{itemize}
+    \begin{itemize}[<+->]
         \item Grundsätzliches Vorgehen:
         \begin{enumerate}
             \item Berechne den Reeb-Graphen $\mathcal{R}$
