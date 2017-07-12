@@ -762,14 +762,14 @@ euler-digits,
         \item Frage: Wie diskretisiert man den Sweep?
         \item Anders formuliert: Wie sieht die Queue aus?
         \item Problem: Im Allgemeinen ändern sich die Komponenten nicht zu den Zeitpunkten $t_0, \ldots, t_\tau$, sondern dazwischen.
-        \item Knoten im Reeb-Graph entsprechen kritischen Werten, also brauchen wir eigentlich nur ein Liste ebendieser
-        \item Da sich diese nicht so einfach berechen lassen, nehmen wir folgende Obermenge:
+        \item Knoten im Reeb-Graph entsprechen kritischen Werten, also braucht man eigentlich nur ein Liste ebendieser
+        \item Da sich die kritischen Werte nicht so einfach berechen lassen, nimmt man folgende Obermenge:
     \end{itemize}
     \begin{block}<6->{Queue}
         Liste aller \emph{Connect}- und \emph{Disconnect}-Ereignisse, d.h. sortierte Liste von Zeitpunkten an denen zwei Entitäten direkt (un)zusammenhängend werden.
     \end{block}
     \begin{itemize}
-        \item<7-> Diese Liste mit $\mathcal{O}(\tau n^2)$ Ereignisse lässt sich in $\mathcal{O}(\tau n^2 \log n)$ Zeit berechnen.
+        \item<7-> Diese Liste mit $\mathcal{O}(\tau n^2)$ Ereignissen lässt sich in $\mathcal{O}(\tau n^2 \log n)$ Zeit berechnen.
     \end{itemize}
 \end{frame}
 
@@ -777,12 +777,12 @@ euler-digits,
     \begin{block}{$xy$-Struktur}\pause
         \begin{itemize}[<+->]
             \item Gewichteter Graph $G=(\mathcal{X},Z)$, der die \enquote{direkt zusammenhängend}-Relation repräsentiert
-            \item Die Gewichte sind die Zeitpunkte, wann die Kante wieder entfernt wird.
+            \item Gewicht einer Kante ist der Zeitpunkt, and dem die Kante wieder entfernt wird.
             \item Maximaler Spannbaum $F$ zur Verwaltung der Zusammenhangskomponenten von $G$.
         \end{itemize}
     \end{block}
     \begin{itemize}
-        \item<5-> Geschicktes Ausnutzen der Gewichte und geeignete Datenstruktur für $F$ ermöglicht Updates von $G$ und $F$ in $\mathcal{O}(\log n)$ Zeit, siehe Ausarbeitung bzw. \cites{buchin2015}{parsaReeb}.
+        \item<5-> Geschicktes Ausnutzen der Gewichte und geeignete Datenstruktur für $F$ ermöglicht Updates von $G$ \emph{und} $F$ in $\mathcal{O}(\log n)$ Zeit, siehe Ausarbeitung bzw. \cites{buchin2015}{parsaReeb}.
         \item<6-> Bei der Behandlung der Ereignisse muss überprüft werden, ob die Änderung des direkten Zusammenhangs zweier Entitäten auch die Komponenten ändern.
     \end{itemize}
     \begin{satz}<7->[{\cite[Thm.~7]{buchin2015}}]
@@ -839,7 +839,7 @@ euler-digits,
                 \item<2-> Einführung eines neuen Parameters $\alpha$, der angibt wie lange eine Störung maximal bestehen darf
                 \item<3-> \bet{$\alpha$-approximativ direkt zusammenhängend zur Zeit $t$}: direkt zusammenhängend zu \emph{einer} Zeit $t' \in \benbrace*{t- \alpha/2, t + \alpha/2}$.
                 \item<4-> Berechung: Schrittweise Vereinfachung von $\mathcal{R}$ mit Hilfe einer Priority Queue.
-                \item<6-> Gesamtkosten erhöhen sich auf $\mathcal{O}(\tau n^3 \log n + N)$
+                \item<5-> Gesamtkosten erhöhen sich auf $\mathcal{O}(\tau n^3 \log n + N)$
             \end{itemize}
         \end{itemize}
         \column[T]{.3\textwidth}
@@ -849,10 +849,10 @@ euler-digits,
         {\footnotesize Quelle: \cite[Fig.~11]{buchin2015}}}
     \end{columns}
     \begin{itemize}
-        \item<7-> Das Modell wurde inzwischen weiter überarbeitet, siehe \textcite{grouping_improved}.
+        \item<6-> Das Modell wurde inzwischen weiter überarbeitet, siehe \textcite{grouping_improved}.
         \begin{itemize}
-            \item<8-> Bei einer sehr dichten Ansammlung von Entitäten entspricht dieses Modell besser der menschlichen Intuition
-            \item<9-> Algorithmen mit $\mathcal{O}(\tau^2 n^5 \log n)$ \emph{oder} $\mathcal{O}(\tau n^4 2^n)$.
+            \item<7-> Bei einer sehr dichten Ansammlung von Entitäten entspricht dieses Modell besser der menschlichen Intuition
+            \item<8-> Algorithmen mit $\mathcal{O}(\tau^2 n^5 \log n)$ \emph{oder} $\mathcal{O}(\tau n^4 2^n)$.
         \end{itemize}
     \end{itemize}
 \end{frame}
