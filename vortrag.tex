@@ -213,7 +213,8 @@ euler-digits,
 \begin{frame}{Ziel dieses Vortrags}
     \vspace{-.6em}
     \begin{center}%
-        \includefilm{trajectories_400_818_3_100_4}{1.19\textheight}%
+        \includefilm{trajectories_400_818_3_100_4}{1.19\textheight}\,
+        \rotatebox{90}{\tiny\copyright Frank \textsc{Staals}, \url{https://fstaals.net/grouping/}}
     \end{center}%
 \end{frame}
 
@@ -233,7 +234,10 @@ euler-digits,
 \end{frame}
 
 \begin{frame}{Beispiel: Skatenight in Münster}
-    \includegraphics[height=.73\textheight]{Bilder/skatenight2_2015_ml-20}
+    \begin{minipage}{\textwidth}
+        \includegraphics[height=.73\textheight]{Bilder/skatenight2_2015_ml-20}\,
+        \rotatebox{90}{\tiny Quelle: \url{allesmuenster.de}}
+    \end{minipage}
     \begin{itemize}
         \item<2-> Der gesamte Zug (2500--3000 Personen) \emph{ist} eine kollektive Bewegung
         \item<3-> Gruppierung lässt sich aber auch auf kleinerem Maßstab betrachten
@@ -537,8 +541,10 @@ euler-digits,
 
 \begin{frame}[t]{Beispiel: Reeb-Graph von $\mathcal{M}$}
     \begin{center}
-        \includegraphics[width=1.05\textwidth]{Bilder/manifold.pdf}
-        \mbox{ }\hfill {\small Quelle: \cite[Fig.~2]{buchin2015}}\pause
+        \includegraphics[width=1.05\textwidth]{Bilder/manifold.pdf}\\[-5pt]
+        \begin{minipage}{1\textwidth}
+            \raggedleft\small Quelle: \cite[Fig.~2]{buchin2015}
+        \end{minipage}\\[.5em] \pause
         \begin{itemize}[<+->]
             \item $\mathcal{M}$ ist eine 3-dimensionale Mannigfaltigkeit mit Rand \textcolor{gray}{in den meisten Fällen}
             \item Der Reeb-Graph beschreibt, wie sich die Komponenten mit der Zeit verändern
@@ -816,8 +822,10 @@ euler-digits,
 \end{frame}
 
 \begin{frame}{Evaluation: Variation der Parameter}
+    \vspace{-1em}
     \begin{center}
-        \rule{-1em}{0pt}\includefilm{side_by_side}{1.05\textwidth}%
+        \rule{-1em}{0pt}\includefilm{side_by_side}{1.05\textwidth}
+        {\footnotesize\copyright Frank \textsc{Staals}, \url{https://fstaals.net/grouping/}\hfill}
     \end{center}
 \end{frame}
 
@@ -836,7 +844,7 @@ euler-digits,
         \column[T]{.3\textwidth}
         \centering
         \vspace{1em}
-        \onslide<3->{\includegraphics[width=5.5cm]{Bilder/alpha-component}\\[1em]
+        \onslide<3->{\includegraphics[width=5.5cm]{Bilder/alpha-component}\\
         {\footnotesize Quelle: \cite[Fig.~11]{buchin2015}}}
     \end{columns}
     \begin{itemize}
