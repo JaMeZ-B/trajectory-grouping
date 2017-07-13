@@ -206,7 +206,7 @@ euler-digits,
     \onslide<5->{Bearbeitung der Problemstellung:}
     \begin{enumerate}
         \item<6-> Überführe menschliche Intuition einer kollektiven Bewegung in eine mathematische Definition
-        \item<7-> Finde einen Weg, die so definierten \enquote{Gruppen} effektiv zu berechnen
+        \item<7-> Finde einen Weg, die so definierten \enquote{Gruppen} effizient zu berechnen
     \end{enumerate}
 \end{frame}
 
@@ -264,7 +264,7 @@ euler-digits,
 \begin{frame}[t]{Räumliche Nähe}
     Sei $\mathcal{X}$ eine Menge von Entitäten, deren Ort innerhalb eines gewissen Zeitraums bekannt ist.\pause
     \begin{definition}<2->
-        Zwei Entitäten $x$ und $y$ sind zum Zeitpunkt $t$ \bet{direkt zusammenhängend}, falls sich ihre $\varepsilon$-Bälle überlappen.
+        Zwei Entitäten $x$ und $y$ sind zum Zeitpunkt $t$ \bet{direkt zusammenhängend}, falls sich ihre $\varepsilon$-Bälle zum Zeitpunkt $t$ überlappen.
         
         $x$ und $y$ heißen \bet{$\varepsilon$-zusammenhängend} zum Zeitpunkt $t$, falls eine Folge von Entitäten $x=x_0, \ldots,x_k=y$ existiert, sodass $x_i$ und $x_{i+1}$ direkt zusammenhängend sind.
     \end{definition}
@@ -404,8 +404,8 @@ euler-digits,
     % Wählt man stattdessen $\abs*{t_1-t_2}\ge \delta > \abs*{t_5 -t_4}$, so fällt die Gruppe $\set*{x_2,x_3,x_4}$ weg.
 \end{frame}
 
-\begin{frame}
-    Weiterer Verlauf:
+\begin{frame}[t]{Weiterer Verlauf}
+    \pause
     \begin{itemize}[<+->]
         \item Definition des sog. \bet{Reeb-Graphen}
         \item Definition der sog. \bet{\GrpStruktur} bestehend aus der Menge der maximalen Gruppen und dem \bet{Reeb-Graphen}
@@ -429,7 +429,7 @@ euler-digits,
     \begin{itemize}
         \item<3-> Auf jeder Höhe werden also die Zusammenhangskomponenten zu einem Punkt kollabiert
         \item<4-> Es ist \emph{a priori} überhaupt nicht klar, dass $\mathcal{R}(f)$ ein Graph ist!
-        \item<5-> Insbesondere ist nicht klar, welche Punkte aus $x$ auf Knoten in $\mathcal{R}(f)$ abgebildet werden.
+        \item<5-> Insbesondere ist nicht klar, welche Punkte aus $X$ auf Knoten in $\mathcal{R}(f)$ abgebildet werden.
         \item<6-> $\mathcal{R}(f)$ ist gerichtet (induziert durch die positive Richtung in $\mathbb{R}$)
     \end{itemize}
 \end{frame}
@@ -834,6 +834,7 @@ euler-digits,
     \begin{columns}[t]
         \column{.6\textwidth}
         \begin{itemize}
+            \item Das Modell lässt sich auch in höheren Dimensionen verwenden.
             \item Modell lässt sich \enquote{robust} gegenüber Störungen machen, siehe \textcite[Sec.~4]{buchin2015}.
             \begin{itemize}
                 \item<2-> Einführung eines neuen Parameters $\alpha$, der angibt wie lange eine Störung maximal bestehen darf
@@ -852,7 +853,7 @@ euler-digits,
         \item<6-> Das Modell wurde inzwischen weiter überarbeitet, siehe \textcite{grouping_improved}.
         \begin{itemize}
             \item<7-> Bei einer sehr dichten Ansammlung von Entitäten entspricht dieses Modell besser der menschlichen Intuition
-            \item<8-> Algorithmen mit $\mathcal{O}(\tau^2 n^5 \log n)$ \emph{oder} $\mathcal{O}(\tau n^4 2^n)$.
+            \item<8-> Algorithmen mit $\mathcal{O}(\tau^2 n^5 \log n)$ \emph{oder} $\mathcal{O}(\tau n^4 2^n)$ Laufzeit.
         \end{itemize}
     \end{itemize}
 \end{frame}
