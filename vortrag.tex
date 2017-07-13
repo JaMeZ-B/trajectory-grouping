@@ -411,6 +411,7 @@ euler-digits,
         \item Definition der sog. \bet{\GrpStruktur} bestehend aus der Menge der maximalen Gruppen und dem \bet{Reeb-Graphen}
         \item Komplexität der \GrpStruktur
         \item Berechnung der \GrpStruktur
+        \item Evaluation
         \item Verbesserungen des Modells
     \end{itemize}
 \end{frame}
@@ -803,6 +804,8 @@ euler-digits,
     \end{satz}
 \end{frame}
 
+\section{Evaluation und Ausblick}
+
 \begin{frame}{Evaluation}
     \begin{columns}[t]
         \column{.4\textwidth}
@@ -834,26 +837,26 @@ euler-digits,
     \begin{columns}[t]
         \column{.6\textwidth}
         \begin{itemize}
-            \item Das Modell lässt sich auch in höheren Dimensionen verwenden.
-            \item Modell lässt sich \enquote{robust} gegenüber Störungen machen, siehe \textcite[Sec.~4]{buchin2015}.
+            \item<1-> Das Modell lässt sich auch in höheren Dimensionen verwenden.
+            \item<2-> Modell lässt sich \enquote{robust} gegenüber Störungen machen, siehe \textcite[Sec.~4]{buchin2015}.
             \begin{itemize}
-                \item<2-> Einführung eines neuen Parameters $\alpha$, der angibt wie lange eine Störung maximal bestehen darf
-                \item<3-> \bet{$\alpha$-approximativ direkt zusammenhängend zur Zeit $t$}: direkt zusammenhängend zu \emph{einer} Zeit $t' \in \benbrace*{t- \alpha/2, t + \alpha/2}$.
-                \item<4-> Berechung: Schrittweise Vereinfachung von $\mathcal{R}$ mit Hilfe einer Priority Queue.
-                \item<5-> Gesamtkosten erhöhen sich auf $\mathcal{O}(\tau n^3 \log n + N)$
+                \item<3-> Einführung eines neuen Parameters $\alpha$, der angibt wie lange eine Störung maximal bestehen darf
+                \item<4-> \bet{$\alpha$-approximativ direkt zusammenhängend zur Zeit $t$}: direkt zusammenhängend zu \emph{einer} Zeit $t' \in \benbrace*{t- \alpha/2, t + \alpha/2}$.
+                \item<5-> Berechung: Schrittweise Vereinfachung von $\mathcal{R}$ mit Hilfe einer Priority Queue.
+                \item<6-> Gesamtkosten erhöhen sich auf $\mathcal{O}(\tau n^3 \log n + N)$
             \end{itemize}
         \end{itemize}
         \column[T]{.3\textwidth}
         \centering
         \vspace{1em}
-        \onslide<3->{\includegraphics[width=5.5cm]{Bilder/alpha-component}\\
+        \onslide<4->{\includegraphics[width=5.5cm]{Bilder/alpha-component}\\
         {\footnotesize Quelle: \cite[Fig.~11]{buchin2015}}}
     \end{columns}
     \begin{itemize}
-        \item<6-> Das Modell wurde inzwischen weiter überarbeitet, siehe \textcite{grouping_improved}.
+        \item<7-> Das Modell wurde inzwischen weiter überarbeitet, siehe \textcite{grouping_improved}.
         \begin{itemize}
-            \item<7-> Bei einer sehr dichten Ansammlung von Entitäten entspricht dieses Modell besser der menschlichen Intuition
-            \item<8-> Algorithmen mit $\mathcal{O}(\tau^2 n^5 \log n)$ \emph{oder} $\mathcal{O}(\tau n^4 2^n)$ Laufzeit.
+            \item<8-> Bei einer sehr dichten Ansammlung von Entitäten entspricht dieses Modell besser der menschlichen Intuition
+            \item<9-> Algorithmen mit $\mathcal{O}(\tau^2 n^5 \log n)$ \emph{oder} $\mathcal{O}(\tau n^4 2^n)$ Laufzeit.
         \end{itemize}
     \end{itemize}
 \end{frame}
