@@ -23,16 +23,20 @@ Die Operationen, die wir benötigen, sind in \cref{tbl:operationenST} aufgeführ
 Eine Datenstruktur, die alle diese Operationen in $\mathcal{O}(\log n)$ Zeit, wobei $n$ die Gesamtzahl der Knoten ist, realisiert, ist unter anderem ein \Index{ST-Baum} nach \textcite{dynamictrees}.
 Das im Folgenden geschilderte Vorgehen von \textcite{buchin2015} zur Berechnung des Reeb-Graphen $\mathcal{R}$ basiert auf einem Algorithmus von \textcite{parsaReeb}, der diese ST-Bäume benutzt.
 
+\begin{figure}[hbt]
+	\Centering
+	\includegraphics[width=.9\textwidth]{Bilder/manifold.pdf}
+\end{figure}
+
 \section{Berechnung des Reeb-Graphen} % (fold)
 \label{sec:berechnung_reeb}
-\todo[inline]{Bild zum Reeb-Graphen erneut einfügen oder referenzieren}
 Wir wollen den Reeb-Graphen $\mathcal{R}$ des dreidimensionalen Raumes $\mathcal{M}$ aus \cref{sec:trajek_reeb} bezüglich der Höhenfunktion berechnen -- die \enquote{Höhe} ist hier aber die Zeit!
 Folglich ist es natürlich, die Berechnung mittels eines Sweep-Algorithmus zu realisieren.
 Unsere Sweep-Ebene ist also die $xy$-Ebene, die $\mathcal{M}$ von unten nach oben -- also chronologisch -- überstreicht.
 
 In \cref{sec:background_reeb} über die differentialtopologischen Hintergründe haben wir bereits gesehen, dass sich der Reeb-Graph nur an den kritischen Werten verändert.\footnote{unter der Annahme, dass $\mathcal{M}$ eine glatte Mannigfaltigkeit ist, sodass kritische Werte überhaupt definiert sind}
 Dies ermöglicht uns die notwendige Diskretisierung des Sweeps: Ein Knoten im Reeb-Graph kann nur auftreten, wenn zwei Komponenten verschmelzen (Merge), eine Komponente zerteilt wird (Split) oder eine Komponente beginnt oder endet, was alles notwendigerweise dadurch verursacht wird, dass zwei Entitäten direkt zusammenhängend werden (\emph{Connect}-Ereignis) oder es nicht länger sind (\emph{Disconnect}-Ereignis).\footnote{oder, dass das Ende des Beobachtungszeitraumes erreicht ist}
-Definieren wir unsere Ereignisqueue bzw. $z$-Struktur also als die Folge aller Zeitpunkte zu denen zwei Entitäten genau den Abstand $2 \varepsilon$ haben, so enthält die Queue auf jeden Fall alle Zeitpunkte, an denen $\mathcal{R}$ aktualisiert werden muss.
+Definieren wir unsere Queue bzw. $z$-Struktur also als die Folge aller Zeitpunkte zu denen zwei Entitäten genau den Abstand $2 \varepsilon$ haben, so enthält die Queue auf jeden Fall alle Zeitpunkte, an denen $\mathcal{R}$ aktualisiert werden muss.
 
 Tatsächlich filtern wir schon bei der Berechnung dieser Queue Zeitpunkte heraus, die nicht \enquote{kritisch} sein können, das heißt die keine kritischen Werte sind.
 Außerdem teilen wir die Zeitpunkte in diesem Arbeitsschritt bereits in \emph{Connect}- und \emph{Disconnect}-Ereignisse auf.
@@ -53,11 +57,11 @@ Es lässt sich in $\mathcal{O}(1)$ Zeit bestimmen, welcher der Fälle eintritt, 
 Im ersten Fall fügen wir die $k$ Zeitpunkte in die Liste ein, im zweiten nur die Randpunkte $t_u$ und $t_{u+1}$; in beiden Fällen fügen wir die Zeitpunkte nicht ein, falls dadurch die Eindeutigkeit verletzt werden würde (asymptotisch kein zusätzlicher Aufwand, da nur das zuletzt eingefügte Element betrachtet werden muss).
 
 In einem zweiten Schritt bereinigen wir $L_{xy}$ nun wie folgt: Wir iterieren über $L_{xy}$ und berechnen dabei für jeden Eintrag $t_i$, ob $x$ und $y$ im offenen Intervall $(t_i,t_{i+1})$ direkt zusammenhängend sind (Abstand beim Mittelpunkt bestimmen).
-Finden wir dadurch Zeitpunkte in $L_{xy}$, an denen sich der Zusammenhang von $x$ und $y$ nicht ändert, so entfernen wir diese aus der $L_{x,y}$.\todo{Zeichnung, dass der Fall tatsächlich eintreten kann}
+Finden wir dadurch Zeitpunkte in $L_{xy}$, an denen sich der Zusammenhang von $x$ und $y$ nicht ändert, so entfernen wir diese aus der $L_{x,y}$.\footnote{Dies kann passieren, wenn ein solcher Zeitpunkt mit einem der Zeitstempel der Trajektorien übereinstimmt}
 Die Verbleibenden beschriften wir entsprechend mit \emph{Connect} oder \emph{Disconnect}.
 
 $L_{xy}$ besteht aus $\mathcal{O}(\tau)$ Zeitpunkten und alle obigen Berechnungen kosten zusammen $\Theta(\tau)$ Zeit.
-Berechnen wir diese Listen für alle $x,y$ und vereinigen sie unter Benutzung eines Min-Heaps zu einer Liste $L$, so entstehen also insgesamt $\mathcal{O}(\tau n^2 \log n^2) = \mathcal{O}(\tau n^2 \log n)$ Kosten und $L$ enthält $\mathcal{O}(\tau n^2)$ Zeitpunkte.
+Berechnen wir diese Listen für alle $x,y$ und vereinigen sie unter Benutzung eines Min-Heaps\todo{klären} zu einer Liste $L$, so entstehen also insgesamt $\mathcal{O}(\tau n^2 \log n^2) = \mathcal{O}(\tau n^2 \log n)$ Kosten und $L$ enthält $\mathcal{O}(\tau n^2)$ Zeitpunkte.
 Beim Zusammenführen der Listen $L_{xy}$ speichern wir zu jedem \emph{Connect}-Ereignis einen Zeiger auf das nächste \emph{Disconnect}-Ereignis der gleichen Entitäten, sofern dies existiert.
 Falls dies nicht existiert, soll der Zeiger auf $t_\tau$, also das Ende des betrachteten Zeitraumes, zeigen.
 Dies ist asymptotisch betrachtet kein zusätzlicher Aufwand.
