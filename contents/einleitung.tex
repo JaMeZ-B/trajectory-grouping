@@ -18,8 +18,18 @@ Diese drei Parameter ermöglichen es uns, Gruppierungen in verschiedenen Größe
 
 Das hier vorgestellte Modell leistet aber noch deutlich mehr als die Identifikation der Gruppen, den es beinhaltet auch die Veränderungen der \GrpStruktur über den betrachteten Zeitraum.
 Insbesondere werden neben \emph{Start}- und \emph{End}-Ereignissen auch \emph{Merge}- und \emph{Split}-Ereignisse beachtet, das heißt es lässt sich eine detaillierte Historie der \GrpStruktur erstellen.
-Diese Eigenschaft des hier vorgestellten Modells ist einer der Aspekte, aufgrund derer dieses Modell anderen Modellen zur Gruppierung von Trajektorien überlegen ist; dazu mehr in \cref{cha:related_work}.\todo{Liste der Vorteile aus Vortrag}
-% unterscheidet es von anderen Modellen zur Gruppierung von Trajektorien
+Darüber hinaus zeichnet sich das Modell durch folgende Aspekte aus:
+\begin{itemize}
+	\item Die Definition einer \enquote{Gruppe} ist intuitiv, siehe \cref{cha:def_gruppe}.
+	\item Die gerade erwähnten Änderungen der Gruppen werden zu kontinuierlichen Zeitpunkten erfasst, das heißt sie werden auch erkannt, wenn sie \emph{nicht} an den durch die Trajektorien gegebenen Zeitpunkten auftreten (was auch im Allgemeinen der Fall ist).
+	\item Die Berechnung ist -- in Relation zur Ausgabegröße -- effizient, siehe \cref{cha:berechnung}.
+	\item Die oben erwähnte Variation der Parameter ermöglicht es, Gruppierung auf unterschiedlichen Maßstäben zu untersuchen.
+	\item Das Modell kann \enquote{robust} gegenüber Störungen gemacht werden.
+\end{itemize}
+Diese Eigenschaften des hier vorgestellten Modells sorgen dafür, dass es einigen anderen Modellen zur Gruppierung von Trajektorien überlegen ist. 
+Insbesondere das Einbeziehen von Merge- und Split-Ereignissen \emph{und} die kontinuierlichen Zeitpunkte sorgen laut \textcite{buchin2015} dafür, dass das Modell zum Beispiel dem Ansatz mit \emph{flocks} von \textcite{benkert_flocks} überlegen ist, den wir im vorherigen Vortrag kennengelernt haben.
 
-Bevor wir im folgenden \cref{cha:def_gruppe} Gruppen mathematisch präzise definieren, soll hier noch das Zusammenspiel der Parameter an möglichen Anwendungsgebieten demonstriert werden.
-\todo[inline]{mögliche Anwendungsgebiete: Skatenight}
+Wir werden nun im folgenden \cref{cha:def_gruppe} Gruppen mathematisch präzise definieren, bevor wir in \cref{cha:reeb_graphen} dann nach einen kurzen Ausflug in die Differentialtopologie den sogenannten Reeb-Graph definieren können, der neben den Gruppen der Hauptbestandteil der \enquote{\GrpStruktur} wird.
+Außerdem wird in diesem Kapitel die Komplexität der \GrpStruktur bestimmt.
+In \cref{cha:berechnung} wird daraufhin die Berechnung der \GrpStruktur detailliert erläutert; neben dem Ausflug in die Differentialtopologie ist dies der Abschnitt, der sich am meisten von dem vorliegenden Artikel von \textcite{buchin2015} unterscheidet.
+Im letzten Kapitel findet eine kurze Evaluation des Modells statt und es werden noch einige Verbesserungen des vorgestellten Modells erläutert ohne dabei aber ins Detail zu gehen. 
