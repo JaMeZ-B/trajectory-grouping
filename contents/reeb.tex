@@ -16,7 +16,7 @@ Um den \Index{Reeb-Graph} von $f$ zu erhalten, benutzen wir nun die Zusammenhang
 	\]
 	Die Elemente von $\mathcal{R}(f)$ bezeichnen wir als \Index{Konturen} von $f$.
 \end{definition}
-Wir erhalten eine eindeutig bestimme Abbildung $h \colon \mathcal{R}(f) \to \mathbb{R}$, sodass das folgende Diagramm kommutiert.
+Wir erhalten eine eindeutig bestimmte Abbildung $h \colon \mathcal{R}(f) \to \mathbb{R}$, sodass das folgende Diagramm kommutiert.
 Alle Abbildungen sind aufgrund der universellen Eigenschaft der Quotiententopologie stetig.
 \[
 	\begin{tikzcd}[sep=large]
@@ -25,8 +25,12 @@ Alle Abbildungen sind aufgrund der universellen Eigenschaft der Quotiententopolo
 	\end{tikzcd}
 \]
 Die Quotientenabbildung $q$ bildet einen Punkt aus $X$ auf die zugehörige Kontur in $\mathcal{R}(f)$ ab.
-$\mathcal{R}(f)$ ist tatsächlich ein Graph, da jede Niveaumenge unter $q$ auf eine diskrete Menge abgebildet wird.\todo{genauer bzw. expliziter}
+% $\mathcal{R}(f)$ ist tatsächlich ein Graph, da jede Niveaumenge unter $q$ auf eine diskrete Menge abgebildet wird.\todo{genauer bzw. expliziter}
+
+Der Reeb-Graph $\mathcal{R}(f)$ beschreibt nun die Evolution der Konturen (wenn man $\mathbb{R}$ als Zeit interpretiert) und damit wird auch klar, dass $\mathcal{R}(f)$ tatsächlich ein Graph ist, da das Urbild von $a \in \mathbb{R}$ unter $h$ stets eine diskrete Menge von Konturen ist und man $\mathcal{R}(f)$ erhält indem man diese Konturen \enquote{verfolgt}, wobei sie sich sich vereinigen oder aufsplitten können.
+Damit muss $\mathcal{R}(f)$ die Struktur eines $1$-dimensionalen CW-Komplexes haben und ist damit insbesondere ein Graph.\footnote{dieser kann allerdings überabzählbar unendlich sein, sofern man keine weiteren Annahmen an $X$ und $f$ trifft}
 Betrachtet man die positive Richtung in $\mathbb{R}$, so wird $\mathcal{R}(f)$ auf kanonische Weise zu einem gerichteten Graphen.
+Ein Beispiel für einen Reeb-Graphen findet man in \cref{fig:torus_reeb}.
 
 \section{Differentialtopologische Hintergründe zum Reeb-Graphen} % (fold)
 \label{sec:background_reeb}
@@ -114,35 +118,41 @@ Ein Punkt $u \in \mathcal{R}(f)$ ist also ein Knoten, wenn $q^{-1}(u)$ einen kri
 \label{sec:trajek_reeb}
 Sei $\mathcal{X}$ wieder eine Menge von Entitäten, die sich entlang bekannter Trajektorien bewegen, die jeweils aus $\tau$ Kanten bestehen.
 Indem wir die $z$-Achse des $\mathbb{R}^3$ als Zeit auffassen erhalten wir für jede Entität $x$ durch Extrusion der $\varepsilon$-Scheibe entlang eines Segments der Trajektorie einen schiefen Zylinder im $\mathbb{R}^3$.
-Die Vereinigung der $\tau$ Zylinder liefert uns dann einen (ausgefüllten) \enquote{Schlauch} pro Entität, welche wir wiederum alle zu einem Teilraum\todo{Mfkt?} $\mathcal{M} \subset \mathbb{R}^3$ vereinigen (siehe \cref{fig:tubes}).
+Die Vereinigung der $\tau$ Zylinder liefert uns dann einen (ausgefüllten) \enquote{Schlauch} pro Entität, welche wir wiederum alle zu einem Teilraum $\mathcal{M} \subset \mathbb{R}^3$ vereinigen (siehe \cref{fig:tubes}).
 Dies ist der Raum, dessen Reeb-Graph wir betrachten wollen.
 
 \begin{figure}
 	\Centering
 	\subfloat[Der Raum $\mathcal{M}$]{
-	\missingfigure[figwidth=.45\textwidth]{Diese lustigen Tuben }\label{fig:tubes}
+	\includegraphics[width=.45\textwidth]{Bilder/manifold_left.pdf}\label{fig:tubes}
 	}
 	\hspace{1em}
 	\subfloat[Reeb-Graph zu $\mathcal{M}$]{
-	\missingfigure[figwidth=.45\textwidth]{Reeb-Graph}}\label{fig:reeb_graph}
-	\caption{Der Raum $\mathcal{M}$ für die Entitäten $x_1, \ldots ,x_k$}
+	\includegraphics[width=.45\textwidth]{Bilder/manifold_right.pdf}\label{fig:reeb_graph}
+	}
+	\caption{Der Raum $\mathcal{M}$ sowie der zugehörige Reeb-Graph $\mathcal{R}$ am Beispiel von sieben Entitäten mit je drei bekannten Positionen.}
 \end{figure}
 
 Bezeichnet man nun mit $H_t$ die horizontale Ebene bei der Höhe $t$, so sind die Mengen $\mathcal{M} \cap H_t$ offensichtlich die Niveaumengen.
 Eine Zusammenhangskomponente von $\mathcal{M} \cap H_t$ entspricht genau einer Komponente im Sinne von \cref{cha:def_gruppe}, also einer maximalen Menge $\varepsilon$-zusammenhängender Entitäten zum Zeitpunkt $t$.
+
 Der Einfachheit halber nehmen wir im weiteren Verlauf folgendes an:
 \begin{itemize}
 	\item Die bekannten Positionen der Trajektorien sind alle an gleichen Zeitpunkten $t_0, \ldots ,t_\tau$.
-	\item Keine drei Entitäten werden zur gleichen Zeit $\varepsilon$-(un)zusammenhängend.\todo{begründen}
+	\item Keine drei Entitäten werden zur gleichen Zeit $\varepsilon$-(un)zusammenhängend.
 \end{itemize}
-Es wird sich zeigen, dass diese Annahmen ohne Beschränkung der Allgemeinheit getroffen werden können.
+Diese Annahmen können ohne Beschränkung der Allgemeinheit getroffen werden:
 Die erste Annahme lässt sich durch das Zerteilen einzelner Segmente der Trajektorien zu geeigneten Zeitpunkten auch leicht künstlich herstellen; in vielen Anwendunsfällen aber wird die Datenerhebung für alle Entitäten direkt zur gleichen Zeit stattfinden.
+Die zweite Annahme ist zum einen in nicht explizit als Gegenbeispiel konstruierten Daten sehr unwahrscheinlich und lässt sich notfalls durch weitere Spezialfälle im Algorithmus abfangen.
 
 \begin{definition}[{name=[Reeb-Graph der \GrpStruktur]}]
 	Wir bezeichnen mit $\mathcal{R}$ den Reeb-Graphen zu $\mathcal{M}$ bezüglich der Höhenfunktion zu $\mathcal{M}$.
 \end{definition}
 
-An dieser Stelle sei angemerkt, dass $\mathcal{M}$ ein dreidimensionaler Raum ist (bis auf einige wenige Ausnahmen ist $\mathcal{M}$ eine 3-Mannigfaltigkeit mit Rand; in jedem Fall ist $\mathcal{M}$ ein dreidimensionaler CW-Komplex) im Gegensatz zum zweidimensionalen Torus, der eben betrachtet wurde.
+% In vielen Fällen ist $\mathcal{M}$ eine $3$-Mannigfaltigkeit mit Rand -- wenn zwei Entitäten während eines Zeitabschnittes aber konstant den Abstand $2 \varepsilon$ haben, so ist $\mathcal{M}$ keine Mannigfaltigkeit!
+% Wie wir später sehen werden, kann dies im Algorithmus aber als Spezialfall behandelt werden.
+
+An dieser Stelle sei angemerkt, dass $\mathcal{M}$ ein dreidimensionaler Raum ist (bis auf einige wenige Ausnahmen ist $\mathcal{M}$ eine 3-Mannigfaltigkeit mit Rand\footnote{Gegenbeispiel: Zwei Entitäten haben während eines Zeitabschnitts konstant den Abstand $2 \varepsilon$. Im Algorithmus in \cref{cha:berechnung} wird dieser Fal explizit abgefangen.}; in jedem Fall ist $\mathcal{M}$ ein dreidimensionaler CW-Komplex) im Gegensatz zum \emph{zwei}dimensionalen Torus, der eben betrachtet wurde.
 Das in \cref{fig:bsp_reeb_rand} betrachtete Beispiel zeigt, warum wir den dreidimensionalen Raum $\mathcal{M}$ und nicht dessen zweidimensionalen Rand betrachten.
 
 \begin{figure}
@@ -163,8 +173,8 @@ Das in \cref{fig:bsp_reeb_rand} betrachtete Beispiel zeigt, warum wir den dreidi
 \end{figure}
 
 Wie in \cref{sec:background_reeb} erläutert, entsprechen die Vertices von $\mathcal{R}$ Zeitpunkten $t_v$, an denen sich die Komponenten ändern.
-Diese Zeitpunkte stimmen im Allgemeinen nicht mit den Zeitpunkten $t_0, \ldots, t_\tau$ überein, was auch in \cref{fig:tubes} zu erkennen ist.
-Jeder Vertex im Reeb-Graphen lässt sich eindeutig einer der folgenden Klassen zuordnen
+Diese Zeitpunkte stimmen im Allgemeinen nicht mit den Zeitpunkten $t_0, \ldots, t_\tau$ überein, was auch in \cref{fig:tubes,fig:reeb_graph} zu erkennen ist.
+Jeder Vertex im Reeb-Graphen lässt sich eindeutig einer der folgenden Klassen zuordnen:
 \begin{description}
 	\item[Start-Vertex] Für jede Komponente zum Zeitpunkt $t_0$ existiert ein Vertex; ein solcher Vertex ist ein \Index{Start-Vertex}.
 	Jeder Start-Vertex hat Eingangs-Grad 0 und Ausgangsgrad 1.
@@ -205,7 +215,7 @@ Dazu folgen wir \textcite[Sec.~2.1~\&~2.2]{buchin2015} und beweisen wir Schranke
 	Diese Konstruktion wiederholen wir für alle Intervalle.
 	Dies liefert dann offensichtlich $\Omega(\tau n^2)$ viele Vertices und damit auch $\Omega(\tau n^2)$ viele Kanten, da jeder Knoten entweder Grad 1 oder Grad 3 hat (siehe oben).
 	
-	Wir teilen $\mathcal{X}$ -- wie in \cref{fig:vertices-intervall} gezeichnet -- in zwei Teilmengen $R= \set*{r_1, \ldots ,r_{n/2}}$, $D=\set*{d_1,\ldots ,d_{n/2}}$ auf, wobei die Entität $r_j$ bei $(-j,-j)$ und $d_\ell$ bei $(\ell,\ell)$ startet.\todo{Lindenmayer-System?}
+	Wir teilen $\mathcal{X}$ -- wie in \cref{fig:vertices-intervall} gezeichnet -- in zwei Teilmengen $R= \set*{r_1, \ldots ,r_{n/2}}$, $D=\set*{d_1,\ldots ,d_{n/2}}$ auf, wobei die Entität $r_j$ bei $(-j,-j)$ und $d_\ell$ bei $(\ell,\ell)$ startet.
 	\begin{figure}
 		\Centering
 		\begin{tikzpicture}[scale=.3,>=Latex,font=\small]
@@ -220,7 +230,8 @@ Dazu folgen wir \textcite[Sec.~2.1~\&~2.2]{buchin2015} und beweisen wir Schranke
 		\end{tikzpicture}
 		\caption{Konstruktion für $\Omega(n^2)$ viele Vertices im Intervall $\benbrace*{t_i,t_{i+1}}$ am Beispiel $n=5$}\label{fig:vertices-intervall}
 	\end{figure}
-	Alle Entitäten bewegen sich mit der Geschwindigkeit Eins, die $r_j$ nach rechts, die $d_\ell$ nach unten, und aus \cref{fig:vertices-intervall} ist klar ersichtlich, dass sich die Konstruktion mit vertauschten Rollen im nächsten Intervall wiederholen lässt.
+	Alle Entitäten bewegen sich mit der Geschwindigkeit Eins, die $r_j$ nach rechts, die $d_\ell$ nach unten.  
+	Aus \cref{fig:vertices-intervall} ist klar ersichtlich, dass sich die Konstruktion mit vertauschten Rollen im nächsten Intervall wiederholen lässt.
 	Da sich $r_j$ und $d_\ell$ zum Zeitpunkt $t_i + j + \ell$ treffen, entsteht ein Vertex im Reeb-Graphen und wir erhalten insgesamt $\Omega(n^2)$ Vertices pro Zeitintervall.
 \end{beweis}
 
@@ -233,7 +244,7 @@ Dazu folgen wir \textcite[Sec.~2.1~\&~2.2]{buchin2015} und beweisen wir Schranke
 	Wir müssen also nur noch zeigen, dass $\mathcal{O}(\tau n^2)$ Vertices und Kanten entstehen können.
 	Dazu nutzen wir aus, dass sich die Entitäten während eines Zeitintervalls $\benbrace*{t_i,t_{i+1}}$ auf Geraden bewegen.
 	Insbesondere ist nämlich der Abstand zwischen zwei Entitäten $x$ und $y$ während $\benbrace*{t_i,t_{i+1}}$ eine konvexe Funktion $\benbrace*{t_i,t_{i+1}} \to \mathbb{R}_+$, wie man sehr leicht mit Hilfe der Dreiecksungleichung zeigt.\footnote{dabei kann man sogar ganz allgemein eine beliebige Norm auf $\mathbb{R}^d$ betrachten}
-	Damit sind $x$ und $y$ höchstens während einem Intervall $I \subseteq \benbrace*{t_i,t_{i+1}}$ direkt-zusammenhängend.
+	Damit sind $x$ und $y$ höchstens während eines Intervalls $I \subseteq \benbrace*{t_i,t_{i+1}}$ direkt-zusammenhängend.
 	Dieses Intervall liefert wiederum höchstens zwei Vertices in $\mathcal{R}$.
 	Da die Trajektorien aus je $\tau$ Kanten bestehen, erzeugt jedes Paar $(x,y)$ somit $\mathcal{O}(\tau)$ Vertices.
 	Damit gibt es insgesamt $\mathcal{O}(\tau n^2)$ Vertices und damit auch $\mathcal{O}(\tau n^2)$ Kanten, da der Knotengrad beschränkt ist.
@@ -242,7 +253,7 @@ Dazu folgen wir \textcite[Sec.~2.1~\&~2.2]{buchin2015} und beweisen wir Schranke
 Da sich die Konstruktion aus \cref{lem:untereSchranke-Reeb} kanonisch in den $\mathbb{R}^d$ einbetten lässt und das Argument mit der Konvexität der Abstandsfunktion in beliebigen Dimensionen funktioniert, gilt \cref{thm:schranke-Reeb} auch für Trajektorien im $\mathbb{R}^d$.
 
 Wir zeigen nun, dass die Anzahl der maximalen Gruppen in $\mathcal{O}(\tau n^3)$ liegt.
-Dies gestaltet sich etwas schwieriger als die Komplexität des Reeb-Graphen: \todo{Beispiel komplett einfügen?}
+Dies gestaltet sich etwas schwieriger als die Komplexität des Reeb-Graphen, da man oftmals erst an einem Split feststellt, dass eine Gruppe maximal ist, auch wenn sie schon vorher begonnen hat.
 
 \begin{lemma}[name={\cite[Lem.~4]{buchin2015}},label=lem:untereSchranke-Gruppen]
 	Für eine Menge $\mathcal{X}$ von $n$ Entitäten, von denen sich jede entlang einer Trajektorie von $\tau$ Kanten bewegt, kann es $\Omega(\tau n^3)$ maximale Gruppen geben, wobei jede eine Größe von $\Omega(n)$ hat.
@@ -251,7 +262,7 @@ Dies gestaltet sich etwas schwieriger als die Komplexität des Reeb-Graphen: \to
 	Wir gehen ähnlich wie in \cref{lem:untereSchranke-Reeb} vor, das heißt wir konstruieren $n$ Kanten von Trajektorien für ein Zeitintervall $\benbrace*{t_u,t_{u+1}}$, welche $\Omega(n^3)$ maximale Gruppen mit $I_G \subseteq \benbrace*{t_u,t_{u+1}}$ erzeugen, sodass eine Wiederholung der Konstruktion für alle Zeitintervalle in der gewünschten Anzahl maximaler Gruppen resultiert.
 	
 	Wir nehmen ohne Einschränkungen an, dass $n$ durch 13 teilbar ist und zerteilen $\mathcal{X}$ in zwei Mengen $S$ und $D$ mit $\abs*{S}=\frac{12n}{13}$ und $\abs*{D}=\frac{n}{13}$.
-	Dabei platzieren wir $\frac{8n}{13}$ Entitäten auf der $x$-Achse mit Abstand $r$, wobei $\varepsilon< r < 2 \varepsilon$.
+	Dabei platzieren wir $\frac{8n}{13}$ Entitäten aus $S$ auf der $x$-Achse mit Abstand $r$, wobei $\varepsilon< r < 2 \varepsilon$.
 	Oberhalb jeder vierten Entität $s_i$ platzieren wir zwei weitere auch mit dem Abstand $r$, sodass sich ein \enquote{Zinnenkranz} aus Zinnen $T_i$ entsteht (siehe \cref{fig:zinnen}).
 	Per Konstruktion hat $S$ $\frac{2n}{13}$ solcher Zinnen und $S$ ist $\varepsilon$-zusammenhängend.
 	Die Entitäten aus $S$ bleiben stationär.
@@ -283,7 +294,7 @@ Dies gestaltet sich etwas schwieriger als die Komplexität des Reeb-Graphen: \to
 	Die Ereignisse im Intervall $\benbrace*{t_u,t_{u+1}}$ lassen sich nun in mehrere \emph{Runden} einteilen.
 	Eine Runde soll dabei die Ereignisse zusammenfassen, die passieren, während $d_1$ eine der \enquote{Zinnen} $T_i$ passiert.
 	Eine solche Runde $z$ startet mit $k$ Merge-Ereignissen zu den Zeitpunkten $j_1, \ldots , j_k$ gefolgt von $k$ Split-Ereignissen $\ell_1, \ldots, \ell_k$.
-	Genauer wird $d_i$ zum Zeitpunkt $j_i$ direkt-zusammenhängend mit $S$ bei $T_{1+z-i}$ und ist es ab dem Zeitpunkt $\ell_i$ nicht länger.
+	Genauer wird $d_i$ zum Zeitpunkt $j_i$ $\varepsilon$-zusammenhängend mit $S$ bei $T_{1+z-i}$ und ist es ab dem Zeitpunkt $\ell_i$ nicht länger.
 	
 	Diese Reihenfolge ist durch die Wahl des Abstandes $4r + \frac{\varepsilon}{n}$ sichergestellt: Damit alle Merge-Ereignisse vor den Split-Ereignissen stattfinden können, müssen alle weiteren an dieser Runde beteiligten Entitäten $\varepsilon$-zusammenhängend mit $S$ werden bevor $d_1$ nicht mehr mit $S$ verbunden ist.
 	Beim Passieren legt $d_1$ eine Strecke von $4 \varepsilon$ zurück und nach jeweils $\frac{\varepsilon}{n}$ zurückgelegter Strecke, wird eine der bis zu $\frac{n}{13}-1$ vielen weiteren Entitäten mit $S$ verbunden.
@@ -318,7 +329,7 @@ Dies gestaltet sich etwas schwieriger als die Komplexität des Reeb-Graphen: \to
 	In den darauf folgenden Split-Ereignissen werden $d_1, \ldots , d_k$ nach und nach von $S$ getrennt -- wenn $d_i$ nicht mehr $\varepsilon$-zusammenhängend zu $S$ ist, enden die maximalen Gruppen $G_{ii}, \ldots , G_{ik}$.
 	Gleichzeitig werden nun aber die Gruppen, die bei $j_{i+1}$ gestartet sind zu maximalen Gruppen $G_{(i+1)h}$, da $d_i$ die Gruppe $G_{ih}$ verlassen hat (siehe \cref{fig:gruppen-intervalle}).
 	
-	Dies bedeutet, dass das Ereignis $\ell_i$ $k-1$ viele neue maximale Gruppen erzeugt.
+	Dies bedeutet, dass das Ereignis $\ell_i$ $k-i$ viele neue maximale Gruppen erzeugt.
 	Zusammen mit den $k$ maximalen Gruppen $G_{1i}$ erzeugt die Runde $z$ also
 	\[
 		\sum_{i=0}^{k} (k-i)  \in \Omega(k^2)
@@ -326,7 +337,7 @@ Dies gestaltet sich etwas schwieriger als die Komplexität des Reeb-Graphen: \to
 	viele maximale Gruppen.
 	Damit erhalten wir für $m \le \frac{12n}{13}$ und ein beliebiges $\delta$ nun $\Omega(n^3)$ maximale Gruppen wie folgt:
 	
-	Wir können die Geschwindigkeit der Entitäten in $D$ so wählen, dass alle Gruppe eine mindestens eine Dauer von $\delta$ haben.
+	Wir können die Geschwindigkeit der Entitäten in $D$ so wählen, dass alle Gruppen eine Mindestdauer von $\delta$ haben.
 	An den Runden $\frac{n}{13}, \ldots , \frac{2n}{13}$ sind per Konstruktion nun jeweils alle $\frac{n}{13}$ Elemente von $D$ beteiligt, da wir $\frac{2n}{13}$ \enquote{Zinnen} haben.
 	In jeder dieser $\frac{n}{13}$ Runden gilt also $k=\frac{n}{13}$.
 	Damit generiert jede dieser $\Omega(n)$ vielen Runden $\Omega(n^2)$ viele maximale Gruppen.
@@ -342,7 +353,7 @@ Dies gestaltet sich etwas schwieriger als die Komplexität des Reeb-Graphen: \to
 	In \cref{lem:untereSchranke-Gruppen} haben wir bereits gesehen, dass es Konfigurationen gibt, die $\Omega(\tau n^3)$ maximale Gruppen haben.
 	Es bleibt die obere Schranke zu zeigen.
 	Da eine maximale Gruppe an einem Start- oder Merge-Vertex beginnt, genügt es zu zeigen, dass an jedem solchen $\mathcal{O}(n)$ maximale Gruppen entstehen können, da wir in \cref{thm:schranke-Reeb} gezeigt haben, dass $\mathcal{O}(\tau n^2)$ viele solche Vertices existieren.
-	Wir besprechen an dieser Stelle nur den Fall von Merge-Vertices, der Beweis für Start-Vertices verläuft genauso.\todo{überprüfen}
+	Wir besprechen an dieser Stelle nur den Fall von Merge-Vertices, der Beweis für Start-Vertices verläuft genauso.
 	Weiter können wir $m=1$ und $\delta=0$ annehmen, da diese Wahlen der beiden Parameter die Anzahl maximaler Gruppen maximieren.
 	
 	\begin{figure}
@@ -412,7 +423,7 @@ Dies gestaltet sich etwas schwieriger als die Komplexität des Reeb-Graphen: \to
 	Jede von ihnen lässt sich durch einen Teilpfad in $\mathcal{T}_v$ repräsentieren, der bei $v$ beginnt.
 	Ein solcher Pfad endet entweder an einen Blatt oder an dem ersten Vertex, an dem sich zwei Entitäten $x,y \in G_i$ trennen.
 	Ein solcher Split von $p_x$ und $p_y$ wiederum kann nur an einem Knoten des Grades 3 auftreten.
-	Da $\mathcal{T}_v$ maximal $n$ Blätter hat, hat $\mathcal{T}_v$ auch maximal $\mathcal{O}(n)$ Grad-3-Knoten.
+	Da $\mathcal{T}_v$ maximal $n$ Blätter hat, hat $\mathcal{T}_v$ auch $\mathcal{O}(n)$ Grad-3-Knoten.
 	
 	Wir zeigen nun, dass maximal eine maximale Gruppe an einem gegebenen Blatt oder Grad-3-Knoten endet.
 	Angenommen es gäbe $G_i$ und $G_j$ mit $i \neq j$, sodass beide an einem gemeinsamen Knoten $U$ enden.
