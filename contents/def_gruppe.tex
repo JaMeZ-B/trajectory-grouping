@@ -3,8 +3,8 @@
 Wir bezeichnen mit $\mathcal{X}$ die Menge der Entitäten, zu denen uns der Ort innerhalb eines gewissen Zeitraums bekannt ist.
 Wie in \cref{cha:einleitung} angedeutet wird unsere Definition einer Gruppe von den folgenden drei Parametern abhängen, die Charakteristika der zu betrachtenden Gruppen bestimmen:
 \begin{itemize}
-	\item Räumlicher Parameter $\varepsilon > 0$
-	\item zeitlicher Parameter $\delta > 0$
+	\item Räumlicher Parameter $\varepsilon \ge 0$
+	\item zeitlicher Parameter $\delta \ge 0$
 	\item Mindestgröße $m \in \mathbb{N}\setminus \set*{0}$
 \end{itemize}
 Wir beginnen mit einigen Definitionen zum räumlichen Zusammenhang zu einem festen Zeitpunkt $t$.
@@ -88,7 +88,7 @@ Die Menge der Komponenten zum Zeitpunkt $t$ bezeichnen wir mit $\mathcal{C}(t)$;
 	\begin{enumerate}[(i)]
 		\item $G$ enthält mindestens $m$ Entitäten, also $k \ge m$,
 		\item die Länge von $I$ ist mindestens $\delta$ und
-		\item\label{enum:3:def:gruppe}zu jeder Zeit $t \in I$ existiert eine Komponente $C \in \mathcal{C}(t)$ mit $G \subseteq C$.\marginnote{in \textcite{grouping_improved} wird zusätzlich gefordert, dass alle $x,y \in G$ \emph{in} $G$ $\varepsilon$"=zusammenhängend sind}
+		\item\label{enum:3:def:gruppe}zu jeder Zeit $t \in I$ existiert eine Komponente $C \in \mathcal{C}(t)$ mit $G \subseteq C$.\marginnote{in \cite{grouping_improved} wird zusätzlich gefordert, dass alle $x,y \in G$ \emph{in(!)} $G$ $\varepsilon$"=zusammenhängend sind}
 	\end{enumerate}
 	Das Intervall $I=[t_s,t_e]$ der Gruppe $G$ bezeichnen wir auch mit $I_G$.
 	Eine Gruppe $H$ \bet{überlagert}\index{Gruppe!überlagernde} $G$, falls $G \subseteq H$ und $I_G \subseteq I_H$ gilt.
@@ -157,7 +157,7 @@ Die Menge der Komponenten zum Zeitpunkt $t$ bezeichnen wir mit $\mathcal{C}(t)$;
 
 In \cref{fig:max-groups} ist eine Menge von Trajektorien gezeichnet, bei der keine Entität eindeutig einer maximalen Gruppe zuzuordnen ist.
 Da wir ja eigentlich die Trajektorien einzelner Entitäten gruppieren wollen, mag dies auf den ersten Blick etwas kontraintuitiv erscheinen.
-Tatsächlich benötigen wir aber alle diese Informationen, um später die Entwicklung der Gruppen über die Zeit und insbesondere Start-, End-, Split- und Merge-Ereignisse von Gruppen analysieren zu können.\todo{siehe Kap. 1?}
+Tatsächlich benötigen wir aber all diese Informationen, um später die Entwicklung der Gruppen über die Zeit und insbesondere Start-, End-, Split- und Merge-Ereignisse von Gruppen analysieren zu können.
 
 Wie \cref{fig:components} bereits zeigt, hat die Wahl des Parameters $\varepsilon$ einen großen Einfluss auf die Komponenten und es stellt sich die Frage, wie sich die (maximalen) Gruppen bei Variation dieses Parameters sowie der anderen beiden $\delta$ und $m$ verändern.
 
@@ -183,4 +183,4 @@ Bevor wir nun im nächsten Kapitel den Reeb-Graphen definieren und damit dann di
 Dazu stelle man sich die folgende Situation vor: Eine Entität $x$ reist über einen langen Zeitraum zusammen mit einer Gruppe $G$, verlässt diese zwischendurch aber für einen sehr kurzen Zeitraum.
 Im Widerspruch zur obigen \cref{def:gruppe} mag es nun sinnvoller sein, $G \cup \set*{x}$ als Gruppe zu betrachten.
 Man möchte die Gruppen also \Index{robust} gegenüber kleinen Störungen machen, die insbesondere bei Daten aus der Praxis oftmals auftreten.
-Wie sich dies unter Einbeziehung der maximalen Störungsdauer als weiteren Parameter realisieren lässt, werden wir in \cref{cha:robust} gegen Ende dieses Arbeit behandeln.
+Wie sich dies unter Einbeziehung der maximalen Störungsdauer als weiteren Parameter realisieren lässt, werden wir in \cref{cha:eval} gegen Ende dieses Arbeit kurz behandeln.
