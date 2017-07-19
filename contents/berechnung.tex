@@ -25,7 +25,7 @@ Das im Folgenden geschilderte Vorgehen von \textcite{buchin2015} zur Berechnung 
 
 \begin{figure}[hbt]
 	\Centering
-	\includegraphics[width=.9\textwidth]{Bilder/manifold.pdf}
+	\includegraphics[width=.8\textwidth]{Bilder/manifold.pdf}
 \end{figure}
 
 \section{Berechnung des Reeb-Graphen} % (fold)
@@ -38,7 +38,7 @@ In \cref{sec:background_reeb} über die differentialtopologischen Hintergründe 
 Dies ermöglicht uns die notwendige Diskretisierung des Sweeps: Ein Knoten im Reeb-Graph kann nur auftreten, wenn zwei Komponenten verschmelzen (Merge), eine Komponente zerteilt wird (Split) oder eine Komponente beginnt oder endet, was alles notwendigerweise dadurch verursacht wird, dass zwei Entitäten direkt zusammenhängend werden (\emph{Connect}-Ereignis) oder es nicht länger sind (\emph{Disconnect}-Ereignis).\footnote{oder, dass das Ende des Beobachtungszeitraumes erreicht ist}
 Definieren wir unsere Queue bzw. $z$-Struktur also als die Folge aller Zeitpunkte zu denen zwei Entitäten genau den Abstand $2 \varepsilon$ haben, so enthält die Queue auf jeden Fall alle Zeitpunkte, an denen $\mathcal{R}$ aktualisiert werden muss.
 
-Tatsächlich filtern wir schon bei der Berechnung dieser Queue Zeitpunkte heraus, die nicht \enquote{kritisch} sein können, das heißt die keine kritischen Werte sind.
+Tatsächlich filtern wir schon bei der Berechnung dieser Queue Zeitpunkte heraus, die keine kritischen Werte sind.
 Außerdem teilen wir die Zeitpunkte in diesem Arbeitsschritt bereits in \emph{Connect}- und \emph{Disconnect}-Ereignisse auf.
 Wie dies genau vonstatten geht und wie die Queue konkret gespeichert wird, wird in \cref{sub:berechnung_queue} erläutert.
 In \cref{sub:xy_struktur} wird dann die für einen Sweep-Algorithmus außerdem benötigte $xy$-Struktur beschrieben, bevor in \cref{sub:behandlung_der_ereignisse} die Verarbeitung der Ereignisse aus der Queue inklusive der Initialisierung der $xy$-Struktur behandelt wird.
@@ -62,13 +62,13 @@ Die Verbleibenden beschriften wir entsprechend mit \emph{Connect} oder \emph{Dis
 Auf das Bereinigen kann man verzichten, dann müssen während des Sweeps aber mehr Sonderfälle betrachtet werden.
 
 $L_{xy}$ besteht aus $\mathcal{O}(\tau)$ Zeitpunkten und alle obigen Berechnungen kosten zusammen $\Theta(\tau)$ Zeit.
-Berechnen wir diese Listen für alle $x,y$ und vereinigen sie unter Benutzung eines Min-Heaps\footnote{ein \emph{direct $k$-way merge}: die minimalen Elemente aller Listen werden in einem Min-Heap verwaltet, um in das kleinste in logarithmischer Zeit finden zu können} zu einer Liste $L$, so entstehen also insgesamt $\mathcal{O}(\tau n^2 \log n^2) = \mathcal{O}(\tau n^2 \log n)$ Kosten und $L$ enthält $\mathcal{O}(\tau n^2)$ Zeitpunkte.
+Berechnen wir diese Listen für alle $x,y$ und vereinigen sie unter Benutzung eines Min-Heaps\footnote{ein \emph{direct $k$-way merge}: die minimalen Elemente aller Listen werden in einem Min-Heap verwaltet, um in das kleinste in logarithmischer Zeit finden zu können} zu einer Liste $L$, so entstehen insgesamt $\mathcal{O}(\tau n^2 \log n^2) = \mathcal{O}(\tau n^2 \log n)$ Kosten und $L$ enthält $\mathcal{O}(\tau n^2)$ Zeitpunkte.
 Beim Zusammenführen der Listen $L_{xy}$ speichern wir zu jedem \emph{Connect}-Ereignis einen Zeiger auf das nächste \emph{Disconnect}-Ereignis der gleichen Entitäten, sofern dies existiert.
 Falls dies nicht existiert, soll der Zeiger auf $t_\tau$, also das Ende des betrachteten Zeitraumes, zeigen.
 Dies ist asymptotisch betrachtet kein zusätzlicher Aufwand.
 Diese Zeiger sind wichtig, um gewisse Kantengewichte effizient -- das heißt in höchstens $\mathcal{O}(\log n)$ -- berechnen zu können (siehe Methode $\textsc{Insert}(x,y)$ in \cref{alg:funktionen}).
 
-Anmerkung: Dieses Verfahren ist einigermaßen komplex, sorgt aber dafür, dass während des Sweeps keine Sonderfälle betrachtet werden müssen. 
+Anmerkung: Dieses Verfahren ist einigermaßen komplex, sorgt aber dafür, dass während des Sweeps keine Sonderfälle betrachtet werden müssen.
 Alternativ könnte man auch Listen für alle Paare von Entitäten für jeden der $\tau$ Zeitabschnitte betrachten und diese einfach konkatenieren, was offensichtlich auch $\mathcal{O}(\tau n^2 \log n^2)$ Zeit kostet.
 Das Problem dabei ist aber, dass man auch dabei nicht ohne Weiteres\footnote{wie zB. das Verwalten des \enquote{letzten} Ereignisses für jedes Paar in einer Hash-Tabelle} die Zeiger von \emph{Connect}-Ereignissen auf ihr entsprechendes \emph{Disconnect}-Ereignis erhält und obige Bereinigung ausführen kann.
 Da beide Varianten die gleiche Laufzeit und zusätzlich benötigen Speicher ($\mathcal{O}(n^2)$ für den Heap bzw. die Hash-Tabelle) haben, kann man dies getrost als reine Implemantierungsfrage betrachten.
@@ -184,7 +184,7 @@ Es kann dabei keine weitere Kante in $G$ geben, die diese beiden Zusammenhangsko
 
 \section{Berechnung der maximalen Gruppen} % (fold)
 \label{sec:berechnung_maximale_gruppen}
-Wir wollen nun ausgehen von dem Reeb-Graphen $\mathcal{R}=(V,E)$, dessen Kanten $e=(v,u)$ mit den entsprechenden Komponenten $C_e$ beschriftet sind, die maximalen Gruppen berechnen.
+Wir wollen nun ausgehend von dem Reeb-Graphen $\mathcal{R}=(V,E)$, dessen Kanten $e=(v,u)$ mit den entsprechenden Komponenten $C_e$ beschriftet sind, die maximalen Gruppen berechnen.
 Dazu ignorieren wir zunächst die Mindestanzahl an Entitäten und die Dauer, das heißt wir nehmen $m=1$ und $\delta=0$ an.
 Wie man den Algorithmus für beliebige $m$ und $\delta$ anpassen muss, erläutern wir später.
 
@@ -210,7 +210,7 @@ Im Unterschied zu den anderen Typen von Vertices, ist die Behandlung Split-Verti
 
 \subsection{Speicherung der maximalen Gruppen} % (fold)
 \label{sub:speicherung_der_maximalen_gruppen}
-In diesem Unterabschnitt soll gezeigt werden, wie die Menge $\mathcal{G}_e$ der maximalen Gruppen zur Kante $e=(v,u)$ in einem Baum $\mathcal{T}_e$ speichern können, sodass eine effiziente Behandlung von Split-Vertices möglich wird.
+In diesem Unterabschnitt soll gezeigt werden, wie wir die Menge $\mathcal{G}_e$ der maximalen Gruppen zur Kante $e=(v,u)$ in einem Baum $\mathcal{T}_e$ speichern können, sodass eine effiziente Behandlung von Split-Vertices möglich wird.
 Dazu benötigen wir die folgende Aussage über \emph{Untergruppen}.
 
 \begin{definition}[{name=[Untergruppe]}]
@@ -275,7 +275,7 @@ Da jede Entität nur in genau einem Blatt enthalten sein kann, hat $\mathcal{T}_
 	\hrule
 \end{algorithm}
 
-Der erste Schritt zur Berechnung ist, wie oben schon erläutert eine topologische Sortierung der Vertices von $\mathcal{R}=(V,E)$.
+Der erste Schritt zur Berechnung ist, wie oben schon erläutert, eine topologische Sortierung der Vertices von $\mathcal{R}=(V,E)$.
 Dies ist zum Beispiel mit dem in \textcite[Sec.~22.4]{cormenIntroduction} erläuterten Algorithmus \textsc{Topological-Sort} möglich.
 Dieser benutzt eine Tiefensuche und kostet $\mathcal{O}(\abs*{V} + \abs*{E}) = \mathcal{O}(\tau n^2)$ Zeit (nach \cref{thm:schranke-Reeb}).
 Die Behandlung der Start- und Merge-Vertices kostet offensichtlich $\mathcal{O}(1)$ Zeit pro Vertex.
@@ -286,11 +286,11 @@ Die \enquote{Bottom-Up}-Konstruktion der Bäume $\mathcal{T}_{e_1}$ und $\mathca
 
 \subsection{Ausgabe der maximalen Gruppen und Einbeziehung der Parameter $m,\delta$} % (fold)
 \label{sub:ausgabe_der_maximalen_gruppen_und_einbeziehung_der_parameter_m_delta}
-Wir müssen noch erläutern, wie \cref{alg:max_groups} angepasst werden muss, um bei der Ausführung alle maximalen Gruppen aufzulisten und wie dabei die Parameter $m$ (Mindestanzahl) und $\delta$ (Mindestdauer) überprüft werden kann.
+Wir müssen noch erläutern, wie \cref{alg:max_groups} angepasst werden muss, um bei der Ausführung alle maximalen Gruppen aufzulisten und wie dabei die Parameter $m$ (Mindestanzahl) und $\delta$ (Mindestdauer) überprüft werden können.
 Offensichtlich kann eine maximale Gruppe nur an einem Split- oder End-Vertex vernichtet werden, sodass nur die entsprechenden \texttt{if}-Blöcke modifiziert werden müssen.
-\Cref{alg:max_groups_final} zeigt diese Modifizierungen.
+\Cref{alg:max_groups_final} zeigt diese Modifikationen.
 \begin{algorithm}[hbt]
-	\caption{Traversieren von $\mathcal{R}=(V,E)$ zur Berechnung und Ausgabe der maximalen Gruppen unter Beachtung der Parameter $m$ und $\delta$} \label{alg:max_groups_final}
+	\caption{Traversieren von $\mathcal{R}$ zur Berechnung und Ausgabe der maximalen Gruppen unter Beachtung der Parameter $m$ und $\delta$} \label{alg:max_groups_final}
 	\vspace{.5em}
 	\hrule\vspace{.5em}
 	
@@ -299,8 +299,8 @@ Offensichtlich kann eine maximale Gruppe nur an einem Split- oder End-Vertex ver
 		\State Sortiere $V$ in topologischer Reihenfolge
 		\For{$v \in V$}
 			\If{$v$ ist Start-Vertex}
-			\State Sei $e=(v,u)$ die ausgehende Kante
-			\State $\mathcal{G}_e \coloneqq \set*{(C_e,t_0)}$, $\mathcal{T}_e \coloneqq \mathcal{G}_e$
+			% \State Sei $e=(v,u)$ die ausgehende Kante
+			\State $\mathcal{G}_e \coloneqq \set*{(C_e,t_0)}$, $\mathcal{T}_e \coloneqq \mathcal{G}_e$, wobei $e=(v,u)$ die ausgehende Kante ist
 			\ElsIf{$v$ ist Merge-Vertex}
 			\State Seien $e_1$ und $e_2$ die beiden eingehenden Kanten, sei $e$ die ausgehende Kante
 			\State $\mathcal{G}_e \coloneqq \mathcal{G}_{e_1} \cup \mathcal{G}_{e_2} \cup \set*{(C_e,t_v)}$
@@ -309,7 +309,8 @@ Offensichtlich kann eine maximale Gruppe nur an einem Split- oder End-Vertex ver
 			\State Sei $e$ die eingehende Kante, seien $e_1,e_2$ die beiden ausgehenden Kanten
 			\State Traversiere $\mathcal{T}_e$ in Post-Order
 			\State Überprüfe für jeden Knoten, ob er Knoten in $\mathcal{T}_{e_1}$ und/oder $\mathcal{T}_{e_2}$ induziert
-			\State Erzeuge dabei $\mathcal{T}_{e_1}$ und $\mathcal{T}_{e_2}$ \enquote{bottom-up}
+			\State Erzeuge dabei $\mathcal{T}_{e_1}$ und $\mathcal{T}_{e_2}$ \enquote{bottom-up} und gib Gruppen aus, deren induzierte Knoten
+			\State nicht mit den ursprünglichen übereinstimmen und die die Bedingungen durch $m, \delta$ erfüllen
 			\ElsIf{$v$ ist End-Vertex}
 			\State Traversiere $\mathcal{T}_e$, den Baum der eingehenden Kante $e$ in Prä-Order
 			\State Gib dabei alle maximalen Gruppen aus, die die Bedingungen durch $m,\delta$ erfüllen
@@ -323,10 +324,13 @@ Offensichtlich kann eine maximale Gruppe nur an einem Split- oder End-Vertex ver
 Im Falle eines End-Vertex traversieren wir einfach den Baum der eingehenden Kante in Prä-Order und geben dabei alle maximalen Gruppen $G$ aus mit $\abs{I_G}\ge \delta$ und $\abs*{G}\ge m$.
 Aufgrund der oben erwähnten Monotonie der Bäume, können wir es dabei einrichten nur die Knoten zu besuchen, deren zugeordnete maximale Gruppe die Bedingung an $m$ erfüllt.
 
-Um festzustellen, welchen maximalen Gruppen an einem
-
-
+Um festzustellen, welche maximalen Gruppen an einem Split-Vertex enden, müssen wir lediglich den Test, ob ein Knoten des ursprünglichen Baumes $\mathcal{T}_e$ einen Knoten in $\mathcal{T}_{e_1}$ und/oder $\mathcal{T}_{e_2}$ induziert, um einen Test, ob dieser induzierte Knoten mit dem ursprünglichen übereinstimmt ergänzen.
+Alle Knoten, bei denen dies nicht Fall ist, entsprechen maximalen Gruppen, die bei diesem Split vernichtet werden.
 % subsection ausgabe_der_maximalen_gruppen_und_einbeziehung_der_parameter_m_delta (end)
+
+\begin{satz}[{name={\cite[Thm.~9]{buchin2015}}}]
+	Alle maximalen Gruppen können in $\mathcal{O}(\tau n^3 + N)$ Zeit berechnet werden, wobei $N \in \mathcal{O}(\tau n^4)$ die Ausgabegröße ist.
+\end{satz}
 
 
 
