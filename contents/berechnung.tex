@@ -42,7 +42,7 @@ Tatsächlich filtern wir schon bei der Berechnung dieser Queue Zeitpunkte heraus
 Außerdem teilen wir die Zeitpunkte in diesem Arbeitsschritt bereits in \emph{Connect}- und \emph{Disconnect}-Ereignisse auf.
 Wie dies genau vonstatten geht und wie die Queue konkret gespeichert wird, wird in \cref{sub:berechnung_queue} erläutert.
 In \cref{sub:xy_struktur} wird dann die für einen Sweep-Algorithmus außerdem benötigte $xy$-Struktur beschrieben, bevor in \cref{sub:behandlung_der_ereignisse} die Verarbeitung der Ereignisse aus der Queue inklusive der Initialisierung der $xy$-Struktur behandelt wird.
-
+Um später die maximalen Gruppen berechnen zu können, wird jede Kante in $\mathcal{R}$ noch mit der zugehörigen Komponente beschriftet.
 
 \subsection{Berechnung der Queue} % (fold)
 \label{sub:berechnung_queue}
@@ -59,12 +59,19 @@ Im ersten Fall fügen wir die $k$ Zeitpunkte in die Liste ein, im zweiten nur di
 In einem zweiten Schritt bereinigen wir $L_{xy}$ nun wie folgt: Wir iterieren über $L_{xy}$ und berechnen dabei für jeden Eintrag $t_i$, ob $x$ und $y$ im offenen Intervall $(t_i,t_{i+1})$ direkt zusammenhängend sind (Abstand beim Mittelpunkt bestimmen).
 Finden wir dadurch Zeitpunkte in $L_{xy}$, an denen sich der Zusammenhang von $x$ und $y$ nicht ändert, so entfernen wir diese aus der $L_{x,y}$.\footnote{Dies kann passieren, wenn ein solcher Zeitpunkt mit einem der Zeitstempel der Trajektorien übereinstimmt}
 Die Verbleibenden beschriften wir entsprechend mit \emph{Connect} oder \emph{Disconnect}.
+Auf das Bereinigen kann man verzichten, dann müssen während des Sweeps aber mehr Sonderfälle betrachtet werden.
 
 $L_{xy}$ besteht aus $\mathcal{O}(\tau)$ Zeitpunkten und alle obigen Berechnungen kosten zusammen $\Theta(\tau)$ Zeit.
-Berechnen wir diese Listen für alle $x,y$ und vereinigen sie unter Benutzung eines Min-Heaps\todo{klären} zu einer Liste $L$, so entstehen also insgesamt $\mathcal{O}(\tau n^2 \log n^2) = \mathcal{O}(\tau n^2 \log n)$ Kosten und $L$ enthält $\mathcal{O}(\tau n^2)$ Zeitpunkte.
+Berechnen wir diese Listen für alle $x,y$ und vereinigen sie unter Benutzung eines Min-Heaps\footnote{ein \emph{direct $k$-way merge}: die minimalen Elemente aller Listen werden in einem Min-Heap verwaltet, um in das kleinste in logarithmischer Zeit finden zu können} zu einer Liste $L$, so entstehen also insgesamt $\mathcal{O}(\tau n^2 \log n^2) = \mathcal{O}(\tau n^2 \log n)$ Kosten und $L$ enthält $\mathcal{O}(\tau n^2)$ Zeitpunkte.
 Beim Zusammenführen der Listen $L_{xy}$ speichern wir zu jedem \emph{Connect}-Ereignis einen Zeiger auf das nächste \emph{Disconnect}-Ereignis der gleichen Entitäten, sofern dies existiert.
 Falls dies nicht existiert, soll der Zeiger auf $t_\tau$, also das Ende des betrachteten Zeitraumes, zeigen.
 Dies ist asymptotisch betrachtet kein zusätzlicher Aufwand.
+Diese Zeiger sind wichtig, um gewisse Kantengewichte effizient -- das heißt in höchstens $\mathcal{O}(\log n)$ -- berechnen zu können (siehe Methode $\textsc{Insert}(x,y)$ in \cref{alg:funktionen}).
+
+Anmerkung: Dieses Verfahren ist einigermaßen komplex, sorgt aber dafür, dass während des Sweeps keine Sonderfälle betrachtet werden müssen. 
+Alternativ könnte man auch Listen für alle Paare von Entitäten für jeden der $\tau$ Zeitabschnitte betrachten und diese einfach konkatenieren, was offensichtlich auch $\mathcal{O}(\tau n^2 \log n^2)$ Zeit kostet.
+Das Problem dabei ist aber, dass man auch dabei nicht ohne Weiteres\footnote{wie zB. das Verwalten des \enquote{letzten} Ereignisses für jedes Paar in einer Hash-Tabelle} die Zeiger von \emph{Connect}-Ereignissen auf ihr entsprechendes \emph{Disconnect}-Ereignis erhält und obige Bereinigung ausführen kann.
+Da beide Varianten die gleiche Laufzeit und zusätzlich benötigen Speicher ($\mathcal{O}(n^2)$ für den Heap bzw. die Hash-Tabelle) haben, kann man dies getrost als reine Implemantierungsfrage betrachten.
 % subsection berechnung_queue (end)
 
 \subsection{Die $xy$-Struktur} % (fold)
@@ -137,7 +144,7 @@ Neben $G$ und $F$ tritt im Laufe der Berechnung von $\mathcal{R}=(V,E)$ noch ein
 \subsection{Behandlung der Ereignisse} % (fold)
 \label{sub:behandlung_der_ereignisse}
 Der Graph $G$ wird für $t_0$ mittels \emph{brute-force} während der Initialisierung der Queue berechnet, da dort bereits alle Paare $(x,y)$ zur Berechnung der Listen $L_{x,y}$ betrachtet werden und somit die Kantengewichte für $G$ bekannt sind.
-Ist $G$ für $t_0$ bekannt, so lässt sich $F$ in $\mathcal{O}(n^2)$ Zeit berechnen; zum Beispiel mit dem Algorithmus von \textsc{Prim}.\todo{Referenz}
+Ist $G$ für $t_0$ bekannt, so lässt sich $F$ in $\mathcal{O}(n^2)$ Zeit berechnen; zum Beispiel mit dem Algorithmus von \textsc{Prim} ($\mathcal{O}(n^2)$ viele Kanten, $n$ Knoten, siehe \textcite[p.~573]{cormenIntroduction}).
 Für jede Komponente von $G$ fügen wir einen Start-Vertex in $\mathcal{R}$ ein und initialisieren die Abbildung $M$ dementsprechend.
 
 Beim Behandeln eines \emph{Connect}-Ereignisses der Entitäten $x$ und $y$ zum Zeitpunkt $t$ bestimmen wir nun zunächst die Komponenten $C_x$ und $C_y$ mittels $\mathtt{Find}$ und mittels $M$ die entsprechenden Vertices $v_x$ und $v_y$ in $\mathcal{R}$.
@@ -147,9 +154,9 @@ In jedem Fall rufen wir $\textsc{Insert}(x,y)$ auf und aktualisieren auch $M$ en
 
 Bei einem \emph{Disconnect}-Ereignis benutzen wir zunächst $F$, um die Komponente $C$ zu finden, die $x$ und $y$ bisher enthalten hat.
 Mittels $M$ finden wir den zugehörigen Vertex $u$ in $\mathcal{R}$.
-Wir rufen nun $\textsc{Delete}(x,y)$ auf und ermitteln die neuen Komponenten $C_x$ und $C_y$ mittels $F$.
+Wir rufen nun $\textsc{Delete}(x,y)$ auf und ermitteln die neuen Komponenten $C_x$ und $C_y$ mittels \textsc{Find}.
 Im Fall $C_x=C_y$ ist nichts weiteres zu tun, da $x$ und $y$ weiterhin $\varepsilon$-zusammenhängend sind.
-Sind $x$ aber nicht mehr $\varepsilon$-zusammenhängend, fügen wir einen Split-Vertex $v$ mit Zeitpunkt $t_v=t$ sowie eine Kante $e=(u,v)$ beschriftet mit $C_e=C$ in $\mathcal{R}$ ein und aktualisieren $M$ entsprechend.
+Sind $x$ und $y$ aber nicht mehr $\varepsilon$-zusammenhängend, fügen wir einen Split-Vertex $v$ mit Zeitpunkt $t_v=t$ sowie eine Kante $e=(u,v)$ beschriftet mit $C_e=C$ in $\mathcal{R}$ ein und aktualisieren $M$ entsprechend.
 
 Sind wir am Ende der Queue $L$ angelangt, also beim Zeitpunkt $t_\tau$, so fügen wir für jede Komponente $C$ in $F$ einen End-Vertex $v$ mit $t_v=t_\tau$ ein und verbinden diesen mit $u=M(C)$ mittels einer Kante, die mit $C$ beschriftet ist.
 % subsection behandlung_der_ereignisse (end)
