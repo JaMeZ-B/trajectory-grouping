@@ -3,7 +3,7 @@
     \Centering\vspace{-\baselineskip}
     \includegraphics[width=.35\textwidth]{Bilder/starkey.png}
     \renewcommand{\figurename}{Abb.}
-    \caption[Screenshot aus dem Video zu den Starkey-Daten. Quelle: \url{https://fstaals.net/grouping/}]{Screenshot aus dem Video zu den Starkey-Daten.}\label{fig:starkey}
+    \caption{Screenshot aus dem Video zu den Starkey-Daten, \cite{starkey-video}.}\label{fig:starkey}
 \end{wrapfigure}
 Da das Ziel darin bestand, menschliche Intuition in ein mathematisches Modell zu überführen, haben \textcite{buchin2015} das Modell implementiert, auf unterschiedliche Testdaten angewandt und zur Visualisierung Videos produziert,\footnote{verfügbar unter \url{https://fstaals.net/grouping/}} an denen man gut überprüfen kann, ob dieses Ziel erreicht wurde.
 Eine Menge von Trajektorien wurde dabei synthetisch basierend auf dem NetLogo-Modell  \cite{netlogo} erstellt, die zweite ist eine Teilmenge von Positionsdaten aus dem Starkey-Projekt \cite{starkey}, die die Bewegung von Hirschen, Elchen und Rindern im \emph{Starkey Experimental Forest} in Oregon erfassen.
@@ -32,7 +32,7 @@ Das hier betrachtete Modell zur \emph{Trajectory Grouping Structure} lässt sich
     \end{definition}
     
     Eine Komponente kann dann zum Beispiel so aussehen, wie in \cref{fig:alpha}, insbesondere müssen ein einer Komponente zum Zeitpunkt $t$ die $t'$ nicht alle übereinstimmen!
-    Den zugehörigen Reeb-Graph kann man nun aus dem Reeb-Graph der ursprünglichen Definition berechnen, indem man ihn sukzessiv \enquote{vereinfacht}, dabei kann zum Beispiel ein Split-Knoten und ein direkt nachfolgender Merge-Knoten durch eine einzige Kante ersetzt werden, wenn dieses Aufteilen der Komponenten nicht zu lange andauert.
+    Den zugehörigen Reeb-Graph kann man nun aus dem Reeb-Graph der ursprünglichen Definition berechnen, indem man ihn sukzessive \enquote{vereinfacht}, dabei kann zum Beispiel ein Split-Knoten und ein direkt nachfolgender Merge-Knoten durch eine einzige Kante ersetzt werden, wenn dieses Aufteilen der Komponenten nicht zu lange andauert.
     Dies führt insgesamt zu einem Algorithmus mit Laufzeit $\mathcal{O}(\tau n^3 \log n + N)$, wobei $N$ wieder die Größe der Ausgabe ist, \cite[Thm.~13]{buchin2015}.
     \item[Verbesserte Definition] Durch \textcite{grouping_improved} wurde die Definition einer Gruppe aus \textcite{buchin2015} mittlerweile weiter verbessert.
     Bei sehr dichten Mengen von Entitäten können noch Fälle eintreten, die nicht der menschlichen Intuition entsprechen, da Entitäten dann $\varepsilon$-zusammenhängend über eine Kette von Entitäten sein können, die aber gar nicht zu den Gruppe gehören.
