@@ -62,7 +62,7 @@
 % ======================================================================================
 
 
-%-- Mathepakete 
+%-- Mathepakete
 % ======================================================================================
 \mathtoolsset{centercolon,showmanualtags}
 \newtagform{brackets}{[}{]}
@@ -124,7 +124,7 @@
 \KOMAoptions{DIV=last}
 % ======================================================================================
 
-% -- BibLaTeX 
+% -- BibLaTeX
 % ======================================================================================
 \usepackage[%
 	backend=biber,
@@ -210,7 +210,7 @@
 \catcode`\_=8\relax
 % ======================================================================================
 
-% -- marginnotes/todonotes 
+% -- marginnotes/todonotes
 % ======================================================================================
 \usepackage[fulladjust]{marginnote}
 \renewcommand*{\marginfont}{\itshape\footnotesize}
@@ -243,6 +243,7 @@
 \captionsetup[subfigure]{subrefformat=simple,labelformat=simple,listofformat=subsimple}
 \renewcommand\thesubfigure{(\alph{subfigure})}
 \usepackage{wrapfig}
+\captionsetup[wrapfigure]{name=Abb. }
 % ======================================================================================
 
 
@@ -283,7 +284,7 @@
       \space(\thmt@shortoptarg)%
     \fi
   }%
-}   
+}
 \makeatother
 % -- Definition der einzelnen Umgebungen
 \declaretheoremstyle[%
