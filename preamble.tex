@@ -103,7 +103,7 @@
 % ======================================================================================
 \addtokomafont{chapter}{\Huge}
 \addtokomafont{captionlabel}{\sffamily\fontseries{mb}\selectfont}
-\addtokomafont{caption}{\itshape}
+\addtokomafont{caption}{\itshape\justifying}
 \usepackage[%
 	headsepline=1pt,
 	automark,
@@ -243,7 +243,8 @@
 \captionsetup[subfigure]{subrefformat=simple,labelformat=simple,listofformat=subsimple}
 \renewcommand\thesubfigure{(\alph{subfigure})}
 \usepackage{wrapfig}
-\captionsetup[wrapfigure]{name=Abb. }
+% \setcapindent
+% \captionsetup[wrapfigure]{name=Abb. }
 % ======================================================================================
 
 
