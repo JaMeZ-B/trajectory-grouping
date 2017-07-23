@@ -1,7 +1,7 @@
 %!TEX root = ../trajectory-grouping.tex
-Betrachtet man eine Menge von sich bewegenden Entitäten, so haben wir bereits in einigen Vorträgen festgestellt, dass die Analyse von Trajektorien aufgrund der großen Datenmengen prinzipiell herausfordernd ist.
-Im Gegensatz zu einigen vorherigen Vorträgen soll es in diesem Vortrag aber nicht darum gehen, die Datenmenge sinnvoll zu reduzieren, sondern Gruppierungseffekte in den gegebenen Trajektorien zu erkennen, um somit ein Bild über die erfassten Bewegungen zu erhalten.
-Konkret soll hier eine Modell zur Gruppierung nach \textcite{buchin2015} mit Methoden der Topologie erläutert werden.
+Betrachtet man eine Menge sich bewegender Entitäten, so haben wir bereits in einigen Vorträgen festgestellt, dass die Analyse von Trajektorien aufgrund der großen Datenmengen prinzipiell herausfordernd ist.
+Im Gegensatz zu einigen vorherigen Vorträgen soll es in diesem Vortrag aber nicht darum gehen, die Datenmenge sinnvoll zu reduzieren, sondern Gruppierungseffekte in den gegebenen Trajektorien zu erkennen, um somit ein Bild über die erfassten kollektiven Bewegungen zu erhalten.
+Konkret soll hier ein Modell zur Gruppierung mit Methoden der Topologie nach \textcite{buchin2015} erläutert werden.
 
 Intuitiv soll eine Menge ausreichend vieler sich bewegender Entitäten, die sich für eine gewisse Zeit lang \enquote{zusammen bewegen}, eine Gruppe bilden.
 Unsere erste Aufgabe wird es sein, diese Intuition in eine mathematische Definition zu überführen.
@@ -16,20 +16,20 @@ Diese intuitive Definition suggeriert bereits, dass dabei drei Parameter in eine
 \end{description}
 Diese drei Parameter ermöglichen es uns, Gruppierungen in verschiedenen Größenordnungen zu analysieren und unser Augenmerk auf bestimmte Gruppen zu lenken: Bei einer hohen Mindestgröße interessieren wir uns nur für große Gruppen, wählen wir einen großen zeitlichen Parameter, so betrachten wir lediglich lange bestehende Gruppen und ein kleiner räumlicher Parameter filtert lose zusammenhängende Gruppen heraus.
 
-Das hier vorgestellte Modell leistet aber noch deutlich mehr als die Identifikation der Gruppen, den es beinhaltet auch die Veränderungen der \GrpStruktur über den betrachteten Zeitraum.
-Insbesondere werden neben \emph{Start}- und \emph{End}-Ereignissen auch \emph{Merge}- und \emph{Split}-Ereignisse beachtet, das heißt es lässt sich eine detaillierte Historie der \GrpStruktur erstellen.
+Das hier vorgestellte Modell leistet aber noch deutlich mehr als die Identifikation der Gruppen, denn es beinhaltet auch die Veränderungen der \GrpStruktur über den betrachteten Zeitraum.
+Insbesondere werden neben \emph{Start}- und \emph{End}-Ereignissen auch \emph{Merge}- und \emph{Split}-Ereignisse beachtet, das heißt es lässt sich eine detaillierte Historie über die Gruppen erstellen.
 Darüber hinaus zeichnet sich das Modell durch folgende Aspekte aus:
 \begin{itemize}
 	\item Die Definition einer \enquote{Gruppe} ist intuitiv, siehe \cref{cha:def_gruppe}.
 	\item Die gerade erwähnten Änderungen der Gruppen werden zu kontinuierlichen Zeitpunkten erfasst, das heißt sie werden auch erkannt, wenn sie \emph{nicht} an den durch die Trajektorien gegebenen Zeitpunkten auftreten (was auch im Allgemeinen der Fall ist).
 	\item Die Berechnung ist -- in Relation zur Ausgabegröße -- effizient, siehe \cref{cha:berechnung}.
 	\item Die oben erwähnte Variation der Parameter ermöglicht es, Gruppierung auf unterschiedlichen Maßstäben zu untersuchen.
-	\item Das Modell kann \enquote{robust} gegenüber Störungen gemacht werden.
+	\item Das Modell kann \enquote{robust} gegenüber Störungen gemacht werden, siehe \cref{cha:eval}.
 \end{itemize}
-Diese Eigenschaften des hier vorgestellten Modells sorgen dafür, dass es einigen anderen Modellen zur Gruppierung von Trajektorien überlegen ist. 
+Diese Eigenschaften des hier vorgestellten Modells sorgen dafür, dass es einigen anderen Modellen zur Gruppierung von Trajektorien überlegen ist.
 Insbesondere das Einbeziehen von Merge- und Split-Ereignissen \emph{und} die kontinuierlichen Zeitpunkte sorgen laut \textcite{buchin2015} dafür, dass das Modell zum Beispiel dem Ansatz mit \emph{flocks} von \textcite{benkert_flocks} überlegen ist, den wir im vorherigen Vortrag kennengelernt haben.
 
 Wir werden nun im folgenden \cref{cha:def_gruppe} Gruppen mathematisch präzise definieren, bevor wir in \cref{cha:reeb_graphen} dann nach einen kurzen Ausflug in die Differentialtopologie den sogenannten Reeb-Graph definieren können, der neben den Gruppen der Hauptbestandteil der \enquote{\GrpStruktur} wird.
 Außerdem wird in diesem Kapitel die Komplexität der \GrpStruktur bestimmt.
 In \cref{cha:berechnung} wird daraufhin die Berechnung der \GrpStruktur detailliert erläutert; neben dem Ausflug in die Differentialtopologie ist dies der Abschnitt, der sich am meisten von dem vorliegenden Artikel von \textcite{buchin2015} unterscheidet.
-Im letzten Kapitel findet eine kurze Evaluation des Modells statt und es werden noch einige Verbesserungen des vorgestellten Modells erläutert ohne dabei aber ins Detail zu gehen. 
+Im letzten Kapitel findet eine kurze Evaluation des Modells statt und es werden noch einige Verbesserungen des vorgestellten Modells erläutert ohne dabei aber ins Detail zu gehen.
