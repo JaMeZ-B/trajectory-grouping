@@ -27,7 +27,7 @@ Alle Abbildungen sind aufgrund der universellen Eigenschaft der Quotiententopolo
 Die Quotientenabbildung $q$ bildet einen Punkt aus $X$ auf die zugehörige Kontur in $\mathcal{R}(f)$ ab.
 % $\mathcal{R}(f)$ ist tatsächlich ein Graph, da jede Niveaumenge unter $q$ auf eine diskrete Menge abgebildet wird.\todo{genauer bzw. expliziter}
 
-Der Reeb-Graph $\mathcal{R}(f)$ beschreibt nun die Evolution der Konturen (wenn man $\mathbb{R}$ als Zeit interpretiert) und damit wird auch klar, dass $\mathcal{R}(f)$ tatsächlich ein Graph ist, da das Urbild von $a \in \mathbb{R}$ unter $h$ stets eine diskrete Menge von Konturen ist und man $\mathcal{R}(f)$ erhält indem man diese Konturen \enquote{verfolgt}, wobei sie sich sich vereinigen oder aufsplitten können.
+Der Reeb-Graph $\mathcal{R}(f)$ beschreibt die Evolution der Konturen (wenn man $\mathbb{R}$ als Zeit interpretiert) und damit wird auch klar, dass $\mathcal{R}(f)$ tatsächlich ein Graph ist, da das Urbild von $a \in \mathbb{R}$ unter $h$ stets eine diskrete Menge von Konturen ist und man $\mathcal{R}(f)$ erhält indem man diese Konturen \enquote{verfolgt}, wobei sie sich sich vereinigen oder aufsplitten können.
 Damit muss $\mathcal{R}(f)$ die Struktur eines $1$-dimensionalen CW-Komplexes haben und ist damit insbesondere ein Graph.\footnote{dieser kann allerdings überabzählbar unendlich sein, sofern man keine weiteren Annahmen an $X$ und $f$ trifft}
 Betrachtet man die positive Richtung in $\mathbb{R}$, so wird $\mathcal{R}(f)$ auf kanonische Weise zu einem gerichteten Graphen.
 Ein Beispiel für einen Reeb-Graphen findet man in \cref{fig:torus_reeb}.
@@ -152,7 +152,7 @@ Die zweite Annahme ist zum einen in nicht explizit als Gegenbeispiel konstruiert
 % In vielen Fällen ist $\mathcal{M}$ eine $3$-Mannigfaltigkeit mit Rand -- wenn zwei Entitäten während eines Zeitabschnittes aber konstant den Abstand $2 \varepsilon$ haben, so ist $\mathcal{M}$ keine Mannigfaltigkeit!
 % Wie wir später sehen werden, kann dies im Algorithmus aber als Spezialfall behandelt werden.
 
-An dieser Stelle sei angemerkt, dass $\mathcal{M}$ ein dreidimensionaler Raum ist (bis auf einige wenige Ausnahmen ist $\mathcal{M}$ eine 3-Mannigfaltigkeit mit Rand\footnote{Gegenbeispiel: Zwei Entitäten haben während eines Zeitabschnitts konstant den Abstand $2 \varepsilon$. Im Algorithmus in \cref{cha:berechnung} wird dieser Fal explizit abgefangen.}; in jedem Fall ist $\mathcal{M}$ ein dreidimensionaler CW-Komplex) im Gegensatz zum \emph{zwei}dimensionalen Torus, der eben betrachtet wurde.
+An dieser Stelle sei angemerkt, dass $\mathcal{M}$ ein dreidimensionaler Raum ist (bis auf einige wenige Ausnahmen ist $\mathcal{M}$ eine 3-Mannigfaltigkeit mit Rand\footnote{Gegenbeispiel: Zwei Entitäten haben während eines Zeitabschnitts konstant den Abstand $2 \varepsilon$. Im Algorithmus in \cref{cha:berechnung} wird dieser Fall explizit abgefangen.}; in jedem Fall ist $\mathcal{M}$ ein dreidimensionaler CW-Komplex) im Gegensatz zum \emph{zwei}dimensionalen Torus, der eben betrachtet wurde.
 Das in \cref{fig:bsp_reeb_rand} betrachtete Beispiel zeigt, warum wir den dreidimensionalen Raum $\mathcal{M}$ und nicht dessen zweidimensionalen Rand betrachten.
 
 \begin{figure}
@@ -169,12 +169,13 @@ Das in \cref{fig:bsp_reeb_rand} betrachtete Beispiel zeigt, warum wir den dreidi
 			\filldraw (\x:1) circle[radius=.04];
 		}
  	\end{tikzpicture}
-	\caption[Unterschiede bei den Zusammenhangskomponenten zwischen $\mathcal{M}$ und $\partial \mathcal{M}$]{Angenommen die gezeichneten Entitäten bewegen sich gar nicht. Jede Niveaumenge von $\mathcal{M}$ ist dann zusammenhängend, die Niveaumengen von $\partial \mathcal{M}$ bestehen aber stets aus zwei Zusammenhangskomponenten. Da obige Konfiguration (bei geeignetem $\delta$) nur eine maximale Gruppe bildet, wurde $\mathcal{R}$ als Reeb-Graph von $\mathcal{M}$ und nicht $\partial \mathcal{M}$ definiert.}\label{fig:bsp_reeb_rand}
+	\caption[Unterschiede bei den Zusammenhangskomponenten zwischen $\mathcal{M}$ und $\partial \mathcal{M}$]{Angenommen die gezeichneten Entitäten bewegen sich gar nicht. Jede Niveaumenge von $\mathcal{M}$ ist dann zusammenhängend, die Niveaumengen des Randes $\partial \mathcal{M}$ bestehen aber stets aus zwei Zusammenhangskomponenten. Da obige Konfiguration (bei geeignetem $\delta$) nur eine maximale Gruppe bildet, wurde $\mathcal{R}$ als Reeb-Graph von $\mathcal{M}$ und nicht $\partial \mathcal{M}$ definiert.}\label{fig:bsp_reeb_rand}
 \end{figure}
 
 Wie in \cref{sec:background_reeb} erläutert, entsprechen die Vertices von $\mathcal{R}$ Zeitpunkten $t_v$, an denen sich die Komponenten ändern.
 Diese Zeitpunkte stimmen im Allgemeinen nicht mit den Zeitpunkten $t_0, \ldots, t_\tau$ überein, was auch in \cref{fig:tubes,fig:reeb_graph} zu erkennen ist.
-Jeder Vertex im Reeb-Graphen lässt sich eindeutig einer der folgenden Klassen zuordnen:
+
+Jeder Vertex im Reeb-Graphen lässt sich nun eindeutig einer der folgenden Klassen zuordnen:
 \begin{description}
 	\item[Start-Vertex] Für jede Komponente zum Zeitpunkt $t_0$ existiert ein Vertex; ein solcher Vertex ist ein \Index{Start-Vertex}.
 	Jeder Start-Vertex hat Eingangs-Grad 0 und Ausgangsgrad 1.
@@ -204,7 +205,7 @@ $\mathcal{R}$ ohne all diese Kanten ist der \Index{reduzierte Reeb-Graph}, den w
 \section{Komplexität der \GrpStruktur} % (fold)
 \label{sec:komplex}
 Gemäß \cref{def:grpstrukur} müssen wir sowohl für die Komplexität des Reeb-Graphen $\mathcal{R}$ als auch die Anzahl maximaler Gruppen obere Schranken finden.
-Dazu folgen wir \textcite[Sec.~2.1~\&~2.2]{buchin2015} und beweisen wir Schranken von $\mathcal{O}(\tau n^2)$ für $\mathcal{R}$ und $\mathcal{O}(\tau n^3)$ für die Anzahl maximaler Gruppen, die im Worst-Case sogar scharf sind.
+Dazu folgen wir \textcite[Sec.~2.1~\&~2.2]{buchin2015} und beweisen Schranken von $\mathcal{O}(\tau n^2)$ für $\abs*{\mathcal{R}}$ und $\mathcal{O}(\tau n^3)$ für die Anzahl maximaler Gruppen, die im Worst-Case sogar scharf sind.
 
 \begin{lemma}[name={\cite[Lem.~1]{buchin2015}},label=lem:untereSchranke-Reeb]
 	Der Reeb-Graph $\mathcal{R}$ einer Menge $\mathcal{X}$ von $n$ Entitäten, von denen sich jede auf einer Trajektorie mit $\tau$ Kanten bewegt, kann $\Omega(\tau n^2)$ Vertices und $\Omega(\tau n^2)$ Kanten haben.
@@ -215,7 +216,7 @@ Dazu folgen wir \textcite[Sec.~2.1~\&~2.2]{buchin2015} und beweisen wir Schranke
 	Diese Konstruktion wiederholen wir für alle Intervalle.
 	Dies liefert dann offensichtlich $\Omega(\tau n^2)$ viele Vertices und damit auch $\Omega(\tau n^2)$ viele Kanten, da jeder Knoten entweder Grad 1 oder Grad 3 hat (siehe oben).
 	
-	Wir teilen $\mathcal{X}$ -- wie in \cref{fig:vertices-intervall} gezeichnet -- in zwei Teilmengen $R= \set*{r_1, \ldots ,r_{n/2}}$, $D=\set*{d_1,\ldots ,d_{n/2}}$ auf, wobei die Entität $r_j$ bei $(-j,-j)$ und $d_\ell$ bei $(\ell,\ell)$ startet.
+	Wir teilen $\mathcal{X}$ -- wie in \cref{fig:vertices-intervall} gezeichnet -- in zwei Teilmengen $R= \set{r_1, \ldots ,r_{n/2}}$, $D=\set{d_1,\ldots ,d_{n/2}}$ auf, wobei die Entität $r_j$ bei $(-j,-j)$ und $d_\ell$ bei $(\ell,\ell)$ startet.
 	\begin{figure}
 		\Centering
 		\begin{tikzpicture}[scale=.3,>=Latex,font=\small]
@@ -241,7 +242,7 @@ Dazu folgen wir \textcite[Sec.~2.1~\&~2.2]{buchin2015} und beweisen wir Schranke
 \end{satz}
 \begin{beweis}
 	In \cref{lem:untereSchranke-Reeb} wurde bereits eine Konstruktion angegeben, die einen Reeb-Graphen mit $\Omega(\tau n^2)$ Vertices und Kanten liefert.
-	Wir müssen also nur noch zeigen, dass $\mathcal{O}(\tau n^2)$ Vertices und Kanten entstehen können.
+	Wir müssen also nur noch zeigen, dass höchstens $\mathcal{O}(\tau n^2)$ Vertices und Kanten entstehen können.
 	Dazu nutzen wir aus, dass sich die Entitäten während eines Zeitintervalls $\benbrace*{t_i,t_{i+1}}$ auf Geraden bewegen.
 	Insbesondere ist nämlich der Abstand zwischen zwei Entitäten $x$ und $y$ während $\benbrace*{t_i,t_{i+1}}$ eine konvexe Funktion $\benbrace*{t_i,t_{i+1}} \to \mathbb{R}_+$, wie man sehr leicht mit Hilfe der Dreiecksungleichung zeigt.\footnote{dabei kann man sogar ganz allgemein eine beliebige Norm auf $\mathbb{R}^d$ betrachten}
 	Damit sind $x$ und $y$ höchstens während eines Intervalls $I \subseteq \benbrace*{t_i,t_{i+1}}$ direkt-zusammenhängend.
@@ -329,7 +330,7 @@ Dies gestaltet sich etwas schwieriger als die Komplexität des Reeb-Graphen, da 
 	In den darauf folgenden Split-Ereignissen werden $d_1, \ldots , d_k$ nach und nach von $S$ getrennt -- wenn $d_i$ nicht mehr $\varepsilon$-zusammenhängend zu $S$ ist, enden die maximalen Gruppen $G_{ii}, \ldots , G_{ik}$.
 	Gleichzeitig werden nun aber die Gruppen, die bei $j_{i+1}$ gestartet sind zu maximalen Gruppen $G_{(i+1)h}$, da $d_i$ die Gruppe $G_{ih}$ verlassen hat (siehe \cref{fig:gruppen-intervalle}).
 	
-	Dies bedeutet, dass das Ereignis $\ell_i$ $k-i$ viele neue maximale Gruppen erzeugt.
+	Dies bedeutet, dass das Ereignis $\ell_i$ genau $k-i$ viele neue maximale Gruppen erzeugt.
 	Zusammen mit den $k$ maximalen Gruppen $G_{1i}$ erzeugt die Runde $z$ also
 	\[
 		\sum_{i=0}^{k} (k-i)  \in \Omega(k^2)
@@ -354,7 +355,7 @@ Dies gestaltet sich etwas schwieriger als die Komplexität des Reeb-Graphen, da 
 	Es bleibt die obere Schranke zu zeigen.
 	Da eine maximale Gruppe an einem Start- oder Merge-Vertex beginnt, genügt es zu zeigen, dass an jedem solchen $\mathcal{O}(n)$ maximale Gruppen entstehen können, da wir in \cref{thm:schranke-Reeb} gezeigt haben, dass $\mathcal{O}(\tau n^2)$ viele solche Vertices existieren.
 	Wir besprechen an dieser Stelle nur den Fall von Merge-Vertices, der Beweis für Start-Vertices verläuft genauso.
-	Weiter können wir $m=1$ und $\delta=0$ annehmen, da diese Wahlen der beiden Parameter die Anzahl maximaler Gruppen maximieren.
+	Weiter können wir $m=1$ und $\delta=0$ annehmen, da diese Werte der beiden Parameter die Anzahl maximaler Gruppen maximieren.
 	
 	\begin{figure}
 		\Centering
@@ -426,7 +427,7 @@ Dies gestaltet sich etwas schwieriger als die Komplexität des Reeb-Graphen, da 
 	Da $\mathcal{T}_v$ maximal $n$ Blätter hat, hat $\mathcal{T}_v$ auch $\mathcal{O}(n)$ Grad-3-Knoten.
 	
 	Wir zeigen nun, dass maximal eine maximale Gruppe an einem gegebenen Blatt oder Grad-3-Knoten endet.
-	Angenommen es gäbe $G_i$ und $G_j$ mit $i \neq j$, sodass beide an einem gemeinsamen Knoten $U$ enden.
+	Angenommen es gäbe $G_i$ und $G_j$ mit $i \neq j$, sodass beide an einem gemeinsamen Knoten $u$ enden.
 	Dann damit auch die Pfade dorthin übereinstimmen, wäre dann aber auch $G_i \cup G_j$ eine Gruppe auf dem Intervall $I=\benbrace*{t_v,t_u}$ im Widerspruch zur Maximalität von $G_i$ und $G_j$.
 	Folglich kann $k$ höchstens die Summe der Blätterzahl mit der Anzahl der Grad-3-Knoten in $\mathcal{T}_v$ sein, woraus $k \in \mathcal{O}(n)$ folgt.
 	Summieren über alle $\mathcal{O}(\tau n^2)$ Start- und Merge-Vertices ergibt $\mathcal{O}(\tau n^3)$ maximale Gruppen insgesamt.
