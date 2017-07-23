@@ -20,7 +20,7 @@ Die Videos mit den NetLogo-Daten belegen außerdem gut, wie die in \cref{cha:def
     \includegraphics[width=.5\textwidth]{Bilder/alpha-component}
     \caption{eine $\alpha$-Komponente zum Zeitpunkt $t$, \cite[Fig:~11]{buchin2015}}\label{fig:alpha}
 \end{figure}
-Das hier betrachtete Modell zur \emph{Trajectory Grouping Structure} lässt sich über die hier besprochenen Aspekte hinaus noch weiter verbessern, was an dieser Stelle stichpunktartig erläutert werden soll:
+Das hier betrachtete Modell zur \emph{Trajectory Grouping Structure} lässt sich über die besprochenen Aspekte hinaus noch weiter verbessern, was an dieser Stelle stichpunktartig erläutert werden soll:
 \begin{description}
     \item[Höhere Dimensionen] Ein genauerer Blick auf das Modell zeigt, dass es nicht nur für Bewegungen in der Ebene geeignet ist, sonder prinzipiell auch in höheren Dimensionen benutzt werden kann -- der zweidimensionale Fall ist, wenn man GPS-Daten verarbeiten will, aber selbstverständlich das Hauptanwendungsgebiet.
     \item[Robuste Gruppen] In \textcite[Sec.~4]{buchin2015} wird das Modell noch etwas verfeinert, um weniger anfällig gegenüber gestörten Daten zu sein.
@@ -31,7 +31,7 @@ Das hier betrachtete Modell zur \emph{Trajectory Grouping Structure} lässt sich
         Zwei Entitäten heißen \bet{$\alpha$-approximativ direkt zusammenhängend}\index{$\alpha$-approximativ direkt zusammenhängend@approximativ direkt zusammenhängend} zum Zeitpunkt $t$, falls sie direkt zusammenhängend zu einem Zeitpunkt $t' \in \benbrace*{t- \alpha/2, t+ \alpha/2}$ sind.\index{direkt zusammenhängend}
     \end{definition}
     
-    Eine Komponente kann dann zum Beispiel so aussehen, wie in \cref{fig:alpha}, insbesondere müssen ein einer Komponente zum Zeitpunkt $t$ die $t'$ nicht alle übereinstimmen!
+    Eine Komponente kann dann zum Beispiel so aussehen, wie in \cref{fig:alpha}, insbesondere müssen in einer Komponente zum Zeitpunkt $t$ die $t'$ nicht alle übereinstimmen!
     Den zugehörigen Reeb-Graph kann man nun aus dem Reeb-Graph der ursprünglichen Definition berechnen, indem man ihn sukzessive \enquote{vereinfacht}, dabei kann zum Beispiel ein Split-Knoten und ein direkt nachfolgender Merge-Knoten durch eine einzige Kante ersetzt werden, wenn dieses Aufteilen der Komponenten nicht zu lange andauert.
     Dies führt insgesamt zu einem Algorithmus mit Laufzeit $\mathcal{O}(\tau n^3 \log n + N)$, wobei $N$ wieder die Größe der Ausgabe ist, \cite[Thm.~13]{buchin2015}.
     \item[Verbesserte Definition] Durch \textcite{grouping_improved} wurde die Definition einer Gruppe aus \textcite{buchin2015} mittlerweile weiter verbessert.
@@ -42,5 +42,5 @@ Das hier betrachtete Modell zur \emph{Trajectory Grouping Structure} lässt sich
 \end{description}
 
 \section{Fazit}
-Zusammenfassend lässt sich sagen, dass \textcite{buchin2015} ein stimmiges Modell zu Gruppierung von Trajektorien geliefert haben, was sich vor allem durch die hohe Übereinstimmung mit menschliche Intuition auszeichnet.
+Zusammenfassend lässt sich sagen, dass \textcite{buchin2015} ein stimmiges Modell zu Gruppierung von Trajektorien geliefert haben, was sich vor allem durch die hohe Übereinstimmung mit der menschlichen Intuition kollektiver Bewegungen auszeichnet.
 Durch das Benutzen topologischer Methoden (Betrachtung von Zusammenhangskomponenten, Reeb-Graph) entstehen dabei einige Vorteile gegenüber anderen Modellen zur Gruppierung, die über den Vorteil einer relativ intuitiven Definition von Gruppen hinausgehen: Das \enquote{Leben} der Gruppen lässt sich detailliert erfassen und die Zeitpunkte, an denen dies geschieht, sind nicht auf die Zeitstempel der Trajektorien eingeschränkt.
