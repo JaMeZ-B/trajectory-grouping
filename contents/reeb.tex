@@ -39,7 +39,7 @@ Neben den gleich auch direkt referenzierten Büchern von \textcite{compTopo} und
 
 Betrachtet man nicht einen beliebigen topologischen Raum $X$, sondern eine differenzierbare Mannigfaltigkeit $M$ wie zum Beispiel den 2-Torus (siehe \cref{fig:torus_reeb}), und eine glatte Funktion $f \colon M \to \mathbb{R}$ so kann man die Punkte von $M$ anhand des Differentials von $f$ in dem jeweiligen Punkt in sogenannte \bet{kritische}\index{kritische Punkte} und \Index{reguläre Punkte} unterteilen.
 \begin{figure}
-	\Centering
+	\centering
 	\begin{tikzpicture}[rotate=90, xscale=1, yscale=1, scale=0.7]
 		% \draw[help lines] (-4,-10) grid (4,4);
 		% reelle Gerade
@@ -122,13 +122,13 @@ Die Vereinigung der $\tau$ Zylinder liefert uns dann einen (ausgefüllten) \enqu
 Dies ist der Raum, dessen Reeb-Graph wir betrachten wollen.
 
 \begin{figure}
-	\Centering
-	\subfloat[Der Raum $\mathcal{M}$]{
-	\includegraphics[width=.48\textwidth]{Bilder/manifold_left.pdf}\label{fig:tubes}
+	\centering%
+	\subfloat[Der Raum $\mathcal{M}$]{%
+	\includegraphics[width=.48\textwidth]{Bilder/manifold_left.pdf}\label{fig:tubes}%
 	}
 	\hspace{1em}
-	\subfloat[Reeb-Graph zu $\mathcal{M}$]{
-	\includegraphics[width=.45\textwidth]{Bilder/manifold_right.pdf}\label{fig:reeb_graph}
+	\subfloat[Reeb-Graph zu $\mathcal{M}$]{%
+	\includegraphics[width=.45\textwidth]{Bilder/manifold_right.pdf}\label{fig:reeb_graph}%
 	}
 	\caption{Der Raum $\mathcal{M}$ sowie der zugehörige Reeb-Graph $\mathcal{R}$ am Beispiel von sieben Entitäten mit je drei bekannten Positionen, \cite[Fig.~2]{buchin2015}}
 \end{figure}
@@ -156,7 +156,7 @@ An dieser Stelle sei angemerkt, dass $\mathcal{M}$ ein dreidimensionaler Raum is
 Das in \cref{fig:bsp_reeb_rand} betrachtete Beispiel zeigt, warum wir den dreidimensionalen Raum $\mathcal{M}$ und nicht dessen zweidimensionalen Rand betrachten.
 
 \begin{figure}
-	\Centering
+	\centering
 	\begin{tikzpicture}[scale=1.3]
 		\foreach \x in {0,30,...,330}{
 			\filldraw[Firebrick2] (\x:1) circle[radius=.4];
@@ -218,7 +218,7 @@ Dazu folgen wir \textcite[Sec.~2.1~\&~2.2]{buchin2015} und beweisen Schranken vo
 	
 	Wir teilen $\mathcal{X}$ -- wie in \cref{fig:vertices-intervall} gezeichnet -- in zwei Teilmengen $R= \set{r_1, \ldots ,r_{n/2}}$, $D=\set{d_1,\ldots ,d_{n/2}}$ auf, wobei die Entität $r_j$ bei $(-j,-j)$ und $d_\ell$ bei $(\ell,\ell)$ startet.
 	\begin{figure}
-		\Centering
+		\centering
 		\begin{tikzpicture}[scale=.3,>=Latex,font=\small]
 			\draw[dashed] (-7,-7) node[left]{$t_i$} -- (7,7);
 			\draw[dashed] (0,-12) node[left]{$t_{i+1}$} -- ++ (14,14);
@@ -269,7 +269,7 @@ Dies gestaltet sich etwas schwieriger als die Komplexität des Reeb-Graphen, da 
 	Die Entitäten aus $S$ bleiben stationär.
 	
 	\begin{figure}[hbtp]
-		\Centering
+		\centering
 		\begin{tikzpicture}[scale=.5]
 			\foreach \x in {1,...,24}{
 				\draw[fill=black,fill opacity=.7] (\x,0) circle[radius=.7];
@@ -302,7 +302,7 @@ Dies gestaltet sich etwas schwieriger als die Komplexität des Reeb-Graphen, da 
 	Da $4 \varepsilon > \enbrace*{\frac{n}{13}-1 } \cdot \frac{\varepsilon}{n}$ gilt, ist nun obige Reihenfolge von Ereignissen gegeben.
 	
 	\begin{figure}
-		\Centering
+		\centering
 		\begin{tikzpicture}[scale=.5,yscale=.9]
 			\pgfmathsetmacro{\height}{10}
 			\foreach \x in {1,...,4}{
@@ -358,7 +358,7 @@ Dies gestaltet sich etwas schwieriger als die Komplexität des Reeb-Graphen, da 
 	Weiter können wir $m=1$ und $\delta=0$ annehmen, da diese Werte der beiden Parameter die Anzahl maximaler Gruppen maximieren.
 	
 	\begin{figure}
-		\Centering
+		\centering
 		\subfloat[$\mathcal{R}'_v$ (durgezogene Linien) als Untergraph von $\mathcal{R}$ (gepunktet gezeichnet)]{
 		\begin{tikzpicture}[scale=.5]
 			% \draw[help lines] (-1,-3) grid (10,3);
